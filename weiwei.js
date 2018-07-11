@@ -1,6 +1,14 @@
 var express=require('express');
 var app=express();
 app.set('port',process.env.PORT||3000);
+app.get('/',function (req,res) {
+	res.type('text/plain');
+	res.send('WeiWei');
+});
+app.get('/stock',function (req,res) {
+	res.type('text/plain');
+	res.send('库存');
+});
 //定制404
 app.use(function (req,res) {
 	res.type('text/plain');
