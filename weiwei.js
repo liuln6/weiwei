@@ -1,5 +1,6 @@
 var express=require('express');
 var app=express();
+console.log('dd');
 app.set('port',process.env.PORT||3000);
 app.get('/',function (req,res) {
 	res.type('text/plain');
