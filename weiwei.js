@@ -21,19 +21,19 @@ app.get('/stock',function (req,res) {
 });
 //编辑布信息
 app.get('/editbubu',function (req,res) {
-	res.render('editbubu',{ layout:'editbubu'});
+	res.render('editbubu');
 });
 //布信息列表
 app.get('/bubulist',function (req,res) {
-	res.render('bubulist',{layout:'bubulist'});
+	res.render('bubulist');
 });
 //添加订单
 app.get('/editorder',function (req,res) {
-	res.render('editorder',{layout:'editorder'});
+	res.render('editorder');
 });
 //订单列表
 app.get('/orderlist',function (req,res) {
-	res.render('orderlist',{layout:'orderlist'});
+	res.render('orderlist');
 });
 //定制404
 app.use(function (req,res) {
