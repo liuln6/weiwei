@@ -10,7 +10,7 @@ app.set('view engine','handlebars');
 app.use(express.static(__dirname +'/public'));
 
 
-app.use(require('body-parser'));
+app.use(require('body-parser')());
 
 app.set('port',process.env.PORT||3000);
 app.get('/',function (req,res) {
