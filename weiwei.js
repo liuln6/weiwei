@@ -1,5 +1,7 @@
 var express=require('express');
 var app=express();
+
+app.use(require('body-parser'));
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
 	.create({defaultLayout:'main'});
