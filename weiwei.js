@@ -21,7 +21,7 @@ app.get('/stock',function (req,res) {
 });
 //编辑布信息
 app.get('/editbubu',function (req,res) {
-	res.render('editbubu',{layout:'editbubu'});
+	res.render('editbubu',{ layout:'editbubu'});
 });
 //布信息列表
 app.get('/bubulist',function (req,res) {
