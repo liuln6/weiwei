@@ -19,6 +19,9 @@ app.get('/',function (req,res) {
 app.get('/stock',function (req,res) {
 	res.render('stock');
 });
+app.get('/editbubu',function (req,res) {
+	res.render('editbubu');
+});
 //定制404
 app.use(function (req,res) {
 	res.status(404);
