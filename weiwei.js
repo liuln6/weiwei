@@ -1,7 +1,6 @@
 var express=require('express');
 var app=express();
 
-app.use(require('body-parser'));
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
 	.create({defaultLayout:'main'});
@@ -9,6 +8,9 @@ app.engine('handlebars',handlebars.engine);
 app.set('view engine','handlebars');
 
 app.use(express.static(__dirname +'/public'));
+
+
+app.use(require('body-parser'));
 
 app.set('port',process.env.PORT||3000);
 app.get('/',function (req,res) {
