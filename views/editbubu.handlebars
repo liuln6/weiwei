@@ -11,12 +11,12 @@
     </div>
 
     <div class="row">
-    <input type="file" id="fileupload" class="form-control" required accept="image/*" name="files[]" data-url='/upload' multiple >
-        <div id="progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
-        </div>
-       <div class="coverimg">
-       </div>
+       <span class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Select files...</span>
+        <!-- The file input field used as target for the file upload widget -->
+        <input id="fileupload" type="file" name="files[]" multiple="">
+    </span>
     </div>
 
     <div class="row mx-auto w-75" style="height: 15px"></div>
