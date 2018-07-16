@@ -48,34 +48,56 @@
 	     </div>
 	 </div>
  </div>
- 	<script type="text/javascript">
- 	$(function() {
- 		new Vue({
-	        el: "#WareHouse",
-	        data: {
-	            checkAll: false,// 是否全选
-	            checkedRows: [],// 选中的行标，用于删除行
-	            facilities: datas,// 表格数据
-	            newRow:{}// 新增的行数据，用于新增行
-	        },
-	        delRows:function () {
-                if (this.checkedRows.length <= 0){//是否选中判断
+ <script>
+    var datas = [
+        {
+            code: "A2017-001",
+            name: "3800充电器",
+            states: "正常",
+            date: "2017-01-21",
+            admin: "andy"
+        },
+        {
+            code: "A2017-002",
+            name: "Lenovo Type-c转接器",
+            states: "正常",
+            date: "2017-01-21",
+            admin: "zero"
+        }];
+
+    new Vue({
+        el: "#vueApp",
+        data: {
+            checkAll: false,
+            checkedRows: [],
+            facilities: datas,
+            newRow:{}
+        },
+        methods: {
+            addRow: function () {
+                this.facilities.push(this.newRow);
+                this.newRow = {};
+            },
+            saveRows:function () {//保存表格数据
+                
+            },
+            delRows:function () {
+                if (this.checkedRows.length <= 0){
                     alert("您未选择需要删除的数据");
                     return false;
                 }
-                if (!confirm("您确定要删除选择的数据吗？")){//删除确认
+                if (!confirm("您确定要删除选择的数据吗？")){
                     return false;
                 }
 
-                for(var i=0;i<this.checkedRows.length;i++){//循环获取选中的行标
+                for(var i=0;i<this.checkedRows.length;i++){
                     var checkedRowIndex = this.checkedRows[i];
-                    /**根据下标移除数组元素*/
                     this.facilities = $.grep(this.facilities,function (facility,j) {
                         return j != checkedRowIndex;
                     });
                 }
-                this.checkedRows = [];//清空选中行数据
+                this.checkedRows = [];
             }
-	    })
- 	});
- 	</script>
+        }
+    });
+</script>
