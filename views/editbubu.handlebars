@@ -1,4 +1,5 @@
 
+{{#section 'head'}}<title>薇小助手</title>{{/section}}
 <h2>编辑信息</h2>
 <div class="container-fluid" id="vueApp">
 	<button type="button" class="btn btn-outline-warning btn-sm" @click="delRows">删除</button>
@@ -34,7 +35,7 @@
 		            </tr>
 	            </thead>
 	            <tbody>
-	                <tr v-for="item in items">
+	                <tr v-for="item in facilities">
 	                    <td><input type="checkbox" :value="item.id" v-model="checkedRows"></td>
 	                    <td></td>
 	                    <td>{{item.code}}</td>
@@ -49,63 +50,59 @@
 	 </div>
 </div>
 {{#section 'jquery'}}
-	 <script>
-$(document.ready(function () {
-	var datas = [
-	        {
-	        	id:0,
-	            code: "A2017-001",
-	            name: "3800充电器",
-	            states: "正常",
-	            date: "2017-01-21",
-	            admin: "andy"
-	        },
-	        {
-	        	id:1,
-	            code: "A2017-002",
-	            name: "Lenovo Type-c转接器",
-	            states: "正常",
-	            date: "2017-01-21",
-	            admin: "zero"
-	        }];
+<script>
+    var datas = [
+        {
+        	id:0,
+            code: "A2017-001",
+            name: "3800充电器",
+            states: "正常",
+            date: "2017-01-21",
+            admin: "andy"
+        },
+        {
+        	id:1,
+            code: "A2017-002",
+            name: "Lenovo Type-c转接器",
+            states: "正常",
+            date: "2017-01-21",
+            admin: "zero"
+        }];
 
-	    new Vue({
-	        el: "#vueApp",
-	        data: {
-	            checkAll: false,
-	            checkedRows: [],
-	            items: datas,
-	            newRow:{}
-	        },
-	        methods: {
-	            addRow: function () {
-	                this.facilities.push(this.newRow);
-	                this.newRow = {};
-	            },
-	            saveRows:function () {//保存表格数据
-	                
-	            },
-	            delRows:function () {
-	                if (this.checkedRows.length <= 0){
-	                    alert("您未选择需要删除的数据");
-	                    return false;
-	                }
-	                if (!confirm("您确定要删除选择的数据吗？")){
-	                    return false;
-	                }
+    new Vue({
+        el: "#vueApp",
+        data: {
+            checkAll: false,
+            checkedRows: [],
+            facilities: datas,
+            newRow:{}
+        },
+        methods: {
+            addRow: function () {
+                this.facilities.push(this.newRow);
+                this.newRow = {};
+            },
+            saveRows:function () {//保存表格数据
+                
+            },
+            delRows:function () {
+                if (this.checkedRows.length <= 0){
+                    alert("您未选择需要删除的数据");
+                    return false;
+                }
+                if (!confirm("您确定要删除选择的数据吗？")){
+                    return false;
+                }
 
-	                for(var i=0;i<this.checkedRows.length;i++){
-	                    var checkedRowIndex = this.checkedRows[i];
-	                    this.facilities = $.grep(this.facilities,function (facility,j) {
-	                        return j != checkedRowIndex;
-	                    });
-	                }
-	                this.checkedRows = [];
-	            }
-	        }
-	    });
-	 });    
-}))
-	 	
-	</script>
+                for(var i=0;i<this.checkedRows.length;i++){
+                    var checkedRowIndex = this.checkedRows[i];
+                    this.facilities = $.grep(this.facilities,function (facility,j) {
+                        return j != checkedRowIndex;
+                    });
+                }
+                this.checkedRows = [];
+            }
+        }
+    });
+</script>
 {{/section}}
