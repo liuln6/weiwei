@@ -27,7 +27,7 @@ app.set('port',process.env.PORT||3000);
 
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
-app.use('upload',function (req,res) {
+app.use('/upload',function (req,res) {
 	// parse a file upload
     var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
     console.log('start upload');
