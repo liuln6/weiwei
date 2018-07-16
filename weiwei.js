@@ -26,8 +26,8 @@ app.set('port',process.env.PORT||3000);
 //图片上传
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
-exports.upload = function(req, res) {
-    // parse a file upload
+app.use('/upload',function (req,res) {
+	// parse a file upload
     var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
     console.log('start upload');
     var dateNow=
@@ -68,8 +68,7 @@ exports.upload = function(req, res) {
 
         console.log('parsing done');
     });
-
-};
+});
 
 app.get('/',function (req,res) {
 	res.render('home');
