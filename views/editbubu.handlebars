@@ -1,5 +1,81 @@
 
 <h2>编辑信息</h2>
-<form class="form-horizontal">
-	
-</form>
+<button type="button" class="btn btn-outline-warning btn-sm" @click="delRows">删除</button>
+<div class="row mx-auto w-75">
+    <div class="col-6">
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#myModal">新增</button>
+            <button type="button" class="btn btn-outline-primary btn-sm" @click="saveRows">保存</button>
+        </div>
+        <button type="button" class="btn btn-outline-warning btn-sm" @click="delRows">删除</button>
+    </div>
+    <div class="col-6">
+        <div class="input-group">
+            <input type="text" class="form-control input-group-sm" placeholder="输入设备编号进行搜索">
+            <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+             </span>
+    	</div>
+ 	</div>
+</div>
+<div class="row mx-auto w-75">
+    <div class="col-12">
+        <table class="table table-hover table-success">
+            <thead class="thead-default">
+	            <tr>
+	                <th><input type="checkbox"></th>
+	                <th>序号</th>
+	                <th>设备编号</th>
+	                <th>设备名称</th>
+	                <th>设备状态</th>
+	                <th>采购日期</th>
+	                <th>设备管理员</th>
+	            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(facility,index) in facilities">
+                    <td><input type="checkbox" :value="index" v-model="checkedRows"></td>
+                    <td>{{index+1}}</td>
+                    <td>{{facility.code}}</td>
+                    <td>{{facility.name}}</td>
+                    <td>{{facility.states}}</td>
+                    <td>{{facility.date}}</td>
+                    <td>{{facility.admin}}</td>
+                </tr>
+            </tbody>
+         </table>
+     </div>
+ </div>
+ {{#section 'jquery'}}
+ 	<script type="text/javascript">
+ 	$(function() {
+ 		new Vue({
+	        el: "#vueApp",
+	        data: {
+	            checkAll: false,// 是否全选
+	            checkedRows: [],// 选中的行标，用于删除行
+	            facilities: datas,// 表格数据
+	            newRow:{}// 新增的行数据，用于新增行
+	        },
+	        delRows:function () {
+                if (this.checkedRows.length <= 0){//是否选中判断
+                    alert("您未选择需要删除的数据");
+                    return false;
+                }
+                if (!confirm("您确定要删除选择的数据吗？")){//删除确认
+                    return false;
+                }
+
+                for(var i=0;i<this.checkedRows.length;i++){//循环获取选中的行标
+                    var checkedRowIndex = this.checkedRows[i];
+                    /**根据下标移除数组元素*/
+                    this.facilities = $.grep(this.facilities,function (facility,j) {
+                        return j != checkedRowIndex;
+                    });
+                }
+                this.checkedRows = [];//清空选中行数据
+            }
+	    })
+ 	});
+ 	</script>
+ {{/section}}
