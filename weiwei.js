@@ -31,7 +31,7 @@ app.use('/upload',function (req,res) {
 	// parse a file upload
     var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
     console.log('start upload');
-    var now=Date.now();
+    var now=new Date();
 	var year=now.getFullYear();
 	var month=now.getMonth()+1;
 
