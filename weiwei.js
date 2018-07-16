@@ -13,6 +13,21 @@ var handlebars=require('express3-handlebars')
 			}
 		}
 	});
+//图片上传
+var jqupload=require('jquery-file-upload-middleware');
+
+app.use('/upload',function (req,res,next) {
+	var now=Date.now();
+	var year=now.getFullYear();
+	var month=now.getMonth()+1;
+	jqupload.fileHandler({
+		uploadDir:function () {
+			return __dirname+'/public/upload/' + year +'/' + month + '/';
+		}
+	})(req,res,next);
+});
+
+
 app.engine('handlebars',handlebars.engine);
 app.set('view engine','handlebars');
 
