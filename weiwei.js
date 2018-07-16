@@ -13,20 +13,6 @@ var handlebars=require('express3-handlebars')
 			}
 		}
 	});
-//图片上传
-var jqupload=require('jquery-file-upload-middleware');
-
-app.use('/upload',function (req,res,next) {
-	var now=Date.now();
-	var year=now.getFullYear();
-	var month=now.getMonth()+1;
-	jqupload.fileHandler({
-		uploadDir:function () {
-			return __dirname+'/public/upload/' + year +'/' + month + '/';
-		}
-	})(req,res,next);
-});
-
 
 app.engine('handlebars',handlebars.engine);
 app.set('view engine','handlebars');
@@ -37,6 +23,54 @@ app.use(express.static(__dirname +'/public'));
 app.use(require('body-parser')());
 
 app.set('port',process.env.PORT||3000);
+//图片上传
+var formidable = require('formidable'),
+    util = require('util'),fs=require('fs');
+exports.upload = function(req, res) {
+    // parse a file upload
+    var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
+    console.log('start upload');
+    var dateNow=
+
+    //存放目录
+    form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
+
+    form.on('field', function(field, value) {
+        //console.log(field, value);
+        fields.push([field, value]);
+    }).on('file', function(field, file) {
+        console.log(field, file);
+        files.push([field, file]);
+        docs.push(file);
+
+
+        var types = file.name.split('.');
+        var date = new Date();
+        var ms = Date.parse(date);
+        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms + '_'+file.name);
+    }).on('end', function() {
+        console.log('-> upload done');
+        res.writeHead(200, {
+            'content-type': 'text/plain'
+        });
+        var out={Resopnse:{
+            'result-code':0,
+            timeStamp:new Date(),
+        },
+        files:docs
+        };
+        var sout=JSON.stringify(out);
+        res.end(sout);
+    });
+
+    form.parse(req, function(err, fields, files) {
+        err && console.log('formidabel error : ' + err);
+
+        console.log('parsing done');
+    });
+
+};
+
 app.get('/',function (req,res) {
 	res.render('home');
 });
