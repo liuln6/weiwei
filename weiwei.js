@@ -24,14 +24,16 @@ app.use(require('body-parser')());
 
 app.set('port',process.env.PORT||3000);
 //图片上传
+
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
-app.use('/upload',function (req,res) {
-	console.log('upload');
-	// parse a file upload
+exports.upload = function(req, res) {
+    // parse a file upload
     var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
     console.log('start upload');
-    var dateNow=
+    var now=Date.now();
+	var year=now.getFullYear();
+	var month=now.getMonth()+1;
 
     //存放目录
     form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
@@ -69,7 +71,8 @@ app.use('/upload',function (req,res) {
 
         console.log('parsing done');
     });
-});
+
+};
 
 app.get('/',function (req,res) {
 	res.render('home');
