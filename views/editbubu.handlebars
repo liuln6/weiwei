@@ -34,15 +34,7 @@
 		            </tr>
 	            </thead>
 	            <tbody>
-	                <tr v-for="(facility,index) in facilities">
-	                    <td><input type="checkbox" :value="index" v-model="checkedRows"></td>
-	                    <td>{{index+1}}</td>
-	                    <td>{{facility.code}}</td>
-	                    <td>{{facility.name}}</td>
-	                    <td>{{facility.states}}</td>
-	                    <td>{{facility.date}}</td>
-	                    <td>{{facility.admin}}</td>
-	                </tr>
+	                
 	            </tbody>
 	         </table>
 	     </div>
@@ -50,7 +42,9 @@
 </div>
  <script>
  $(function () {
- 	var datas = [
+ 	// body...
+ });
+    var datas = [
         {
             code: "A2017-001",
             name: "3800充电器",
@@ -101,6 +95,4 @@
             }
         }
     });
- });
-    
 </script>
