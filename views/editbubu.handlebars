@@ -38,11 +38,11 @@
 	                <tr v-for="item in facilities">
 	                    <td><input type="checkbox" :value="item.id" v-model="checkedRows"></td>
 	                    <td></td>
-	                    <td>item.code</td>
+	                    <td>\{{item.code}}</td>
 	                    <td>\{{ item.name }}</td>
-	                    <td>{{item.states}}</td>
-	                    <td>{{item.date}}</td>
-	                    <td>{{item.admin}}</td>
+	                    <td>\{{item.states}}</td>
+	                    <td>\{{item.date}}</td>
+	                    <td>\{{item.admin}}</td>
 	                </tr>
 	            </tbody>
 	         </table>
