@@ -1,7 +1,6 @@
 var express=require('express');
 var app=express();
 
-var fs=require('fs');
 
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
@@ -27,6 +26,16 @@ app.use(require('body-parser')());
 app.set('port',process.env.PORT||3000);
 //图片上传
 
+var fs=require('fs');
+var path=require('path');
+
+function mkdir(dirpath) {
+	if(!fs.existsSync(path.dirname(dirpath))){
+		mkdir(path.dirname(dirpath))
+	}
+	fs.mkdirSync(dirpath);
+}
+
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
 app.use('/upload',function (req,res) {
@@ -40,16 +49,8 @@ app.use('/upload',function (req,res) {
     //存放目录
     form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
 
-    fs.exists(form.uploadDir,function (exists) {
-    	if(!exists){
-    		fs.mkdir(form.uploadDir,function (err) {
-    			if(err){
-    				throw err;
-    			}
-    			console.log('创建成功');
-    		});
-    	}
-    })
+    let myPath=form.uploadDir;
+    fs.existsSync(myPath)==false&&mkdir(myPath);
 
     form.on('field', function(field, value) {
         //console.log(field, value);
