@@ -3,11 +3,6 @@ var router=express.Router();
 //引入数据库包
 var db=require('./dbprovider.js');
 
-//设置handlebars视图引擎
-var handlebars=require('express3-handlebars');
-
-app.engine('handlebars',handlebars.engine);
-app.set('view engine','handlebars');
 
 /**
 库存查询列表
