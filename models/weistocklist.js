@@ -6,3 +6,4 @@ var db=require('./dbprovider.js');
 /**
 get stock list
 **/
+module.exports=router;
