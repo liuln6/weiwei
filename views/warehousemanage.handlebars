@@ -43,9 +43,25 @@
 <!-- The basic File Upload plugin -->
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
 <script>
-    
+
+    var warehouselist=[];
+      function GetWeiStockList() {
+        $.ajax({
+            url: '/warehousemanage/getwarehouselist',
+            dataType: 'json',
+            type: 'get',
+            data: {
+                test: 'ajax'
+            },
+            success: function (data) {
+                console.log(data);
+                warehouselise=data.rows;
+            }
+        })
+    }  
 
  $(function () {
+    GetWeiStockList();
     var datas = [
         {
             id:0,
@@ -64,6 +80,7 @@
             admin: "zero"
         }];
 
+
     new Vue({
         el: "#AddWare",
         data: {
@@ -71,7 +88,7 @@
             checkedRows: [],
             facilities: datas,
             newRow:{},
-            warehouselise:[]
+            warehouselise:warehouselist
         },
         methods: {
             addRow: function () {
@@ -97,21 +114,8 @@
                     });
                 }
                 this.checkedRows = [];
-            },
-            GetWeiStockList:function () {
-                $.ajax({
-                    url: '/warehousemanage/getwarehouselist',
-                    dataType: 'json',
-                    type: 'get',
-                    data: {
-                        test: 'ajax'
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        this.warehouselise=data.rows;
-                    }
-                })
             }
+            
         }
     });
 
