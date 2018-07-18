@@ -45,23 +45,9 @@
 <script>
 
     var warehouselist=[];
-      function GetWeiStockList() {
-        $.ajax({
-            url: '/warehousemanage/getwarehouselist',
-            dataType: 'json',
-            type: 'get',
-            data: {
-                test: 'ajax'
-            },
-            success: function (data) {
-                console.log(data);
-                warehouselise=data.rows;
-            }
-        })
-    }  
+         
 
  $(function () {
-    GetWeiStockList();
     var datas = [
         {
             id:0,
@@ -88,7 +74,7 @@
             checkedRows: [],
             facilities: datas,
             newRow:{},
-            warehouselise:warehouselist
+            warehouselise:this.GetWeiStockList()
         },
         methods: {
             addRow: function () {
@@ -114,8 +100,21 @@
                     });
                 }
                 this.checkedRows = [];
+            },
+            GetWeiStockList:function() {
+                $.ajax({
+                    url: '/warehousemanage/getwarehouselist',
+                    dataType: 'json',
+                    type: 'get',
+                    data: {
+                        test: 'ajax'
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        warehouselise=data.rows;
+                    }
+                })
             }
-            
         }
     });
 
