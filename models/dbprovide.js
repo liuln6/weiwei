@@ -1,10 +1,10 @@
 mysqlConfig:{
 	production:{
-		host:'39.107.252.17',
-		user:'root',
-		password:'lina2010',
-		port:'3306',
-		database:'WeiWeiStock'
+		host :'39.107.252.17',
+		user :'root',
+		password :'lina2010',
+		port :'3306',
+		database :'WeiWeiStock'
 	}
 };
 var mysql=require('mysql');
