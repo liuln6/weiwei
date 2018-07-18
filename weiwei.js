@@ -1,6 +1,8 @@
 var express=require('express');
 var app=express();
 
+var fs=require('fs');
+
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
 	.create({
@@ -37,6 +39,17 @@ app.use('/upload',function (req,res) {
 
     //存放目录
     form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
+
+    fs.exists(form.uploadDir,function (exists) {
+    	if(!exists){
+    		fs.mkdir(form.uploadDir,function (err) {
+    			if(err){
+    				throw err;
+    			}
+    			console.log('创建成功');
+    		});
+    	}
+    })
 
     form.on('field', function(field, value) {
         //console.log(field, value);
