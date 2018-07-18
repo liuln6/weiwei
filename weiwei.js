@@ -3,7 +3,6 @@ var path=require('path');
 var app=express();
 
 var fs=require('fs');
-var path=require('path');
 
 var warehousemanage=require('./models/warehousemanage');
 
