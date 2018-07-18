@@ -122,30 +122,6 @@ app.use(function (err,req,res,next) {
 });
 
 
-
-
-
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'lina2010',
-  database : 'WeiWeiStock'
-});
-
-connection.connect();
-
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
-});
-
-connection.end();
-
-
-
-
-
 app.listen(app.get('port'),function () {
 	console.log('Express started on http://localhost:'+app.get('port')+' press Ctrl-C to terminate');
 });
