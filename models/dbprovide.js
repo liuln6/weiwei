@@ -1,4 +1,5 @@
 
+var mysql=require('mysql');
 var connection = mysql.createConnection({
   host     : '39.107.252.17',
   user     : 'root',
