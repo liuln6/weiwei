@@ -1,6 +1,11 @@
 var express=require('express');
+var path=require('path');
 var app=express();
 
+var fs=require('fs');
+var path=require('path');
+
+var warehousemanage=require('./models/warehousemanage');
 
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
@@ -26,8 +31,7 @@ app.use(require('body-parser')());
 app.set('port',process.env.PORT||3000);
 //图片上传
 
-var fs=require('fs');
-var path=require('path');
+
 
 function mkdir(dirpath) {
 	if(!fs.existsSync(path.dirname(dirpath))){
@@ -90,6 +94,7 @@ app.use('/upload',function (req,res) {
 app.get('/',function (req,res) {
 	res.render('home');
 });
+app.use('/warehousemanage',warehousemanage);
 app.get('/stock',function (req,res) {
 	res.render('stock');
 });
