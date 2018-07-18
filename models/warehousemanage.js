@@ -3,16 +3,21 @@ var router=express.Router();
 //引入数据库包
 var db=require('./dbprovider.js');
 
-router.get('/getwarehouselist',function (req,res) {
-	db.query("select * from WeiWarehouse",function (err,rows) {
-		if(err){
-			res.end('获取仓库数据失败'+err);
-		}
-		else{
-			res.json({"result":{rows:rows}});
+//设置handlebars视图引擎
+var handlebars=require('express3-handlebars')
+	.create({
+		defaultLayout:'main',
+		helpers:{
+			section:function (name,options) {
+				if(!this._sections) this._sections={};
+				this._sections[name] = options.fn(this);
+				return null;
+			}
 		}
 	});
-});
+
+app.engine('handlebars',handlebars.engine);
+app.set('view engine','handlebars');
 
 /**
 库存查询列表
@@ -27,7 +32,16 @@ router.get('/',function (req,res,next) {
 		}
 	});
 });
-
+router.get('/getwarehouselist',function (req,res) {
+	db.query("select * from WeiWarehouse",function (err,rows) {
+		if(err){
+			res.end('获取仓库数据失败'+err);
+		}
+		else{
+			res.json({"result":{rows:rows}});
+		}
+	});
+});
 /**
 入库
 **/
