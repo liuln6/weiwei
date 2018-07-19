@@ -37,7 +37,7 @@ router.get('/getwarehouselist2',function (req,res) {
 			$.each(rows,function (i,obj) {
 				formateRows.push({id:obj.ID,text:obj.Name});
 			});
-			res.json({results:formateRows});
+			res.json({"results":formateRows});
 		}
 	});
 });
