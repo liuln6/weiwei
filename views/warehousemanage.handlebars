@@ -110,8 +110,18 @@ GetWeiStockList() ;
 $('.js-data-example-ajax').select2({
   ajax: {
     url: '/warehousemanage/getwarehouselist2',
-    dataType: 'json'
+    dataType: 'json',
     // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+    processResults: function (data, params) {
+    params.page = params.page || 1;
+
+        return {
+            results: data.results,
+            pagination: {
+                more: (params.page * 10) < data.count_filtered
+            }
+        };
+    }
   }
 });
 $('#fileupload').fileupload({
