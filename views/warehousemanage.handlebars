@@ -191,7 +191,10 @@ GetWeiStockList() ;
                     },
                     success: function (data) {
                         console.log(data);
-                        vm.warehouselist= data.rows;
+                        vm.warehouselist=[];
+                        $.each(data.rows,function (i,obj) {
+                            vm.warehouselist.push(obj);
+                        });
                     }
                 })
             };
