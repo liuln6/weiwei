@@ -113,7 +113,7 @@
  $(function () {
 
 GetWeiStockList() ;
-$('.selectstock').select2({
+var $selectStock=$('.selectstock').select2({
   ajax: {
     url: '/warehousemanage/getwarehouselistdata',
     dataType: 'json',
@@ -130,7 +130,7 @@ $('.selectstock').select2({
     }
   }
 });
-$(".selectstock").select2('val',2).trigger('change');
+$selectStock.val('2').trigger('change');
 $('.selectstock').on("select2:select",function (e) {
     vm.newRow.WID=$(".selectstock").select2('val');
 });
