@@ -100,8 +100,10 @@
                     });
                 }
                 this.checkedRows = [];
-            },
-            GetWeiStockList:function() {
+            }
+        }
+    });
+        function GetWeiStockList() {
                 $.ajax({
                     url: '/warehousemanage/getwarehouselist',
                     dataType: 'json',
@@ -111,14 +113,11 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        return data.rows;
+                        vm.data.warehouselise= data.rows;
                     }
                 })
-            }
-        }
-    });
+            }();
 
-vm.data.warehouselise=vm.GetWeiStockList();
 
     $('#fileupload').fileupload({
         url: '/upload',
