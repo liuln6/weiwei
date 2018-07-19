@@ -34,8 +34,9 @@ router.get('/getwarehouselistdata',function (req,res) {
 		}
 		else{
 			var formateRows=[];
-			$.each(rows,function (i,obj) {
-				formateRows.push({id:obj.ID,text:obj.Name});
+			rows.forEach(function(item,index){
+				console.log(item+'---'+index);
+				formateRows.push({id:item.ID,text:item.Name});
 			});
 			res.json({"results":formateRows});
 		}
