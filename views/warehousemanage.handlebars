@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-row">
        <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>选择图片</span>
@@ -20,25 +20,25 @@
         <div id="files"></div>
     </div>
 
-    <div class="form-group">
+    <div class="form-row">
         <label for="WID">选择仓库</label>
         <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
     </div>
-    <div class="form-group">
+    <div class="form-row">
         <label for="TotalNumber">米数</label>
-        <input type="number" name="TotalNumber">
+        <input type="number" class="form-control" name="TotalNumber">
     </div>
-    <div class="form-group">
+    <div class="form-row">
         <label for="Price">售价</label>
         <input type="number" name="Price">
     </div>
-    <div class="form-group">
+    <div class="form-row">
         <label for="Remark">描述信息</label>
-        <textarea name="Remark"></textarea>
+        <textarea name="Remark" class="form-control" ></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-row">
         <label for="No">编号</label>
-        <input type="text" name="No">
+        <input type="text" class="form-control" name="No">
     </div>
 </div>
 {{#section 'jquery'}}
