@@ -101,6 +101,11 @@
                 }
                 this.checkedRows = [];
             }
+        },
+        watch: {
+            newRow.WID: function (val) {
+               $(".selectstock").select2('val', val);
+            }
         }
     });
       
@@ -124,6 +129,8 @@ $('.selectstock').select2({
         };
     }
   }
+}).on("change",function (e) {
+    vm.newRow.WID=e.val;
 });
 $('#fileupload').fileupload({
     url: '/upload',
