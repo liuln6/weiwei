@@ -20,12 +20,9 @@
         <div id="files"></div>
     </div>
     <div class="row">
-        <select  >
-            <option v-for="(item,index) in warehouselist"  :value="item.ID">\{{ item.Name }}</option>
+        <select multiple='' name="WID" id="WID" v-model="newRow.WID" >
+            <option v-for="(item,index) in warehouselist"  :value="item.ID" >\{{ item.Name }}</option>
         </select>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" v-for="(item,index) in warehouselist"  :value="item.ID">\{{ item.Name }}</a>
-        </div>
     </div>
     <div class="row">
     选择人
@@ -72,8 +69,10 @@
             checkAll: false,
             checkedRows: [],
             facilities: datas,
-            newRow:{},
-            warehouselist:[]
+            newRow:{
+                WID:1
+            },
+            warehouselist:[],
         },
         methods: {
             addRow: function () {
