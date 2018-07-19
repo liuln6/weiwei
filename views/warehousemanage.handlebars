@@ -71,7 +71,7 @@
             checkedRows: [],
             facilities: datas,
             newRow:{},
-            warehouselise:[]
+            warehouselist:[]
         },
         methods: {
             addRow: function () {
@@ -192,7 +192,7 @@ GetWeiStockList() ;
                     },
                     success: function (data) {
                         console.log(data);
-                        vm.data.warehouselise= data.rows;
+                        vm.warehouselist= data.rows;
                     }
                 })
             };
