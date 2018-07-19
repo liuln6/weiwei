@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <select name="WID" id="WID" >
-            <option v-for="(item,index) in warehouselise"  :value="item.ID">{{ item.Name }}</option>
+            <option v-for="(item,index) in warehouselist"  :value="item.ID">{{ item.Name }}</option>
         </select>
     </div>
     <div class="row">
@@ -44,7 +44,6 @@
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
 <script>
 
-    var warehouselist=[];
        var datas = [
         {
             id:0,
