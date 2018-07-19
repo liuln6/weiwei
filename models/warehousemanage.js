@@ -27,7 +27,7 @@ router.get('/getwarehouselist',function (req,res) {
 		}
 	});
 });
-router.get('/getwarehouselist2',function (req,res) {
+router.get('/getwarehouselistdata',function (req,res) {
 	db.query("select * from WeiWarehouse",function (err,rows) {
 		if(err){
 			res.end('获取仓库数据失败'+err);
