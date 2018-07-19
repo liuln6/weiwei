@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="form-group">
        <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>选择图片</span>
@@ -20,20 +20,17 @@
         <div id="files"></div>
     </div>
 
-    <div class="row w-100">
-        <select class="selectstock w-100" name="WID2" id="WID2" v-model="newRow.WID" ></select>
+    <div class="form-group">
+        <label for="WID">选择仓库</label>
+        <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
     </div>
-    <div>
-        <span>\{{newRow.WID}}</span>
+    <div class="form-group">
+        <label for="TotalNumber">米数</label>
+        <input type="number" name="TotalNumber">
     </div>
-    <div class="row">
-    选择人
-    </div>
-    <div class="row">
-    totalnumber
-    </div>
-    <div class="row">
-    price
+    <div class="form-group">
+        <label for="Price">售价</label>
+        <input type="number" name="Price">
     </div>
     <div class="row">
     remark
