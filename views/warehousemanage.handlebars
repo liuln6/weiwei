@@ -103,8 +103,8 @@
             }
         },
         watch: {
-            'newRow.WID' (val) {
-               $(".selectstock").select2('val', val);
+            'newRow.WID':function newRowWID() {
+               $(".selectstock").select2('val', this.newRow.WID);
             }
         }
     });
