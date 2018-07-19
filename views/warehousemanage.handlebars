@@ -23,6 +23,8 @@
         <select multiple='' name="WID" id="WID" v-model="newRow.WID" >
             <option v-for="(item,index) in warehouselist"  :value="item.ID" >\{{ item.Name }}</option>
         </select>
+    </div>
+    <div class="row">
         <select class="js-data-example-ajax"></select>
     </div>
     <div class="row">
