@@ -129,7 +129,8 @@ $('.selectstock').select2({
         };
     }
   }
-}).on("change",function (e) {
+});
+$('.selectstock').on("change",function (e) {
     vm.newRow.WID=e.val;
 });
 $('#fileupload').fileupload({
