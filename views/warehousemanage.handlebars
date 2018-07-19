@@ -130,7 +130,7 @@ var $selectStock=$('.selectstock').select2({
     }
   }
 });
-$(".selectstock").select2('val', "2").change();
+$(".selectstock").select2('val', "2");
 $('.selectstock').on("select2:select",function (e) {
     vm.newRow.WID=$(".selectstock").select2('val');
 });
