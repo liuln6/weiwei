@@ -20,9 +20,12 @@
         <div id="files"></div>
     </div>
     <div class="row">
-        <ul class="dropdown-menu">
-            <li class="dropdown-item" v-for="(item,index) in warehouselist"  :value="item.ID">\{{ item.Name }}</li>
-        </ul>
+        <select  >
+            <option v-for="(item,index) in warehouselist"  :value="item.ID">\{{ item.Name }}</option>
+        </select>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" v-for="(item,index) in warehouselist"  :value="item.ID">\{{ item.Name }}</a>
+        </div>
     </div>
     <div class="row">
     选择人
