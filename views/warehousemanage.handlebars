@@ -192,7 +192,7 @@ GetWeiStockList() ;
                     success: function (data) {
                         console.log(data);
                         vm.warehouselist=[];
-                        $.each(data.rows,function (i,obj) {
+                        $.each(data.result.rows,function (i,obj) {
                             vm.warehouselist.push(obj);
                         });
                     }
