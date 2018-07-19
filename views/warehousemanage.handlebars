@@ -45,10 +45,7 @@
 <script>
 
     var warehouselist=[];
-         
-
- $(function () {
-    var datas = [
+       var datas = [
         {
             id:0,
             code: "A2017-001",
@@ -103,21 +100,11 @@
             }
         }
     });
-        function GetWeiStockList() {
-                $.ajax({
-                    url: '/warehousemanage/getwarehouselist',
-                    dataType: 'json',
-                    type: 'get',
-                    data: {
-                        test: 'ajax'
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        vm.data.warehouselise= data.rows;
-                    }
-                })
-            }();
+      
 
+ $(function () {
+
+GetWeiStockList() ;
 
     $('#fileupload').fileupload({
         url: '/upload',
@@ -195,5 +182,19 @@
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 }); 
+        function GetWeiStockList() {
+                $.ajax({
+                    url: '/warehousemanage/getwarehouselist',
+                    dataType: 'json',
+                    type: 'get',
+                    data: {
+                        test: 'ajax'
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        vm.data.warehouselise= data.rows;
+                    }
+                })
+            };
 </script>
 {{/section}}
