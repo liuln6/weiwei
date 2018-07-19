@@ -67,14 +67,14 @@
         }];
 
 
-    new Vue({
+    var vm=new Vue({
         el: "#AddWare",
         data: {
             checkAll: false,
             checkedRows: [],
             facilities: datas,
             newRow:{},
-            warehouselise:this.GetWeiStockList()
+            warehouselise:[]
         },
         methods: {
             addRow: function () {
@@ -111,14 +111,14 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        warehouselise=data.rows;
+                        return data.rows;
                     }
                 })
             }
         }
     });
 
-
+vm.data.warehouselise=vm.GetWeiStockList();
 
     $('#fileupload').fileupload({
         url: '/upload',
