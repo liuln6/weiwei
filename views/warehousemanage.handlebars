@@ -25,7 +25,7 @@
         </select>
     </div>
     <div class="row w-100">
-        <select class="js-data-example-ajax"></select>
+        <select class="selectstock w-100"></select>
     </div>
     <div class="row">
     选择人
@@ -109,7 +109,7 @@
  $(function () {
 
 GetWeiStockList() ;
-$('.js-data-example-ajax').select2({
+$('.selectstock').select2({
   ajax: {
     url: '/warehousemanage/getwarehouselistdata',
     dataType: 'json',
