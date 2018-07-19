@@ -130,8 +130,8 @@ $('.selectstock').select2({
     }
   }
 });
-$('.selectstock').on("change",function (e) {
-    vm.newRow.WID=e.val;
+$('.selectstock').on("select2:select",function (e) {
+    vm.newRow.WID=$(this).val;
 });
 $('#fileupload').fileupload({
     url: '/upload',
