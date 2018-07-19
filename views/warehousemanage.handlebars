@@ -131,7 +131,7 @@ $('.selectstock').select2({
   }
 });
 $('.selectstock').on("select2:select",function (e) {
-    vm.newRow.WID=$(this).val;
+    vm.newRow.WID=$(".selectstock").select2('val');
 });
 $('#fileupload').fileupload({
     url: '/upload',
