@@ -18,7 +18,13 @@
         </span>
         <div id="files"></div>
     </div>
-
+    <div class="form-row">
+        <div class="colorType" v-model="productColor">
+            <div class="form-group" v-for="(color,index) in productImage">
+                <img src="{{color.url}}" alt="{{color.name}}" class="img-thumbnail">
+            </div>
+        </div>
+    </div>
     <div class="form-row">
         <label for="WID">选择仓库</label>
         <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
@@ -33,45 +39,7 @@
             <input type="text" class="form-control" name="No">
         </div>
     </div>
-    <div class="form-row">
-        <div class="form-group">
-            <lable role="button" for='TotalNumberDanger' class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            <input type="number" name="TotalNumberDanger">
-        </div>
-        <div class="form-group">           
-            <lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            <input type="number" name="TotalNumberDark">
-        </div>
-        <a class="text-warning" href="path/to/settings" aria-label="Settings"  data-toggle="modal" data-target="#selectColor">
-          <i class="fa fa-plus-square fa-3x" aria-hidden="true"></i>
-
-        </a>
-
-        <select class="selectColor w-100" v-model="newRow.WID" >
-            <option value="" selected="selected">请选择区域</option>
-            <option value="dark"><lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable></option>
-            <option value="danger"><lable role="button" for='TotalNumberDark'  class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;</lable></option>
-            <option value="primary">
-                <lable role="button" for='TotalNumberDark'  class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            </option>
-            <option value="secondary">
-                <lable role="button" for='TotalNumberDark'  class="btn btn-secondary">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            </option>
-            <option value="success">
-                <lable role="button" for='TotalNumberDark'  class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            </option>
-            <option value="warning">
-                <i role="button" for='TotalNumberDark'  class="btn btn-warning">&nbsp;&nbsp;&nbsp;&nbsp;</i>
-            </option>
-            <option value="info">
-                <lable role="button" for='TotalNumberDark'  class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            </option>
-            <option value="light">
-                <lable role="button" for='TotalNumberDark'  class="btn btn-light">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-            </option>
-
-        </select>
-    </div>
+    
     <div class="form-row">
         <label for="Remark">描述信息</label>
         <textarea name="Remark" class="form-control" ></textarea>
@@ -110,7 +78,7 @@
         data: {
             checkAll: false,
             checkedRows: [],
-            productColor: [],
+            productImage: [],
             newRow:{
                 WID:2
             },
