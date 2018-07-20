@@ -38,14 +38,39 @@
             <lable role="button" for='TotalNumberDanger' class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
             <input type="number" name="TotalNumberDanger">
         </div>
-        <div>           
+        <div class="form-group">           
             <lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
             <input type="number" name="TotalNumberDark">
         </div>
-        <a class="btn btn-default" href="path/to/settings" aria-label="Settings"  data-toggle="modal" data-target="#selectColor">
+        <a class="text-warning" href="path/to/settings" aria-label="Settings"  data-toggle="modal" data-target="#selectColor">
           <i class="fa fa-plus-square fa-3x" aria-hidden="true"></i>
 
         </a>
+
+        <select class="selectColor w-100" v-model="newRow.WID" >
+            <option value="" selected="selected">请选择区域</option>
+            <option value="dark"><lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable></option>
+            <option value="danger"><lable role="button" for='TotalNumberDark'  class="btn btn-danger">&nbsp;&nbsp;&nbsp;&nbsp;</lable></option>
+            <option value="primary">
+                <lable role="button" for='TotalNumberDark'  class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+            </option>
+            <option value="secondary">
+                <lable role="button" for='TotalNumberDark'  class="btn btn-secondary">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+            </option>
+            <option value="success">
+                <lable role="button" for='TotalNumberDark'  class="btn btn-success">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+            </option>
+            <option value="warning">
+                <lable role="button" for='TotalNumberDark'  class="btn btn-warning">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+            </option>
+            <option value="info">
+                <lable role="button" for='TotalNumberDark'  class="btn btn-info">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+            </option>
+            <option value="light">
+                <lable role="button" for='TotalNumberDark'  class="btn btn-light">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+            </option>
+
+        </select>
     </div>
     <div class="form-row">
         <label for="Remark">描述信息</label>
@@ -57,38 +82,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">新增设备信息</h4>
+                    <h4 class="modal-title">选择颜色类型</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-3">设备编号：</div>
-                        <div class="col-9">
-                            <input class="form-control" placeholder="设备编号" v-model="newRow.code">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">设备名称：</div>
-                        <div class="col-9">
-                            <input class="form-control" placeholder="设备名称" v-model="newRow.name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">设备状态：</div>
-                        <div class="col-9">
-                            <input class="form-control" placeholder="设备状态" v-model="newRow.states">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">采购日期：</div>
-                        <div class="col-9">
-                            <input class="form-control" placeholder="采购日期" v-model="newRow.date">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">管理员：</div>
-                        <div class="col-9">
-                            <input class="form-control" placeholder="管理员" v-model="newRow.admin">
+                        <div class="form-group">           
+                            <lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
                         </div>
                     </div>
                 </div>
@@ -175,6 +175,9 @@ $(function () {
     $('.selectstock').on("select2:select",function (e) {
         vm.newRow.WID=$(".selectstock").select2('val');
     });
+
+    var $selectColor=$(".selectColor").select2();
+
     $('#fileupload').fileupload({
         url: '/upload',
         dataType: 'json',
