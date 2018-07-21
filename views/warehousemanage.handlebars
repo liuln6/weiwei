@@ -20,9 +20,9 @@
     <div class="form-row">
         <div class="productImage" v-model="productImage">
             <div class="form-group" v-for="(img,index) in productImage">
-                <img src="{{img.url}}" alt="{{img.name}}" class="img-thumbnail">
-                <input type="number" name="productImage[{{index}}]">
-                <input type="num" name="productImage[{{index}}]">
+                <img src="\{{img.url}}" alt="\{{img.name}}" class="img-thumbnail">
+                <input type="number" name="productImage[\{{index}}]">
+                <input type="num" name="productImage[\{{index}}]">
             </div>
         </div>
     </div>
