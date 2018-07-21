@@ -162,6 +162,7 @@ $(function () {
         previewMaxHeight: 100,
         previewCrop: true
     }).on('fileuploadadd', function (e, data) {
+        debugger;
         $.each(data.files,function (index,file) {
             vm.productImage.push({
                 name:file.name,
