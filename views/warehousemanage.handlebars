@@ -208,7 +208,7 @@ $(function () {
         $.each(data.result.files,function (index,file) {
             vm.productImage.push({
                 name:file.name,
-                url:WeiWeiHost+file.url,
+                url:WeiWeiHost+file.path,
                 price:0,
                 totalNum:0
             });
