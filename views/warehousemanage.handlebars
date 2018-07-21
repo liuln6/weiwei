@@ -19,7 +19,7 @@
     </div>
     <div class="from-row" v-model="imageList">
         <div class="card" style="width: 150px;" v-for="(item,index) in productImage">
-            <img class="card-img-top" :src="item.url'/100px180/'" :alt="item.name" >
+            <img class="card-img-top" :src="item.url" :alt="item.name" >
             <div class="card-body">  
                 <input type="number" :name="'productImage_'[index]" :value="item.totalNum">
                 <input type="num" :name="'productImage_'[index]"  :value="item.price">
