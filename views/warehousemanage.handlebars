@@ -161,15 +161,7 @@ $(function () {
         previewMaxHeight: 100,
         previewCrop: true
     }).on('fileuploadadd', function (e, data) {
-        debugger;
-        $.each(data.files,function (index,file) {
-            vm.productImage.push({
-                name:file.name,
-                url:WeiWeiHost+file.path,
-                price:0,
-                totalNum:0
-            });
-        });
+        
         
     }).on('fileuploadprocessalways', function (e, data) {
         var index = data.index,
@@ -210,6 +202,16 @@ $(function () {
                     .append('<br>')
                     .append(error);
             }
+        });
+
+        debugger;
+        $.each(data.result.files,function (index,file) {
+            vm.productImage.push({
+                name:file.name,
+                url:WeiWeiHost+file.url,
+                price:0,
+                totalNum:0
+            });
         });
     }).on('fileuploadfail', function (e, data) {
         $.each(data.files, function (index, file) {
