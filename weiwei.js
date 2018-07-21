@@ -67,7 +67,7 @@ app.use('/upload',function (req,res) {
         var date = new Date();
         var ms = Date.parse(date);
         fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1] );
-        file.path='public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1];
+        file.path='tmp/' + year +'/' + month + '/' + ms+'.'+types[1];
         docs.push(file);
     }).on('end', function() {
         console.log('-> upload done');
