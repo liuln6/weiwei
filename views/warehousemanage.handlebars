@@ -17,8 +17,8 @@
         <input id="fileupload" type="file" name="files[]" multiple="">
         </span>
     </div>
-    <div class="from-row" v-model="imageList">
-        <div class="card" style="width: 150px;" v-for="(item,index) in productImage">
+    <div class="from-row" v-model="productImage">
+        <div class="card float-left" style="width: 100px;" v-for="(item,index) in productImage">
             <img class="card-img-top" :src="item.url" :alt="item.name" >
             <div class="card-body">  
                 <input type="number" :name="'productImage_'[index]" :value="item.totalNum">
@@ -85,7 +85,6 @@
         data: {
             checkAll: false,
             checkedRows: [],
-            imageList:imageArr,
             productImage: imageArr,
             productType:imageArr,
             newRow:{
@@ -141,6 +140,8 @@
     });
       
 $(function () {
+    vm.productImage=[];
+    vm.productType=[];
     GetWeiStockList() ;
     var $selectStock=$('.selectstock').select2({
         ajax: {
@@ -218,22 +219,6 @@ $(function () {
             progress + '%'
         );
     }).on('fileuploaddone', function (e, data) {
-        $.each(data.result.files, function (index, file) {
-            if (file.url) {
-                var link = $('<a>')
-                    .attr('target', '_blank')
-                    .prop('href', file.url);
-                $(data.context.children()[index])
-                    .wrap(link);
-            } else if (file.error) {
-                var error = $('<span class="text-danger"/>').text(file.error);
-                $(data.context.children()[index])
-                    .append('<br>')
-                    .append(error);
-            }
-        });
-
-        debugger;
         $.each(data.result.files,function (index,file) {
             vm.productImage.push({
                 name:file.name,
