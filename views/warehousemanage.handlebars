@@ -18,7 +18,7 @@
         </span>
     </div>
     <div class="form-row">
-        <div class="productImage" v-model="productImage">
+        <div class="productImage col" v-model="productImage">
             <div class="form-group" v-for="(img,index) in productImage">
                 <img src="img.url" alt="img.name" class="img-thumbnail">
                 <input type="number" name="productImage[index]">
@@ -74,17 +74,34 @@
 <!-- The basic File Upload plugin -->
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
 <script>
+    var imageArr=[{
+        url:'',
+        name:'',
+        price:null,
+        totalNum:null
+    }]; 
     var vm=new Vue({
         el: "#AddWare",
         data: {
             checkAll: false,
             checkedRows: [],
-            productImage: [],
-            productType:[],
+            productImage: imageArr,
+            productType:imageArr,
             newRow:{
                 WID:2
             },
             warehouselist:[],
+        },
+        computed:{
+            productType:function () {
+                var typeArr=[];
+                $.each(this.productImage,function (index,item) {
+                    if(item.price!=null&&item.price!=0&&item.totalNum!=null&&item.totalNum!=0){
+                        typeArr.push(item);
+                    }
+                });
+                return typeArr;
+            }
         },
         methods: {
             addRow: function () {
@@ -163,7 +180,16 @@ $(function () {
         previewMaxHeight: 100,
         previewCrop: true
     }).on('fileuploadadd', function (e, data) {
-        
+        data.context = $('<div/>').appendTo('#files');
+        $.each(data.files, function (index, file) {
+            var node = $('<p/>')
+                    .append($('<span/>').text(file.name));
+            //if (!index) {
+            //    node
+            //        .append('<br>')
+            //        .append(uploadButton.clone(true).data(data));
+            //}
+            node.appendTo(data.context);
         
     }).on('fileuploadprocessalways', function (e, data) {
         var index = data.index,
