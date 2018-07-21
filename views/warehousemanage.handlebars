@@ -18,9 +18,11 @@
         </span>
     </div>
     <div class="form-row">
-        <div class="colorType" v-model="productImage">
-            <div class="form-group" v-for="(color,index) in productImage">
-                <img src="{{color.path}}" alt="{{color.name}}" class="img-thumbnail">
+        <div class="productImage" v-model="productImage">
+            <div class="form-group" v-for="(img,index) in productImage">
+                <img src="{{img.url}}" alt="{{img.name}}" class="img-thumbnail">
+                <input type="number" name="productImage[{{index}}]">
+                <input type="num" name="productImage[{{index}}]">
             </div>
         </div>
     </div>
