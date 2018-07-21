@@ -61,13 +61,13 @@ app.use('/upload',function (req,res) {
     }).on('file', function(field, file) {
         console.log(field, file);
         files.push([field, file]);
-        docs.push(file);
 
 
         var types = file.name.split('.');
         var date = new Date();
         var ms = Date.parse(date);
-        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+types[1] );
+        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1] );
+        docs.push(file);
     }).on('end', function() {
         console.log('-> upload done');
         res.writeHead(200, {
