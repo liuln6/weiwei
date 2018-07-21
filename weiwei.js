@@ -75,8 +75,7 @@ app.use('/upload',function (req,res) {
         });
         var out={Resopnse:{
             'result-code':0,
-            timeStamp:new Date(),
-            url:file.path
+            timeStamp:new Date()
         },
         files:docs
         };
