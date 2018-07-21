@@ -18,11 +18,11 @@
         </span>
     </div>
     <div class="form-row">
-        <div class="productImage col" v-model="productImage">
+        <div class=" col" v-model="imageList">
             <div class="form-group" v-for="(item,index) in productImage">
                 <img src="{{item.url}}" alt="{{item.name}}" class="img-thumbnail">
-                <input type="number" name="{{item.totalNum}}">
-                <input type="num" name="{{item.price}}">
+                <input type="number" name="" value="{{item.totalNum}}">
+                <input type="num" name="productImage_{{index}}" value="{{item.price}}">
             </div>
         </div>
     </div>
@@ -85,6 +85,7 @@
         data: {
             checkAll: false,
             checkedRows: [],
+            imageList:imageArr,
             productImage: imageArr,
             productType:imageArr,
             newRow:{
