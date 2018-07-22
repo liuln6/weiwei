@@ -32,10 +32,10 @@
             </div>
         </div>
     </div>
-    <!--<div class="form-row float-none">
+    <div class="form-row float-none">
         <label for="WID">选择仓库</label>
         <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
-    </div>-->
+    </div>
     <div class="form-row">
         
         <div class="form-group col-md-6">
@@ -43,14 +43,36 @@
             <input type="text" class="form-control" name="No">
         </div>
         <div class="form-check form-check-inline" v-for="(ware,wareIndex) in warehouselist">
-          <label class="form-check-label">\{{ware.Name}}</label>
-          <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+          <input class="form-check-input" type="redio" name="warehouseSelect" :value="ware.ID" :id="'warehouselist_'wareIndex">
+          <label class="form-check-label" :for="'warehouselist_'wareIndex">\{{ware.Name}}</label>
         </div>
     </div>
     
     <div class="form-row">
         <label for="Remark">描述信息</label>
         <textarea name="Remark" class="form-control" ></textarea>
+    </div>
+
+    <!-- 模态框 -->
+    <div class="modal fade" id="selectColor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">选择颜色类型</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">           
+                            <lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" @click="addRow">确认</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {{#section 'jquery'}}
@@ -150,12 +172,12 @@ $(function () {
             }
         }
     });
-    //$(".selectstock").select2('val', vm.newRow.WID);
-    //$('.selectstock').on("select2:select",function (e) {
-    //    vm.newRow.WID=$(".selectstock").select2('val');
-    //});
+    $(".selectstock").select2('val', vm.newRow.WID);
+    $('.selectstock').on("select2:select",function (e) {
+        vm.newRow.WID=$(".selectstock").select2('val');
+    });
 
-    //var $selectColor=$(".selectColor").select2();
+    var $selectColor=$(".selectColor").select2();
 
     $('#fileupload').fileupload({
         url: '/upload',
