@@ -87,6 +87,10 @@
         price:null,
         totalNum:null
     }]; 
+    var wareList=[{
+        ID:0,
+        Name:""
+    }];
     var vm=new Vue({
         el: "#AddWare",
         data: {
@@ -97,7 +101,7 @@
             newRow:{
                 WID:2
             },
-            warehouselist:[],
+            warehouselist:wareList,
         },
         computed:{
             productType:function () {
@@ -149,6 +153,7 @@
 $(function () {
     vm.productImage=[];
     vm.productType=[];
+    vm.warehouselist=[];
     GetWeiStockList() ;
     var $selectStock=$('.selectstock').select2({
         ajax: {
