@@ -1,0 +1,12 @@
+.app-footer:{
+	transition: margin-left .25s,margin-right .25s,width .25s,flex .25s,-ms-flex .25s;
+	flex: 0 0 50px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 0 1rem;
+	color: #fff;
+	background: #383e4b;
+	border-top: 1 solid #e4e6eb;
+	box-sizing: border-box;
+}
