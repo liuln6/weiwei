@@ -43,7 +43,6 @@
             <input type="text" class="form-control" name="No">
         </div>
         <div class="form-check form-check-inline" v-for="(item,index) in warehouselist">
-          <input class="form-check-input" type="radio" name="warehouseSelect" :value="item.ID" >
           <label class="form-check-label" :for="'warehouselist_'index">\{{item.Name}}</label>
         </div>
     </div>
