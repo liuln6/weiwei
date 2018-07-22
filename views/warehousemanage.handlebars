@@ -32,19 +32,18 @@
             </div>
         </div>
     </div>
-    <div class="form-row float-none">
+    <!--<div class="form-row float-none">
         <label for="WID">选择仓库</label>
         <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
-    </div>
+    </div>-->
     <div class="form-row">
         
         <div class="form-group col-md-6">
             <label for="No">编号</label>
             <input type="text" class="form-control" name="No">
         </div>
-        <div class="form-check form-check-inline" v-for="(item,index) in warehouselist">
-          
-          <label class="form-check-label">dd</label>
+        <div class="form-check form-check-inline" v-for="(ware,wareIndex) in warehouselist">
+          <label class="form-check-label">\{{ware.Name}}</label>
           <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
         </div>
     </div>
