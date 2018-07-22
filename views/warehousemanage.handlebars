@@ -22,8 +22,8 @@
             <img class="card-img-top" :src="item.url" :alt="item.name" >
             <div class="p-2">
                 <div class="form-group col-md-6">
-                    <label :for="TotalNumber" class="text-muted">米数</label>
-                    <input type="number" min="0" :name="'totalNumber_'[index]" :value="item.totalNum" class="w-100">
+                    <label :for="'totalNumber+'index" class="text-muted">米数</label>
+                    <input type="number" min="0" :name="'totalNumber+'index" :value="item.totalNum" class="w-100">
                 </div>  
                 <div class="form-group col-md-6">
                     <label :for="'price_'index" class="text-muted">价格</label>
