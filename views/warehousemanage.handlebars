@@ -23,15 +23,15 @@
             <div class="p-2">
                 <div class="form-group col-md-4">
                     <label v-bind:for="'totalNumber'+index" class="text-muted">米数</label>
-                    <input type="number" min="0" v-bind:name="'totalNumber+'index" :value="item.totalNum" class="w-100">
+                    <input type="number" min="0" v-bind:name="'totalNumber+'index" v-bind:value="item.totalNum" class="w-100">
                 </div>  
                 <div class="form-group col-md-4">
                     <label v-bind:for="'price_'+index" class="text-muted">价格</label>
-                    <input type="num" min="0" v-bind:name="'price_'+index"  :value="item.price" class="w-100">
+                    <input type="num" min="0" v-bind:name="'price_'+index"  v-bind:value="item.price" class="w-100">
                 </div>
                 <div class="form-group col-md-4">
                     <label v-bind:for="'mark_'+index" class="text-muted">标识</label>
-                    <input type="text" v-bind:name="'mark_'+index"  :value="item.mark" placeholder="颜色" class="w-100">
+                    <input type="text" v-bind:name="'mark_'+index"  v-bind:value="item.mark" placeholder="颜色" class="w-100">
                 </div>  
             </div>
         </div>
