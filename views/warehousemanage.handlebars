@@ -11,7 +11,7 @@
     </div>
 
     <div class="row text-center">
-       <span class="btn text-success fileinput-button">
+       <span class="btn text-success fileinput-button col align-self-center">
             <span class="fa fa-camera-retro fa-5x"></span> 
             <!-- The file input field used as target for the file upload widget -->
             <input id="fileupload" type="file" name="files[]" multiple="">
@@ -41,6 +41,10 @@
         <div class="form-group col-md-6">
             <label for="No">编号</label>
             <input type="text" class="form-control" name="No">
+        </div>
+        <div class="form-check form-check-inline" v-for="(item,index) in warehouselist">
+          <input class="form-check-input" type="radio" min="0" :name="warehouselist" :value="item.id" :id="'warehouselist_'index">
+          <label class="form-check-label" :for="'warehouselist_'index">\{{item.text}}</label>
         </div>
     </div>
     
