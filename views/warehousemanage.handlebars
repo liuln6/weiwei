@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="form-row">
+    <div class="form-row text-center">
        <span class="btn btn-dark fileinput-button">
             <span class="fa fa-camera-retro fa-5x"></span> 
             <!-- The file input field used as target for the file upload widget -->
@@ -20,9 +20,15 @@
     <div class="row" v-model="productImage">
         <div class="card float-left w-25" v-for="(item,index) in productImage">
             <img class="card-img-top" :src="item.url" :alt="item.name" >
-            <div class="p-2">  
-                <input type="number" :name="'productImage_'[index]" :value="item.totalNum" class="w-100">
-                <input type="num" :name="'productImage_'[index]"  :value="item.price" class="w-100">
+            <div class="p-2">
+                <div class="form-group col-md-6">
+                    <label for="TotalNumber" class="text-muted">米数</label>
+                    <input type="number" min="0" :name="'productImage_'[index]" :value="item.totalNum" class="w-100">
+                </div>  
+                <div class="form-group col-md-6">
+                    <label for="TotalNumber" class="text-muted">价格</label>
+                    <input type="num" min="0" :name="'productImage_'[index]"  :value="item.price" class="w-100">
+                </div> 
             </div>
         </div>
     </div>
@@ -31,10 +37,7 @@
         <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="TotalNumber">米数</label>
-            <input type="number" class="form-control" name="TotalNumber">
-        </div>
+        
         <div class="form-group col-md-6">
             <label for="No">编号</label>
             <input type="text" class="form-control" name="No">
