@@ -181,7 +181,7 @@ $(function () {
         previewMaxWidth: 100,
         previewMaxHeight: 100,
         previewCrop: true,
-        singleFileUploads：false
+        singleFileUploads: false
     }).on('fileuploadadd', function (e, data) {
         data.context = $('<div/>').appendTo('#files');
         $.each(data.files, function (index, file) {
