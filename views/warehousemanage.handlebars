@@ -22,8 +22,8 @@
             <img class="card-img-top" :src="item.url" :alt="item.name" >
             <div class="p-2">
                 <div class="form-group col-md-4">
-                    <label v-bind:for="'totalNumber'+index" class="text-muted">米数</label>
-                    <input type="number" min="0" v-bind:name="'totalNumber+'index" v-bind:value="item.totalNum" class="w-100">
+                    <label v-bind:for="'totalNumber_'+index" class="text-muted">米数</label>
+                    <input type="number" min="0" v-bind:name="'totalNumber_'+index" v-bind:value="item.totalNum" class="w-100">
                 </div>  
                 <div class="form-group col-md-4">
                     <label v-bind:for="'price_'+index" class="text-muted">价格</label>
