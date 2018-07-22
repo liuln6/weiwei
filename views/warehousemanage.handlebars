@@ -53,28 +53,6 @@
         <label for="Remark">描述信息</label>
         <textarea name="Remark" class="form-control" ></textarea>
     </div>
-
-    <!-- 模态框 -->
-    <div class="modal fade" id="selectColor">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">选择颜色类型</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="form-group">           
-                            <lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal" @click="addRow">确认</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 {{#section 'jquery'}}
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/vendor/jquery.ui.widget.min.js"></script>
@@ -173,12 +151,12 @@ $(function () {
             }
         }
     });
-    $(".selectstock").select2('val', vm.newRow.WID);
-    $('.selectstock').on("select2:select",function (e) {
-        vm.newRow.WID=$(".selectstock").select2('val');
-    });
+    //$(".selectstock").select2('val', vm.newRow.WID);
+    //$('.selectstock').on("select2:select",function (e) {
+    //    vm.newRow.WID=$(".selectstock").select2('val');
+    //});
 
-    var $selectColor=$(".selectColor").select2();
+    //var $selectColor=$(".selectColor").select2();
 
     $('#fileupload').fileupload({
         url: '/upload',
