@@ -36,16 +36,18 @@
             </div>
         </div>
     </div>
+    <!--
     <div class="form-row float-none">
         <label for="WID">选择仓库</label>
         <select class="selectstock w-100" name="WID" id="WID" v-model="newRow.WID" ></select>
     </div>
+    -->
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="No">编号</label>
-            <input type="text" class="form-control" name="No">
+            <input type="text" v-model="newRow.No" class="form-control" name="No">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-8">
             <label >仓库</label>
             <div class="">
                 <div class="form-check form-check-inline" v-for="(ware,wareIndex) in warehouselist">
@@ -58,7 +60,7 @@
     
     <div class="form-row">
         <label for="Remark">描述信息</label>
-        <textarea name="Remark" class="form-control" ></textarea>
+        <textarea name="Remark" v-model="newRow.Remark" class="form-control" ></textarea>
     </div>
 
     <!-- 模态框 -->
@@ -109,6 +111,9 @@
             productType:imageArr,
             newRow:{
                 WID:2
+                No:"",
+                Remark:"",
+
             },
             warehouselist:wareList,
         },
@@ -125,7 +130,34 @@
         },
         methods: {
             addRow: function () {
-                this.facilities.push(this.newRow);
+                var product={
+                    WID:this.newRow.WID,
+                    Remark:this.newRow.Remark,
+                    No:this.newRow.No,
+                    ImageList:[],
+                    ImageType:[],
+                };
+
+                $.each(this.vm.productType,function (index,item) {
+                    product.ImageList.push({
+                        url:item.url,
+                        name:item.name,
+                        price:item.price,
+                        totalNum:item.totalNum,
+                        mark:item.mark
+                    });
+                });
+                $.each(this.vm.productImage,function (index,item) {
+                    product.ImageList.push({
+                        url:item.url,
+                        name:item.name,
+                        price:item.price,
+                        totalNum:item.totalNum,
+                        mark:item.mark
+                    });
+                });
+                //保存数据
+                //this.facilities.push(this.newRow);
                 this.newRow = {};
             },
             saveRows:function () {//保存表格数据
