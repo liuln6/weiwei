@@ -1,4 +1,4 @@
-.app-footer:{
+.app-footer {
 	transition: margin-left .25s,margin-right .25s,width .25s,flex .25s,-ms-flex .25s;
 	flex: 0 0 50px;
 	display: flex;
@@ -10,8 +10,3 @@
 	border-top: 1 solid #e4e6eb;
 	box-sizing: border-box;
 }
-#footer{background-color:#1fa67a;border-top:1px solid #1b926c;color:#a5d8c7;text-shadow:0 1px 0 rgba(0,0,0,0.15);margin-top:60px;}
-#footer a{color:#d2ebe3;border-bottom:dotted 1px #a5d8c7}
-#footer a:hover{color:#fff;text-decoration:none;border-bottom:solid 1px #fff}
-#footer .container{padding-top:50px;padding-bottom:55px}
-#footer .project{margin-top:10px}
