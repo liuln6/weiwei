@@ -17,12 +17,12 @@
             <input id="fileupload" type="file" name="files[]" multiple="">
         </span>
     </div>
-    <div class="from-row" v-model="productImage">
+    <div class="row" v-model="productImage">
         <div class="card float-left" style="width: 100px;" v-for="(item,index) in productImage">
             <img class="card-img-top" :src="item.url" :alt="item.name" >
             <div class="card-body">  
-                <input type="number" :name="'productImage_'[index]" :value="item.totalNum">
-                <input type="num" :name="'productImage_'[index]"  :value="item.price">
+                <input type="number" :name="'productImage_'[index]" :value="item.totalNum" width="w-100">
+                <input type="num" :name="'productImage_'[index]"  :value="item.price" width="w-100">
             </div>
         </div>
     </div>
@@ -180,7 +180,8 @@ $(function () {
             .test(window.navigator.userAgent),
         previewMaxWidth: 100,
         previewMaxHeight: 100,
-        previewCrop: true
+        previewCrop: true,
+        singleFileUploads：false
     }).on('fileuploadadd', function (e, data) {
         data.context = $('<div/>').appendTo('#files');
         $.each(data.files, function (index, file) {
