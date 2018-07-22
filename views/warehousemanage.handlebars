@@ -18,11 +18,11 @@
         </span>
     </div>
     <div class="row" v-model="productImage">
-        <div class="card float-left" style="width: 100px;" v-for="(item,index) in productImage">
+        <div class="card float-left w-25" v-for="(item,index) in productImage">
             <img class="card-img-top" :src="item.url" :alt="item.name" >
-            <div class="card-body">  
-                <input type="number" :name="'productImage_'[index]" :value="item.totalNum" width="w-100">
-                <input type="num" :name="'productImage_'[index]"  :value="item.price" width="w-100">
+            <div class="p-2">  
+                <input type="number" :name="'productImage_'[index]" :value="item.totalNum" class="w-100">
+                <input type="num" :name="'productImage_'[index]"  :value="item.price" class="w-100">
             </div>
         </div>
     </div>
