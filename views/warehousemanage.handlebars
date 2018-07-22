@@ -44,7 +44,7 @@
         </div>
         <div class="form-group col-md-6" v-model=newRow.WID>
         <div class="form-check form-check-inline" v-for="(ware,wareIndex) in warehouselist">
-          <input class="form-check-input" type="radio" name="warehouseSelect" v-bind:value="ware.ID" v-bind:id="'warehouse_'wareIndex" >
+          <input class="form-check-input" type="radio" name="warehouseSelect" v-bind:value="ware.ID" >
           <label class="form-check-label">\{{ware.Name}}</label>
         </div>
         </div>
