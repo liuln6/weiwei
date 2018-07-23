@@ -94,6 +94,11 @@
 <!-- The basic File Upload plugin -->
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
 <script>
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
+
     var imageArr=[{
         url:'',
         name:'',
