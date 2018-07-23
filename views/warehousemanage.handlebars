@@ -41,9 +41,11 @@
     </div>
     -->
     <div class="form-row">
-        <div class="form-group col-md-4">
-            <label for="No">编号</label>
-            <input type="text" v-model="newRow.No" data-validation-required-message=“*” required="" class="form-control" name="No">
+        <div class="control-group col-md-4">
+            <label class="control-label" for="No">编号</label><p class="help-block"></p>
+            <div class="control-s">
+                <input type="text" v-model="newRow.No" data-validation-required-message=“*” required="" class="form-control" name="No">
+            </div>
         </div>
         <div class="form-group col-md-8">
             <label >仓库</label>
