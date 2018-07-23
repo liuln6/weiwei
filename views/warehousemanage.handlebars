@@ -4,7 +4,7 @@
 <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
 {{/section}}
 <div class="container" id="AddWare">
-    <form>
+    <form class="needs-validation" novalidate>
         <div class="row text-center">
            <span class="btn imageAdd fileinput-button col align-self-center">
                 <span class="fa-stack fa-3x">
@@ -46,6 +46,12 @@
                 <label class="control-label" for="No">编号<i class="help-block"></i></label>
                 <div class="control-s">
                     <input type="text" v-model="newRow.No" data-validation-required-message=“*” required="" class="form-control" required="" name="No">
+                </div>
+                <div class="valid-tooltip">
+                Looks good!
+                </div>
+                <div class="invalid-tooltip">
+                  Please choose a unique and valid username.
                 </div>
             </div>
             <div class="form-group col-md-8">
