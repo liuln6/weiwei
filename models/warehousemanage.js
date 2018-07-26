@@ -55,7 +55,7 @@ router.post('/add',function (req,res) {
 	var WID=req.body.WID;
 	var Price=0;
 	var InputUerID=1;
-	var Remark=reg.body.Remark;
+	var Remark=req.body.Remark;
 	var UsedNumbr=0;
 	db.query("insert into WeiWarehouseManage(WID,Price,InputTime,InputUerID,Remark,UsedNumbr) values ('"+WID+"','"+Price+"','"+now()+"','"+InputUerID+"','"+Remark+"',0)",function (err,rows) {
 		if(err){
