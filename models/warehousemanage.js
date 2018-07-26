@@ -50,6 +50,8 @@ router.get('/add',function (req,res) {
 });
 router.post('/add',function (req,res) {
 	debugger;
+
+			console.info(req);
 	var WID=req.body.WID;
 	var Price=0;
 	var InputUerID=1;
