@@ -51,7 +51,7 @@ router.get('/add',function (req,res) {
 router.post('/add',function (req,res) {
 	var WID=req.body.WID;
 	var Price=req.body.Price;
-	var InputUerID=reg.body.InputUerID;
+	var InputUerID=1;
 	var Remark=reg.body.Remark;
 	var UsedNumbr=0;
 	db.query("insert into WeiWarehouseManage(WID,Price,InputTime,InputUerID,Remark,UsedNumbr) values ('"+WID+"','"+Price+"','"+now()+"','"+InputUerID+"','"+Remark+"',0)",function (err,rows) {
@@ -59,6 +59,7 @@ router.post('/add',function (req,res) {
 			res.end('新增失败'+err);
 		}else{
 			res.end(res);
+			console.info(rows.ID);
 		}
 	});
 });

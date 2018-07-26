@@ -45,8 +45,8 @@
             <div class="form-group col-md-4">
                 <label for="No">编号</label>
                 <input type="text" :class="{'is-invalid': errors.has('No')}" data-vv-delay="500" v-model="newRow.No" v-validate="'required'" class="form-control" name="No">
-                <i v-show="errors.has('No')" class="fa fa-warning"></i>
-                <span v-show="errors.has('No')" class="help is-danger">\{{ errors.first('No') }}</span>
+                <i v-show="errors.has('No')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('No')" class="help text-danger">\{{ errors.first('No') }}</span>
             </div>
             <div class="form-group col-md-8">
                 <label >仓库</label>
@@ -63,8 +63,8 @@
             <div class="form-group">
                 <label for="Remark">描述信息</label>
                 <textarea name="Remark" v-model="newRow.Remark" :class="{'is-invalid':errors.has('Remark'),'form-control':true}" v-validate="'required'" data-vv-delay="500"></textarea>
-                 <i v-show="errors.has('Remark')" class="fa fa-warning"></i>
-                <span v-show="errors.has('Remark')" class="help is-danger">\{{ errors.first('Remark') }}</span>
+                 <i v-show="errors.has('Remark')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('Remark')" class="help text-danger">\{{ errors.first('Remark') }}</span>
             </div>
         </div>
         <button class="btn btn-primary" type="submit" @click="saveRows">保存</button>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal" @click="addRow">确认</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal" @click="saveRows">确认</button>
                     </div>
                 </div>
             </div>
