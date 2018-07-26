@@ -49,6 +49,7 @@ router.get('/add',function (req,res) {
 	res.render('add');
 });
 router.post('/add',function (req,res) {
+	debugger;
 	var WID=req.body.WID;
 	var Price=req.body.Price;
 	var InputUerID=1;
