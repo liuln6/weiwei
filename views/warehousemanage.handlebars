@@ -162,7 +162,7 @@
                     ImageType:[],
                 };
                 if(vm.productType){
-                    $.each(this.vm.productType,function (index,item) {
+                    $.each(vm.productType,function (index,item) {
                         product.ImageList.push({
                             url:item.url,
                             name:item.name,
@@ -173,7 +173,7 @@
                     });
                 }
                 if(vm.productImage){
-                    $.each(this.vm.productImage,function (index,item) {
+                    $.each(vm.productImage,function (index,item) {
                         product.ImageList.push({
                             url:item.url,
                             name:item.name,
