@@ -59,7 +59,36 @@
             </div>
         </div>
         
-        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Remark">描述信息</label>
+                <textarea name="Remark" v-model="newRow.Remark" :class="{'is-invalid':errors.has('Remark'),form-control}" v-validate="required" data-vv-delay="500"></textarea>
+                 <i v-show="errors.has('Remark')" class="fa fa-warning"></i>
+                <span v-show="errors.has('Remark')" class="help is-danger">\{{ errors.first('Remark') }}</span>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit" @click="saveRows">保存</button>
+        <!-- 模态框 -->
+        <div class="modal fade" id="selectColor">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">选择颜色类型</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-group">           
+                                <lable role="button" for='TotalNumberDark'  class="btn btn-dark">&nbsp;&nbsp;&nbsp;&nbsp;</lable>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal" @click="addRow">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 {{#section 'jquery'}}
