@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal" @click="saveRows">确认</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal" >确认</button>
                     </div>
                 </div>
             </div>
@@ -141,6 +141,7 @@
                     if (result) {
                       // eslint-disable-next-line
                       alert('Form Submitted!');
+                      this.saveRows();
                       return;
                     }
 
@@ -160,25 +161,28 @@
                     ImageList:[],
                     ImageType:[],
                 };
-
-                $.each(this.vm.productType,function (index,item) {
-                    product.ImageList.push({
-                        url:item.url,
-                        name:item.name,
-                        price:item.price,
-                        totalNum:item.totalNum,
-                        mark:item.mark
+                if(vm.productType){
+                    $.each(this.vm.productType,function (index,item) {
+                        product.ImageList.push({
+                            url:item.url,
+                            name:item.name,
+                            price:item.price,
+                            totalNum:item.totalNum,
+                            mark:item.mark
+                        });
                     });
-                });
-                $.each(this.vm.productImage,function (index,item) {
-                    product.ImageList.push({
-                        url:item.url,
-                        name:item.name,
-                        price:item.price,
-                        totalNum:item.totalNum,
-                        mark:item.mark
+                }
+                if(vm.productImage){
+                    $.each(this.vm.productImage,function (index,item) {
+                        product.ImageList.push({
+                            url:item.url,
+                            name:item.name,
+                            price:item.price,
+                            totalNum:item.totalNum,
+                            mark:item.mark
+                        });
                     });
-                });
+                }
                 //保存数据
                 axios.post('/add',product)
                 .then(function (response) {
