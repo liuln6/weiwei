@@ -98,6 +98,7 @@
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
 
 <script>
+    var controlUrl="/warehousemanage/";
     Vue.use(VeeValidate);
     var imageArr=[{
         url:'',
@@ -185,7 +186,7 @@
                     });
                 }
                 //保存数据
-                axios.post('/add',product)
+                axios.post(controlUrl+'/add',product)
                 .then(function (response) {
                     console.log(response);
                 })
