@@ -4,7 +4,7 @@
 <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
 {{/section}}
 <div class="container" id="AddWare">
-    <form class="needs-validation" novalidate>
+    <form class="needs-validation" @submit.prevent="validateBeforeSubmit">
         <div class="row text-center">
            <span class="btn imageAdd fileinput-button col align-self-center">
                 <span class="fa-stack fa-3x">
@@ -67,7 +67,7 @@
                 <span v-show="errors.has('Remark')" class="help text-danger">\{{ errors.first('Remark') }}</span>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit" @click="saveRows">保存</button>
+        <button class="btn btn-primary" type="button" @click="saveRows">保存</button>
         <!-- 模态框 -->
         <div class="modal fade" id="selectColor">
             <div class="modal-dialog">
@@ -136,6 +136,17 @@
             }
         },
         methods: {
+            validateBeforeSubmit:function () {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                      // eslint-disable-next-line
+                      alert('Form Submitted!');
+                      return;
+                    }
+
+                    alert('Correct them errors!');
+                  });
+            }
             addRow: function () {
                 
                 //this.facilities.push(this.newRow);
