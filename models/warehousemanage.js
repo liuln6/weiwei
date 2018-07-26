@@ -51,7 +51,7 @@ router.get('/add',function (req,res) {
 router.post('/add',function (req,res) {
 	debugger;
 	var WID=req.body.WID;
-	var Price=req.body.Price;
+	var Price=0;
 	var InputUerID=1;
 	var Remark=reg.body.Remark;
 	var UsedNumbr=0;
