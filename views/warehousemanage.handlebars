@@ -42,11 +42,11 @@
         </div>
         -->
         <div class="form-row">
-            <div class="control-group col-md-4">
+            <div class="form-group col-md-4">
                 <label for="No">编号</label>
-                <input type="text" :class="{'is-invalid': errors.has('newRow.No')}" data-vv-delay="500" v-model="newRow.No" v-validate="'required'" class="form-control" name="newRow.No">
-                <i v-show="errors.has('newRow.No')" class="fa fa-warning"></i>
-                <span v-show="errors.has('newRow.No')" class="help is-danger">{{ errors.first('newRow.No') }}</span>
+                <input type="text" :class="{'is-invalid': errors.has('No')}" data-vv-delay="500" v-model="newRow.No" v-validate="'required'" class="form-control" name="No">
+                <i v-show="errors.has('No')" class="fa fa-warning"></i>
+                <span v-show="errors.has('No')" class="help is-danger">\{{ errors.first('No') }}</span>
             </div>
             <div class="form-group col-md-8">
                 <label >仓库</label>
@@ -62,10 +62,12 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="Remark">描述信息</label>
-                <textarea name="Remark" required="" v-model="newRow.Remark" class="form-control" required=""></textarea>
+                <textarea name="Remark" v-model="newRow.Remark" :class="{'is-invalid': errors.has('Remark')},form-control" v-validate="required" data-vv-delay="500"></textarea>
+                 <i v-show="errors.has('Remark')" class="fa fa-warning"></i>
+                <span v-show="errors.has('Remark')" class="help is-danger">\{{ errors.first('Remark') }}</span>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">保存</button>
+        <button class="btn btn-primary" type="submit" @click="saveRows">保存</button>
         <!-- 模态框 -->
         <div class="modal fade" id="selectColor">
             <div class="modal-dialog">
@@ -135,6 +137,11 @@
         },
         methods: {
             addRow: function () {
+                
+                //this.facilities.push(this.newRow);
+                this.newRow = {};
+            },
+            saveRows:function () {//保存表格数据
                 var product={
                     WID:this.newRow.WID,
                     Remark:this.newRow.Remark,
@@ -162,11 +169,13 @@
                     });
                 });
                 //保存数据
-                //this.facilities.push(this.newRow);
-                this.newRow = {};
-            },
-            saveRows:function () {//保存表格数据
-                
+                axios.post('/add',product)
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
             delRows:function () {
                 if (this.checkedRows.length <= 0){
