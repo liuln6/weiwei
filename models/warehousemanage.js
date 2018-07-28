@@ -55,7 +55,7 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	db.query("insert into WeiWarehouseManage(WID,Price,InputTime,InputUserID,Remark,UsedNumber) values ('"+WID+"','"+Price+"',"+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+","+InputUerID+",'"+Remark+"',0)",function (err,result) {
+	db.query("insert into WeiWarehouseManage(WID,Price,InputTime,InputUserID,Remark,UsedNumber) values ('"+WID+"','"+Price+"','"+moment(new Date()).format('YYYY-MM-DD HH:mm:ss')+"',"+InputUerID+",'"+Remark+"',0)",function (err,result) {
 		if(err){
 			res.end('新增失败'+err);
 		}else{
