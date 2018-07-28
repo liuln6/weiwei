@@ -49,20 +49,17 @@ router.get('/add',function (req,res) {
 	res.render('add');
 });
 router.post('/add',function (req,res) {
-	debugger;
-
-			console.info(req);
 	var WID=req.body.WID;
 	var Price=0;
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	db.query("insert into WeiWarehouseManage(WID,Price,InputTime,InputUserID,Remark,UsedNumber) values ('"+WID+"','"+Price+"','"+new Date()+"',"+InputUerID+",'"+Remark+"',0)",function (err,rows) {
+	db.query("insert into WeiWarehouseManage(WID,Price,InputTime,InputUserID,Remark,UsedNumber) values ('"+WID+"','"+Price+"','"+new Date()+"',"+InputUerID+",'"+Remark+"',0)",function (err,result) {
 		if(err){
 			res.end('新增失败'+err);
 		}else{
 			res.end(res);
-			console.info(rows.ID);
+			console.info(result);
 		}
 	});
 });
