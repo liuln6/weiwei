@@ -5,10 +5,15 @@ var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/warehouseManageSQL.js');
-
+var pool=mysql.createPool({
+	host:'localhost',
+	user:'root',
+	password:'lina2010',
+	database:'WeiWeiStock'
+});
 var connection;
 function handleDisconnect() {
-    connection = mysql.createConnection(db.pool);
+    connection = mysql.createConnection(pool);
     connection.connect(function(err) {
         if(err) {
             console.log("进行断线重连：" + new Date());
