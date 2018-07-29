@@ -8,6 +8,8 @@ var sql=require('../db/warehouseManageSQL.js');
 
 var path=require('path');
 
+var async=require('async');
+
 const dbconfig = {
     host     : '39.107.252.17',
     user     : 'root',
@@ -140,23 +142,30 @@ router.use('/upload',function (req,res) {
         };
         //新增图片
         handleDisconnect();
-		var values=[];
-		var resData=[];
-		docs.forEach(function (item,index) {
-			connection.query(sql.addImages,[item.path,new Date(),0],function (err,rows,fields) {
-				if(err){
-					console.log("添加图片失败",err.message);
+        var resData=[];
+        async.eachSeries(docs,function (item,callback) {
+        	//遍历执行新增
+        	connection.query(sql.addImages,[item.path,new Date(),0],function (err,results) {
+        		if(err){
+        			console.log("添加图片失败",err.message);
 					res.json("添加图片失败");
-				}
-				else{
-					resData.push({
+        		}else{
+        			console.log(results.insertId);
+        			callback();
+        			resData.push({
 						url:item.path,
 						id:rows.insertId
 					});
-				}
-				console.log(resData);	
-			});
-		});
+        		}
+        	});
+        },function (err) {
+        	if(err){
+        		console.log(err);
+        	}else{
+        		console.log('Sql执行完成');
+        	}
+        });
+
 		console.log(resData);
 		
 		connection.end();
