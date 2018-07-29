@@ -79,20 +79,11 @@ router.post('/add',function (req,res) {
 	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,result) {
 		if(err){
 			res.end('新增失败'+err);
-			res.json(result.insertId);
 		}else{
 			
 			var newID=result.insertId;
-			//新增图片
-			var values=[];
-
-			connection.query(sql.addImages,[values],function (err,rows,fields) {
-				if(err){
-					console.log("添加图片失败",err.message);
-					res.json("添加图片失败");
-				}
-			});
-			console.info(result.ID);
+			
+			res.json(result.insertId);
 		}
 	});
 	//web请求中可以不断连接
@@ -147,8 +138,19 @@ router.use('/upload',function (req,res) {
         },
         files:docs
         };
-        //入库
-        
+        //新增图片
+			var values=[];
+			docs.forEach(function (item,index) {
+				values.push([
+					item.path+item.name,new Date(),0
+					]);
+			});
+			connection.query(sql.addImages,[values],function (err,rows,fields) {
+				if(err){
+					console.log("添加图片失败",err.message);
+					res.json("添加图片失败");
+				}
+			});
         var sout=JSON.stringify(out);
         res.end(sout);
     });
