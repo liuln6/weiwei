@@ -150,6 +150,9 @@ router.use('/upload',function (req,res) {
 					console.log("添加图片失败",err.message);
 					res.json("添加图片失败");
 				}
+				else{
+					console.log(rows);
+				}
 			});
         var sout=JSON.stringify(out);
         res.end(sout);
