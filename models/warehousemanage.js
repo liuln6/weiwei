@@ -154,7 +154,7 @@ router.use('/upload',function (req,res) {
         			callback();
         			resData.push({
 						url:item.path,
-						id:rows.insertId
+						id:results.insertId
 					});
         		}
         	});
