@@ -6,7 +6,7 @@ var pool=mysql.createPool({
 	database:'WeiWeiStock'
 });
 
-function query(sql,callback) {
+function query(sql,[],callback) {
 	pool.getConnection(function (err,connection) {
 		//Use the connection
 		connection.query(sql,function (err,rows) {

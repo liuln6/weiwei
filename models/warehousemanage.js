@@ -1,6 +1,7 @@
 var express=require('express');
 var router=express.Router();
 //引入数据库包
+var mysql= require('mysql');
 var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/warehouseManageSQL.js');
