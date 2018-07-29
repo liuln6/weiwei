@@ -80,6 +80,8 @@ app.use('/upload',function (req,res) {
         },
         files:docs
         };
+        //入库
+        
         var sout=JSON.stringify(out);
         res.end(sout);
     });

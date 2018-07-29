@@ -5,6 +5,9 @@ var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/warehouseManageSQL.js');
+
+var path=require('path');
+
 const dbconfig = {
     host     : '39.107.252.17',
     user     : 'root',
@@ -73,16 +76,88 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,results) {
+	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,result) {
 		if(err){
 			res.end('新增失败'+err);
+			res.json(result.insertId);
 		}else{
-			res.json(results);
+			
+			var newID=result.insertId;
+			//新增图片
+			var values=[];
 
+			connection.query(sql.addImages,[values],function (err,rows,fields) {
+				if(err){
+					console.log("添加图片失败",err.message);
+					res.json("添加图片失败");
+				}
+			});
 			console.info(result.ID);
 		}
 	});
 	//web请求中可以不断连接
     connection.end();
 });
+
+function mkdir(dirpath) {
+	if(!fs.existsSync(path.dirname(dirpath))){
+		mkdir(path.dirname(dirpath))
+	}
+	fs.mkdirSync(dirpath);
+}
+
+var formidable = require('formidable'),
+    util = require('util'),fs=require('fs');
+app.use('/upload',function (req,res) {
+	// parse a file upload
+    var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
+    console.log('start upload');
+    var now=new Date();
+	var year=now.getFullYear();
+	var month=now.getMonth()+1;
+
+    //存放目录
+    form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
+
+    let myPath=form.uploadDir;
+    fs.existsSync(myPath)==false&&mkdir(myPath);
+
+    form.on('field', function(field, value) {
+        //console.log(field, value);
+        fields.push([field, value]);
+    }).on('file', function(field, file) {
+        console.log(field, file);
+        files.push([field, file]);
+
+
+        var types = file.name.split('.');
+        var date = new Date();
+        var ms = Date.parse(date);
+        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1] );
+        file.path='tmp/' + year +'/' + month + '/' + ms+'.'+types[1];
+        docs.push(file);
+    }).on('end', function() {
+        console.log('-> upload done');
+        res.writeHead(200, {
+            'content-type': 'text/plain'
+        });
+        var out={Resopnse:{
+            'result-code':0,
+            timeStamp:new Date()
+        },
+        files:docs
+        };
+        //入库
+        
+        var sout=JSON.stringify(out);
+        res.end(sout);
+    });
+
+    form.parse(req, function(err, fields, files) {
+        err && console.log('formidabel error : ' + err);
+
+        console.log('parsing done');
+    });
+});
+
 module.exports=router;
