@@ -77,19 +77,11 @@ router.post('/add',function (req,res) {
 		if(err){
 			res.end('新增失败'+err);
 		}else{
-			res.end(res);
-			console.info(result);
+			
+
+			console.info(result.ID);
 		}
 	});
-	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err, result) {
-        if(err){
-            console.log('[INSERT ERROR] - ',err.message);
-            res.json("添加数据失败");
-            return;
-        }
-        console.log(result);
-        res.json("添加数据成功");
-    });
 	//web请求中可以不断连接
     connection.end();
 });
