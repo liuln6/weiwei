@@ -156,7 +156,7 @@ router.use('/upload',function (req,res) {
 				}	
 			});
 		});
-		
+		console.log(resData);
 		
 		connection.end();
         var sout=JSON.stringify(resData);
