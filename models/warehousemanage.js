@@ -73,11 +73,11 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,result) {
+	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,results) {
 		if(err){
 			res.end('新增失败'+err);
 		}else{
-			
+			res.json(results);
 
 			console.info(result.ID);
 		}
