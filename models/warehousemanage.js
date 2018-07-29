@@ -127,7 +127,7 @@ router.use('/upload',function (req,res) {
         var date = new Date();
         var ms = Date.parse(date);
         var msfive=generateMixed(5);
-        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1] );
+        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[1] );
         file.path='tmp/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
         docs.push(file);
     }).on('end', function() {
