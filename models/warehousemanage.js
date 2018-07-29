@@ -108,7 +108,7 @@ function mkdir(dirpath) {
 
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
-app.use('/upload',function (req,res) {
+router.use('/upload',function (req,res) {
 	// parse a file upload
     var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
     console.log('start upload');
