@@ -141,23 +141,25 @@ router.use('/upload',function (req,res) {
         //新增图片
         handleDisconnect();
 		var values=[];
+		var resData=[];
 		docs.forEach(function (item,index) {
-			values.push([
-				item.path+item.name,new Date(),0
-				]);
+			connection.query(sql.addImages,[item.path,new Date(),0],function (err,rows,fields) {
+				if(err){
+					console.log("添加图片失败",err.message);
+					res.json("添加图片失败");
+				}
+				else{
+					resData.push({
+						url:item.path,
+						id:rows.insertId
+					});
+				}	
+			});
 		});
-		connection.query(sql.addImages,[values],function (err,rows,fields) {
-			if(err){
-				console.log("添加图片失败",err.message);
-				res.json("添加图片失败");
-			}
-			else{
-				console.log(rows);
-				console.log(fields);
-			}
-		});
+		
+		
 		connection.end();
-        var sout=JSON.stringify(out);
+        var sout=JSON.stringify(resData);
         res.end(sout);
     });
 
