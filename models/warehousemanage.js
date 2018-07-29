@@ -6,7 +6,7 @@ var mysql= require('mysql');
 var moment=require('moment');
 var sql=require('../db/warehouseManageSQL.js');
 var pool=mysql.createPool({
-	host:'127.0.0.1',
+	host:'39.107.252.17',
 	user:'root',
 	password:'lina2010',
 	database:'WeiWeiStock'
