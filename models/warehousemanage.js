@@ -163,14 +163,15 @@ router.use('/upload',function (req,res) {
         		console.log(err);
         	}else{
         		console.log('Sql执行完成');
+        		console.log(resData);
+		
+				connection.end();
+		        var sout=JSON.stringify(resData);
+		        res.end(sout);
         	}
         });
 
-		console.log(resData);
 		
-		connection.end();
-        var sout=JSON.stringify(resData);
-        res.end(sout);
     });
 
     form.parse(req, function(err, fields, files) {
