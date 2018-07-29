@@ -2,7 +2,7 @@ var express=require('express');
 var router=express.Router();
 //引入数据库包
 var mysql= require('mysql');
-var db=require('../db/dbprovider.js');
+//var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/warehouseManageSQL.js');
 
@@ -30,7 +30,8 @@ function handleDisconnect() {
 库存查询列表
 **/
 router.get('/',function (req,res,next) {
-	db.query('select * from WeiWarehouseManage',function (err,rows) {
+	handleDisconnect();
+	connection.query(sql.queryAll,function (err,rows) {
 		console.log(rows);
 		if(err){
 			res.render('warehousemanage',{title:'入库',datas:[]});
@@ -38,9 +39,11 @@ router.get('/',function (req,res,next) {
 			res.render('warehousemanage',{title:'入库',datas:rows});
 		}
 	});
+	connection.end();
 });
 router.get('/getwarehouselist',function (req,res) {
-	db.query("select * from WeiWarehouse",function (err,rows) {
+	handleDisconnect();
+	connection.query(sql.queryHouseAll,function (err,rows) {
 		if(err){
 			res.end('获取仓库数据失败'+err);
 		}
@@ -48,21 +51,7 @@ router.get('/getwarehouselist',function (req,res) {
 			res.json({"result":{rows:rows}});
 		}
 	});
-});
-router.get('/getwarehouselistdata',function (req,res) {
-	db.query("select * from WeiWarehouse",function (err,rows) {
-		if(err){
-			res.end('获取仓库数据失败'+err);
-		}
-		else{
-			var formateRows=[];
-			rows.forEach(function(item,index){
-				console.log(item+'---'+index);
-				formateRows.push({id:item.ID,text:item.Name});
-			});
-			res.json({"results":formateRows});
-		}
-	});
+	connection.end();
 });
 /**
 入库
@@ -77,7 +66,7 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	db.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,result) {
+	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,result) {
 		if(err){
 			res.end('新增失败'+err);
 		}else{
