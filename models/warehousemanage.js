@@ -5,6 +5,26 @@ var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/warehouseManageSQL.js');
 
+var connection;
+function handleDisconnect() {
+    connection = mysql.createConnection(db.pool);
+    connection.connect(function(err) {
+        if(err) {
+            console.log("进行断线重连：" + new Date());
+            setTimeout(handleDisconnect, 2000);   //2秒重连一次
+            return;
+        }
+        console.log("连接成功");
+    });
+    connection.on('error', function(err) {
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+            handleDisconnect();
+        } else {
+            throw err;
+        }
+    });
+}
 /**
 库存查询列表
 **/
@@ -50,6 +70,7 @@ router.get('/add',function (req,res) {
 	res.render('add');
 });
 router.post('/add',function (req,res) {
+	handleDisconnect();
 	var WID=req.body.WID;
 	var Price=0;
 	var InputUerID=1;
@@ -63,5 +84,16 @@ router.post('/add',function (req,res) {
 			console.info(result);
 		}
 	});
+	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err, result) {
+        if(err){
+            console.log('[INSERT ERROR] - ',err.message);
+            res.json("添加数据失败");
+            return;
+        }
+        console.log(result);
+        res.json("添加数据成功");
+    });
+	//web请求中可以不断连接
+    connection.end();
 });
 module.exports=router;
