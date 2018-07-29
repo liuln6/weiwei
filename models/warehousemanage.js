@@ -151,7 +151,7 @@ router.use('/upload',function (req,res) {
 					res.json("添加图片失败");
         		}else{
         			console.log(results.insertId);
-        			callback();
+        			//callback();
         			resData.push({
 						url:item.path,
 						id:results.insertId
