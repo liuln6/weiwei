@@ -153,7 +153,8 @@ router.use('/upload',function (req,res) {
 						url:item.path,
 						id:rows.insertId
 					});
-				}	
+				}
+				console.log(resData);	
 			});
 		});
 		console.log(resData);
