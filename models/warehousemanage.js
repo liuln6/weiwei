@@ -153,6 +153,7 @@ router.use('/upload',function (req,res) {
 			}
 			else{
 				console.log(rows);
+				console.log(fields);
 			}
 		});
 		connection.end();
