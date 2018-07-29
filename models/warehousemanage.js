@@ -126,8 +126,9 @@ router.use('/upload',function (req,res) {
         var types = file.name.split('.');
         var date = new Date();
         var ms = Date.parse(date);
+        var msfive=generateMixed(5);
         fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1] );
-        file.path='tmp/' + year +'/' + month + '/' + ms+'.'+types[1];
+        file.path='tmp/' + year +'/' + month + '/' + ms+'.'+msfive+types[types.length-1];
         docs.push(file);
     }).on('end', function() {
         console.log('-> upload done');
@@ -181,5 +182,17 @@ router.use('/upload',function (req,res) {
         console.log('parsing done');
     });
 });
+var chars = ['0','1','2','3','4','5','6','7','8','9',
+'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+];
+function generateMixed(n) {
+     global.res = "";
+     for(var i = 0; i < n ; i ++) {
+         var id = Math.ceil(Math.random()*61);
+         res += chars[id];
+     }
+    return global.res;
+}
 
 module.exports=router;
