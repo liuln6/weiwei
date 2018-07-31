@@ -94,9 +94,20 @@ router.post('/add',function (req,res) {
 				postID=result.insertId;
 				callback(err);
 			});
-		},function(callback) {
+		},function (callback) {
+			//添加图片与产品的关联关系
 			var typeData=[];
-			TypeList.foreach(function (item,index) {
+			ImageList.forEach(function (item,index) {
+				typeData.push(item.mark,item.id,postID);
+			});
+			//新增产品与图片的关联关系
+			connection.query(sql.addProductImage,typeData,function (err,result) {
+				callback(err);
+			});
+		}
+		function(callback) {
+			var typeData=[];
+			TypeList.forEach(function (item,index) {
 				typeData.push(postID,item.price,0,item.totalNum,1,item.id,item.mark);
 			});
 			//新增产品类型
