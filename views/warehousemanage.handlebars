@@ -18,19 +18,19 @@
         </div>
         <div class="row" v-model="productImage">
             <div class="card float-left w-25" v-for="(item,index) in productImage">
-                <img class="card-img-top" :src="item.url" >
+                <img class="card-img-top" :src="item.url" v-model="productImage[index].url">
                 <div class="p-2">
                     <div class="form-group col-md-4">
                         <label :for="'totalNumber_'+index" class="text-muted">米数</label>
-                        <input type="number" min="0" :name="'totalNumber_'+index" :value="item.totalNum" class="w-100">
+                        <input type="number" min="0" :name="'totalNumber_'+index" :value="item.totalNum" class="w-100" v-model="productImage[index].totalNum">
                     </div>  
                     <div class="form-group col-md-4">
                         <label :for="'price_'+index" class="text-muted">价格</label>
-                        <input type="num" min="0" :name="'price_'+index" :value="item.price" class="w-100">
+                        <input type="num" min="0" :name="'price_'+index" :value="item.price" class="w-100" v-model="productImage[index].price">
                     </div>
                     <div class="form-group col-md-4">
                         <label :for="'mark_'+index" class="text-muted">标识</label>
-                        <input type="text" :name="'mark_'+index" :value="item.mark" placeholder="颜色" class="w-100">
+                        <input type="text" :name="'mark_'+index" :value="item.mark" placeholder="颜色" class="w-100" v-model="productImage[index].mark">
                     </div>  
                 </div>
             </div>
