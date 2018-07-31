@@ -16,7 +16,7 @@
                 <input id="fileupload" type="file" name="files[]"  multiple="">
             </span>
         </div>
-        <div class="row" v-model="productImage">
+        <div class="row">
             <div class="card float-left w-25" v-for="(item,index) in productImage">
                 <img class="card-img-top" :src="item.url" v-model="productImage[index].url">
                 <div class="p-2">
