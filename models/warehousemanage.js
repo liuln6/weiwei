@@ -73,22 +73,54 @@ router.get('/add',function (req,res) {
 });
 router.post('/add',function (req,res) {
 	handleDisconnect();
+
 	var WID=req.body.WID;
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0],function (err,result) {
-		if(err){
-			res.end('新增失败'+err);
-		}else{
-			
-			var newID=result.insertId;
-			
-			res.json(result.insertId);
+	var ImageList=req.body.productImage;
+	var TypeList=req.body.productType;
+	var postID=null;
+	var tasks=[
+		function (callback) {
+			//开启事务
+			connection.beginTransaction(function(err) {
+				callback(err);
+			});
+		},
+		function(callback) {
+			//新增产品
+			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0],function (err,result) {
+				postID=result.insertId;
+				callback(err);
+			});
+		},function(callback) {
+			var typeData=[];
+			TypeList.foreach(function (item,index) {
+				typeData.push(postID,item.price,0,item.totalNum,1,item.id,item.mark);
+			});
+			//新增产品类型
+			connection.query(sql.addImageType,typeData,function (err,result) {
+				callback(err);
+			});
+		},function (callback) {
+			//提交事务
+			connection.commit(function (err) {
+				callback(err);
+			});
 		}
+	];
+	async.series(tasks,function (err,results) {
+		if(err){
+			console.log(err);
+			connection.rollback();//发生错误时回滚
+			res.json({"result": err});
+		}else{
+			res.json({"result":"保存成功"});
+		}
+
+		connection.end();
 	});
-	//web请求中可以不断连接
-    connection.end();
 });
 
 function mkdir(dirpath) {
