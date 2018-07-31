@@ -104,7 +104,7 @@ router.post('/add',function (req,res) {
 			connection.query(sql.addProductImage,typeData,function (err,result) {
 				callback(err);
 			});
-		}
+		},
 		function(callback) {
 			var typeData=[];
 			TypeList.forEach(function (item,index) {
