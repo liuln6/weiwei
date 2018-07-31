@@ -4,7 +4,7 @@ var router=express.Router();
 var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
-var sql=require('../db/warehouseManageSQL.js');
+var sql=require('../db/productSQL.js');
 
 var path=require('path');
 
@@ -74,11 +74,10 @@ router.get('/add',function (req,res) {
 router.post('/add',function (req,res) {
 	handleDisconnect();
 	var WID=req.body.WID;
-	var Price=0;
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	connection.query(sql.add,[WID,Price,new Date(),InputUerID,Remark,0],function (err,result) {
+	connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0],function (err,result) {
 		if(err){
 			res.end('新增失败'+err);
 		}else{
