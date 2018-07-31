@@ -82,6 +82,7 @@ router.post('/add',function (req,res) {
 	var ImageList=req.body.productImage;
 	var TypeList=req.body.productType;
 	var postID=null;
+	console.info(req.body.productImage);
 	var tasks=[
 		function (callback) {
 			//开启事务
