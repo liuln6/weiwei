@@ -126,17 +126,6 @@
             },
             warehouselist:wareList
         },
-        computed:{
-            productType:function () {
-                var typeArr=[];
-                $.each(this.productImage,function (index,item) {
-                    if(item.price!=null&&item.price!=0&&item.totalNum!=null&&item.totalNum!=0){
-                        typeArr.push(item);
-                    }
-                });
-                return typeArr;
-            }
-        },
         methods: {
             validateBeforeSubmit:function () {
                 this.$validator.validateAll().then((result) => {
@@ -163,19 +152,17 @@
                     ImageList:[],
                     ImageType:[],
                 };
-                if(vm.productType){
-                    $.each(vm.productType,function (index,item) {
-                        product.ImageList.push({
+                if(vm.productImage){
+                    $.each(vm.productImage,function (index,item) {
+                        if(item.price!=null&&item.price!=0&&item.totalNum!=null&&item.totalNum!=0){
+                            vm.productImage.push({
                             url:item.url,
                             id:item.id,
                             price:item.price,
                             totalNum:item.totalNum,
                             mark:item.mark
-                        });
-                    });
-                }
-                if(vm.productImage){
-                    $.each(vm.productImage,function (index,item) {
+                            });
+                        }
                         product.ImageList.push({
                             url:item.url,
                             id:item.id,
