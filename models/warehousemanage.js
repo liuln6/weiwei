@@ -210,13 +210,13 @@ router.use('/upload',function (req,res) {
         },function (err) {
         	if(err){
         		console.log(err); 
-        		res.send(err);
+        		res.json(err);
         	}else{
         		console.log('Sql执行完成');
         		console.log(resData);
 		
 		        var sout=JSON.stringify(resData);
-		        res.send(sout);
+		        res.json(sout);
         	}
         });
 
