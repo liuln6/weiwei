@@ -212,7 +212,6 @@ router.use('/upload',function (req,res) {
         },function (err) {
         	if(err){
         		console.log(err); 
-        		connection.end();
         		res.send(err);
         	}else{
         		console.log('Sql执行完成');
