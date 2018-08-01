@@ -1,10 +1,11 @@
 var express=require('express');
-var path=require('path');
+
 var app=express();
 
 var fs=require('fs');
+app.use(require('body-parser')());
 
-var warehousemanage=require('./models/warehousemanage');
+var warehousemanage=require('./models/warehousemanage.js');
 
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
@@ -25,73 +26,13 @@ app.set('view engine','handlebars');
 app.use(express.static(__dirname +'/public'));
 
 
-app.use(require('body-parser')());
 
 app.set('port',process.env.PORT||3000);
 //图片上传
 
 
 
-function mkdir(dirpath) {
-	if(!fs.existsSync(path.dirname(dirpath))){
-		mkdir(path.dirname(dirpath))
-	}
-	fs.mkdirSync(dirpath);
-}
 
-var formidable = require('formidable'),
-    util = require('util'),fs=require('fs');
-app.use('/upload',function (req,res) {
-	// parse a file upload
-    var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
-    console.log('start upload');
-    var now=new Date();
-	var year=now.getFullYear();
-	var month=now.getMonth()+1;
-
-    //存放目录
-    form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
-
-    let myPath=form.uploadDir;
-    fs.existsSync(myPath)==false&&mkdir(myPath);
-
-    form.on('field', function(field, value) {
-        //console.log(field, value);
-        fields.push([field, value]);
-    }).on('file', function(field, file) {
-        console.log(field, file);
-        files.push([field, file]);
-
-
-        var types = file.name.split('.');
-        var date = new Date();
-        var ms = Date.parse(date);
-        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms+'.'+types[1] );
-        file.path='tmp/' + year +'/' + month + '/' + ms+'.'+types[1];
-        docs.push(file);
-    }).on('end', function() {
-        console.log('-> upload done');
-        res.writeHead(200, {
-            'content-type': 'text/plain'
-        });
-        var out={Resopnse:{
-            'result-code':0,
-            timeStamp:new Date()
-        },
-        files:docs
-        };
-        //入库
-        
-        var sout=JSON.stringify(out);
-        res.end(sout);
-    });
-
-    form.parse(req, function(err, fields, files) {
-        err && console.log('formidabel error : ' + err);
-
-        console.log('parsing done');
-    });
-});
 
 app.get('/',function (req,res) {
 	res.render('home');
