@@ -80,6 +80,8 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
+	console.log(req.body.productImage);
+	console.log(req.body.productType);
 	var ImageList=querystring.parse(req.body.productImage);
 	var TypeList=querystring.parse(req.body.productType);
 	var postID=null;
