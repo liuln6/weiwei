@@ -15,7 +15,8 @@ const dbconfig = {
     user     : 'root',
     password : 'lina2010',
     port     : '3306',
-    database : 'WeiWeiStock'
+    database : 'WeiWeiStock',
+    useConnectionPooling:true
 };
 
 var connection;
@@ -46,10 +47,8 @@ router.get('/',function (req,res,next) {
 	connection.query(sql.queryAll,function (err,rows) {
 		console.log(rows);
 		if(err){
-			connection.end();
 			res.render('warehousemanage',{title:'入库',datas:[]});
 		}else{
-			connection.end();
 			res.render('warehousemanage',{title:'入库',datas:rows});
 		}
 	});
@@ -58,12 +57,10 @@ router.get('/getwarehouselist',function (req,res) {
 	handleDisconnect();
 	connection.query(sql.queryHouseAll,function (err,rows) {
 		if(err){
-			connection.end();
 			res.send('获取仓库数据失败'+err);
 		}
 		else{
 
-			connection.end();
 			res.json({"result":{rows:rows}});
 		}
 	});
@@ -130,10 +127,8 @@ router.post('/add',function (req,res) {
 		if(err){
 			console.log(err);
 			connection.rollback();//发生错误时回滚
-			connection.end();
 			res.json({"result": err});
 		}else{
-			connection.end();
 			res.json({"result":"保存成功"});
 		}
 
@@ -220,7 +215,6 @@ router.use('/upload',function (req,res) {
         		console.log('Sql执行完成');
         		console.log(resData);
 		
-				connection.end();
 		        var sout=JSON.stringify(resData);
 		        res.send(sout);
         	}
