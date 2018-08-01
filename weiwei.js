@@ -5,6 +5,12 @@ var app=express();
 var fs=require('fs');
 app.use(require('body-parser')());
 
+// parse application/x-www-form-urlencoded  
+app.use(bodyParser.urlencoded({ extended: false }))  
+  
+// parse application/json  
+app.use(bodyParser.json()) 
+
 var warehousemanage=require('./models/warehousemanage.js');
 
 //设置handlebars视图引擎
