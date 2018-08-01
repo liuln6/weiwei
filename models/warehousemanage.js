@@ -46,24 +46,27 @@ router.get('/',function (req,res,next) {
 	connection.query(sql.queryAll,function (err,rows) {
 		console.log(rows);
 		if(err){
+			connection.end();
 			res.render('warehousemanage',{title:'入库',datas:[]});
 		}else{
+			connection.end();
 			res.render('warehousemanage',{title:'入库',datas:rows});
 		}
 	});
-	connection.end();
 });
 router.get('/getwarehouselist',function (req,res) {
 	handleDisconnect();
 	connection.query(sql.queryHouseAll,function (err,rows) {
 		if(err){
+			connection.end();
 			res.end('获取仓库数据失败'+err);
 		}
 		else{
+
+			connection.end();
 			res.json({"result":{rows:rows}});
 		}
 	});
-	connection.end();
 });
 /**
 入库
@@ -127,12 +130,13 @@ router.post('/add',function (req,res) {
 		if(err){
 			console.log(err);
 			connection.rollback();//发生错误时回滚
+			connection.end();
 			res.json({"result": err});
 		}else{
+			connection.end();
 			res.json({"result":"保存成功"});
 		}
 
-		connection.end();
 	});
 });
 
@@ -208,6 +212,7 @@ router.use('/upload',function (req,res) {
         	if(err){
         		console.log(err); 
         		res.end(err);
+        		connection.end();
         	}else{
         		console.log('Sql执行完成');
         		console.log(resData);
