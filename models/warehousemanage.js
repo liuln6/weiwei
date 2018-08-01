@@ -206,7 +206,8 @@ router.use('/upload',function (req,res) {
         	});
         },function (err) {
         	if(err){
-        		console.log(err);
+        		console.log(err); 
+        		res.end(err);
         	}else{
         		console.log('Sql执行完成');
         		console.log(resData);
