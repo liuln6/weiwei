@@ -82,10 +82,10 @@ router.post('/add',function (req,res) {
 	var UsedNumbr=0;
 	console.log(req.body.ImageList);
 	console.log(req.body.ImageType);
-	var ImageList=querystring.parse(req.body.ImageList);
-	var TypeList=querystring.parse(req.body.ImageType);
+	var ImageList=req.body.ImageList;
+	var TypeList=req.body.ImageType;
 	var postID=null;
-	console.info(req.body.productImage);
+	console.info(ImageList);
 	var tasks=[
 		function (callback) {
 			//开启事务
