@@ -214,13 +214,13 @@ router.use('/upload',function (req,res) {
         	}else{
         		console.log('Sql执行完成');
         		console.log(resData);
-		
+				var sout=JSON.stringify(resData);
+		        console.log("返回值："+sout);
+				res.json(sout);
 		        
         	}
         });
-		var sout=JSON.stringify(resData);
-        console.log("返回值："+sout);
-		res.json(sout);
+		
 		
     });
 
