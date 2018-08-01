@@ -104,7 +104,7 @@ router.post('/add',function (req,res) {
 			var typeData=[];
 			console.log(ImageList);
 			ImageList.forEach(function (item,index) {
-				typeData.push(item.mark,item.id,postID);
+				typeData.push([item.mark,item.id,postID]);
 			});
 			//新增产品与图片的关联关系
 			connection.query(sql.addProductImage,typeData,function (err,result) {
@@ -115,7 +115,7 @@ router.post('/add',function (req,res) {
 			var typeData=[];
 			console.log(TypeList);
 			TypeList.forEach(function (item,index) {
-				typeData.push(postID,item.price,0,item.totalNum,1,item.id,item.mark);
+				typeData.push([postID,item.price,0,item.totalNum,1,item.id,item.mark]);
 			});
 			//新增产品类型
 			connection.query(sql.addImageType,typeData,function (err,result) {
