@@ -8,7 +8,14 @@ var sql=require('../db/productSQL.js');
 
 var path=require('path');
 var async=require('async');
-var badyparser=require('body-parser');
+
+var bodyParser = require('body-parser')
+
+// create application/json parser
+var jsonParser = bodyParser.json()
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
 const dbconfig = {
