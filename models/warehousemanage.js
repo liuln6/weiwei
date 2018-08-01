@@ -107,7 +107,7 @@ router.post('/add',function (req,res) {
 				typeData.push([item.mark,item.id,postID]);
 			});
 			//新增产品与图片的关联关系
-			connection.query(sql.addProductImage,typeData,function (err,result) {
+			connection.query(sql.addProductImage,[typeData],function (err,result) {
 				callback(err);
 			});
 		},
@@ -118,7 +118,7 @@ router.post('/add',function (req,res) {
 				typeData.push([postID,item.price,0,item.totalNum,1,item.id,item.mark]);
 			});
 			//新增产品类型
-			connection.query(sql.addImageType,typeData,function (err,result) {
+			connection.query(sql.addImageType,[typeData],function (err,result) {
 				callback(err);
 			});
 		},function (callback) {
