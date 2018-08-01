@@ -219,7 +219,7 @@ router.use('/upload',function (req,res) {
         	}
         });
 		var sout=JSON.stringify(resData);
-
+        console.log("返回值："+sout);
 		res.json(sout);
 		
     });
