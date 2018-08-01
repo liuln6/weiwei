@@ -8,6 +8,10 @@ var sql=require('../db/productSQL.js');
 
 var path=require('path');
 var async=require('async');
+var badyparser=require('body-parser');
+var app=express();
+
+app.use(require('body-parser')());
 
 const dbconfig = {
     host     : '39.107.252.17',
