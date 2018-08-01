@@ -100,6 +100,7 @@ router.post('/add',function (req,res) {
 		},function (callback) {
 			//添加图片与产品的关联关系
 			var typeData=[];
+			console.log(ImageList);
 			ImageList.forEach(function (item,index) {
 				typeData.push(item.mark,item.id,postID);
 			});
@@ -110,6 +111,7 @@ router.post('/add',function (req,res) {
 		},
 		function(callback) {
 			var typeData=[];
+			console.log(TypeList);
 			TypeList.forEach(function (item,index) {
 				typeData.push(postID,item.price,0,item.totalNum,1,item.id,item.mark);
 			});
