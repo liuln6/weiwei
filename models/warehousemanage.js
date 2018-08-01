@@ -59,7 +59,7 @@ router.get('/getwarehouselist',function (req,res) {
 	connection.query(sql.queryHouseAll,function (err,rows) {
 		if(err){
 			connection.end();
-			res.end('获取仓库数据失败'+err);
+			res.send('获取仓库数据失败'+err);
 		}
 		else{
 
@@ -143,6 +143,9 @@ router.post('/add',function (req,res) {
 function mkdir(dirpath) {
 	if(!fs.existsSync(path.dirname(dirpath))){
 		mkdir(path.dirname(dirpath))
+	}else
+	{
+		//
 	}
 	fs.mkdirSync(dirpath);
 }
@@ -211,15 +214,15 @@ router.use('/upload',function (req,res) {
         },function (err) {
         	if(err){
         		console.log(err); 
-        		res.end(err);
         		connection.end();
+        		res.send(err);
         	}else{
         		console.log('Sql执行完成');
         		console.log(resData);
 		
 				connection.end();
 		        var sout=JSON.stringify(resData);
-		        res.end(sout);
+		        res.send(sout);
         	}
         });
 
