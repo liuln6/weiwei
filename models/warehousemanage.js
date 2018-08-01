@@ -10,6 +10,7 @@ var path=require('path');
 
 var async=require('async');
 var parser=require('body-parser');
+var querystring=require('querystring');
 
 const dbconfig = {
     host     : '39.107.252.17',
@@ -79,8 +80,8 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	var ImageList=req.body.productImage;
-	var TypeList=req.body.productType;
+	var ImageList=querystring.parse(req.body.productImage);
+	var TypeList=querystring.parse(req.body.productType);
 	var postID=null;
 	console.info(req.body.productImage);
 	var tasks=[
