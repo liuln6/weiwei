@@ -10,7 +10,6 @@ var path=require('path');
 
 var async=require('async');
 var parser=require('body-parser');
-var querystring=require('querystring');
 
 const dbconfig = {
     host     : '39.107.252.17',
@@ -80,12 +79,9 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
-	console.log(req.body.ImageList);
-	console.log(req.body.ImageType);
 	var ImageList=req.body.ImageList;
 	var TypeList=req.body.ImageType;
 	var postID=null;
-	console.info(ImageList);
 	var tasks=[
 		function (callback) {
 			//开启事务
