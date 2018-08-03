@@ -12,6 +12,8 @@ app.use(bodyParser.json())
 var product=require('./models/product.js');
 //订单
 var order=require('./models/order.js');
+//用户
+var user=require('./models/user.js');
 
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
@@ -42,6 +44,7 @@ app.get('/',function (req,res) {
 });
 app.use('/product',product);
 app.use('/order',order);
+app.user('/user',user);
 app.get('/stock',function (req,res) {
 	res.render('stock');
 });

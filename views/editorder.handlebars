@@ -5,18 +5,20 @@
 	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 		<div class="form-row">
             <div class="form-group">
-                <label for="productID">选布</label>
-                <input type="text" :class="{'is-invalid': errors.has('productID')}" data-vv-delay="500" v-model="productID" v-validate="'required'" class="form-control" name="productID">
-                <i v-show="errors.has('productID')" class="fa text-danger fa-warning"></i>
-                <span v-show="errors.has('productID')" class="help text-danger">\{{ errors.first('productID') }}</span>
+                <label for="productName">选布</label>
+                <input type="text" id="productName" name="productName" :class="{'is-invalid': errors.has('productID'),form-control:true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
+                <input type="hidden" v-model="productID" name="productID">
+                <i v-show="errors.has('productName')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('productName')" class="help text-danger">\{{ errors.first('productName') }}</span>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group">
-                <label for="userID">客人</label>
-                <input type="text" :class="{'is-invalid': errors.has('userID')}" data-vv-delay="500" v-model="userID" v-validate="'required'" class="form-control" name="userID">
-                <i v-show="errors.has('userID')" class="fa text-danger fa-warning"></i>
-                <span v-show="errors.has('userID')" class="help text-danger">\{{ errors.first('userID') }}</span>
+                <label for="UserWeiXinID">微信号</label>
+                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),form-control:true}" data-vv-delay="500" v-model="UserWeiXinID" v-validate="'required'" >
+                <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
+                <input type="hidden" v-model="userID" class="form-control" name="userID">
+                <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
             </div>
         </div>
         <div class="form-row">
@@ -36,15 +38,40 @@
 	</form>
 </div>
 {{#section 'jquery'}}
+    <!--typeahead-->
+    <script src="https://cdn.bootcss.com/typeahead.js/0.11.1/bloodhound.min.js"></script>
+    <script src="https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.js"></script>
+    <script src="https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.jquery.js"></script>
+    <!--typeahead-->
 	<script type="text/javascript">
 
 		var controlUrl="/warehousemanage/";
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
+
+
+        //远程数据源
+        var remote_cities = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('CityName'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            // 在文本框输入字符时才发起请求
+            remote: controlUrl+'/user/getUser?q=%QUERY'
+        });
+
+        remote_cities.initialize();
+
+        $('#productName').typeahead(null, {
+            name: 'cities',
+            displayKey: 'userName',
+            source: remote_cities.ttAdapter()
+        });
+
+
 	    var vm=new Vue({
 	    	 el: "#order",
 	    	 data:{
+                productName:'',
 	    	 	productID:0,
-	    	 	userID:0,
+                UserWeiXinID:'',
 	    	 	number:0,
 	    	 	price:0,
                 totalPrice:0
