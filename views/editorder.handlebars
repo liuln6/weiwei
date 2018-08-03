@@ -45,13 +45,14 @@
 	    	 	productID:0,
 	    	 	userID:0,
 	    	 	number:0,
-	    	 	price:0
+	    	 	price:0,
+                totalPrice:0
 	    	 },
 	    	 methods:{
 	    	 	validateBeforeSubmit:function () {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                      this.saveRows();
+                      //this.saveRows();
                       return;
                     }
                   });
