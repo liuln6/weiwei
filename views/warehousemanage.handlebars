@@ -178,15 +178,20 @@
                         });
                     });
                 }
-                //保存数据
-                axios.post(controlUrl+'add',product)
-                .then(function (response) {
-                    console.log(response);
-                    swal.close();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                if(product.ImageType.length==0){
+                    swal("", "亲，忘记图片下的米数跟价格信息的填写了,至少填写一个哦~","warning")
+                }else{
+                   //保存数据
+                    axios.post(controlUrl+'add',product)
+                    .then(function (response) {
+                        console.log(response);
+                        swal.close();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    }); 
+                }
+                
             },
             delRows:function () {
                 if (this.checkedRows.length <= 0){
