@@ -203,7 +203,7 @@ router.use('/upload',function (req,res) {
         	docsArr.push(item.path);
         });
         console.log(docsArr);
-        async.eachSeries(docs,function (item,callback) {
+        async.eachSeries(docsArr,function (item,callback) {
         	//遍历执行新增
         	connection.query(sql.addImages,[item.path,new Date(),0],function (err,results) {
         		if(err){
