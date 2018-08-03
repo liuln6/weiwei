@@ -61,4 +61,4 @@ router.get('/add',function (req,res) {
 	res.render('addOrder');
 });
 
-module.exports=order;
+module.exports=orderProduct;
