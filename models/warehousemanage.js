@@ -86,6 +86,7 @@ router.post('/add',function (req,res) {
 	var InputUerID=1;
 	var Remark=req.body.Remark;
 	var UsedNumbr=0;
+	var TotalNumber=req.body.TotalNumber;
 	var ImageList=req.body.ImageList;
 	var TypeList=req.body.ImageType;
 	var postID=null;
@@ -98,7 +99,7 @@ router.post('/add',function (req,res) {
 		},
 		function(callback) {
 			//新增产品
-			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0],function (err,result) {
+			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0,TotalNumber],function (err,result) {
 				postID=result.insertId;
 				callback(err);
 			});
