@@ -198,9 +198,10 @@ router.use('/upload',function (req,res) {
         //新增图片
         handleDisconnect();
         var resData=[];
-        async.eachSeries(docs,function (item,callback) {
-        	//遍历执行新增
-        	connection.query(sql.addImages,[item.path,new Date(),0],function (err,results) {
+
+		
+		//入库
+		async.eachSeries(docs,connection.query(sql.addImages,[doc.path,new Date(),0],function (err,results) {
         		if(err){
         			console.log("添加图片失败",err.message);
 					res.json("添加图片失败");
@@ -213,21 +214,19 @@ router.use('/upload',function (req,res) {
 					});
 					callback();
         		}
-        	});
-        },function (err) {
-        	if(err){
-        		console.log(err); 
-        		res.render(err);
-        	}else{
-        		console.log('Sql执行完成');
-        		console.log(resData);
-				var sout=JSON.stringify(resData);
-		        console.log("返回值："+sout);
-				res.json(sout);
-		        
+        	}),function (err) {
+	        	if(err){
+	        		console.log(err); 
+	        		res.render(err);
+	        	}else{
+	        		console.log('Sql执行完成');
+	        		console.log(resData);
+					var sout=JSON.stringify(resData);
+			        console.log("返回值："+sout);
+					res.json(sout);
+	        	}
         	}
-        });
-		
+		);
 		
     });
 
