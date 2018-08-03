@@ -58,7 +58,7 @@ router.get('/',function (req,res,next) {
 下单
 **/
 router.get('/add',function (req,res) {
-	res.render('addOrder');
+	res.render('editorder');
 });
 
 module.exports=router;
