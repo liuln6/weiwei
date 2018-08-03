@@ -1,1 +1,65 @@
-编辑订单
+{{#section 'title'}}
+	<title>代客下单</title>
+{{/section}}
+<div class="container" id="order">
+	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
+		<div class="form-row">
+            <div class="form-group">
+                <label for="productID">选布</label>
+                <input type="text" :class="{'is-invalid': errors.has('productID')}" data-vv-delay="500" v-model="productID" v-validate="'required'" class="form-control" name="productID">
+                <i v-show="errors.has('productID')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('productID')" class="help text-danger">\{{ errors.first('productID') }}</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="userID">客人</label>
+                <input type="text" :class="{'is-invalid': errors.has('userID')}" data-vv-delay="500" v-model="userID" v-validate="'required'" class="form-control" name="userID">
+                <i v-show="errors.has('userID')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('userID')" class="help text-danger">\{{ errors.first('userID') }}</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="number">米数</label>
+                <input type="text" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" v-validate="'required|numeric'" class="form-control" name="number">
+                <i v-show="errors.has('number')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
+            </div>
+            <div class="form-group col-md-6">
+            	<div v-if="totalPrice>0">
+            	*<label>\{{price}}</label>=<label>\{{totalPrice}}</label>
+            	</div>
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">保存</button>
+	</form>
+</div>
+{{#section 'jquery'}}
+	<script type="text/javascript">
+		var controlUrl="/warehousemanage/";
+	    Vue.use(VeeValidate,{locale: 'zh_CN'});
+	    var vm=new Vue({
+	    	 el: "#order",
+	    	 data:{
+	    	 	productID:0,
+	    	 	userID:0,
+	    	 	number:0,
+	    	 	price:0
+	    	 },
+	    	 methods:{
+	    	 	validateBeforeSubmit:function () {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                      this.saveRows();
+                      return;
+                    }
+                  });
+            	},
+            	add:function () {
+            		
+            	}
+	    	 }
+	    });
+	</script>
+{{/section}}

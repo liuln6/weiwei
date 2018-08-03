@@ -25,7 +25,7 @@
 	        <a class="nav-link" href="/warehousemanage">入库</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="/editorder">下单</a>
+	        <a class="nav-link" href="/order">下单</a>
 	      </li>
 	      <li class="nav-item">
 	        <a class="nav-link disabled" href="/bubulist">查库</a>
@@ -51,7 +51,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 	<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 	<script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">	
+    Vue.use(VeeValidate,{locale: 'zh_CN'});
 	var WeiWeiHost="http://39.107.252.17:3000/";
 	toastr.options = {  
         closeButton: true,  //是否显示关闭按钮（提示框右上角关闭按钮）

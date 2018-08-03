@@ -55,9 +55,9 @@ router.get('/',function (req,res,next) {
 	connection.query(sql.queryAll,function (err,rows) {
 		console.log(rows);
 		if(err){
-			res.render('warehousemanage',{title:'入库',datas:[]});
+			res.render('product',{title:'入库',datas:[]});
 		}else{
-			res.render('warehousemanage',{title:'入库',datas:rows});
+			res.render('product',{title:'入库',datas:rows});
 		}
 	});
 });

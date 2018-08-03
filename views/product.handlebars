@@ -1,5 +1,5 @@
 
-{{#section 'title'}}<title>薇小助手</title>
+{{#section 'title'}}<title>产品入库</title>
 <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload-ui-noscript.min.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
 {{/section}}
@@ -71,8 +71,7 @@
 <script src="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/js/jquery.fileupload.min.js"></script>
 
 <script>
-    var controlUrl="/warehousemanage/";
-    Vue.use(VeeValidate,{locale: 'zh_CN'});
+    var controlUrl="/product/";
     var imageArr=[{
         id:0,
         url:'',
@@ -107,11 +106,6 @@
                       return;
                     }
                   });
-            },
-            addRow: function () {
-                
-                //this.facilities.push(this.newRow);
-                this.newRow = {};
             },
             saveRows:function () {
                 //保存表格数据
@@ -151,35 +145,15 @@
                     swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
                     axios.post(controlUrl+'add',product)
                     .then(function (response) {
-                        console.log(response);
+                        $('#productform')[0].reset();
+                        vm.productImage=[];
                         swal.close();
                         toastr.success('数据添加成功了，恭喜亲~', '')
-                        $('#productform')[0].reset();
                     })
                     .catch(function (error) {
                         console.log(error);
                     }); 
                 }
-                
-            },
-            delRows:function () {
-                if (this.checkedRows.length <= 0){
-                    alert("您未选择需要删除的数据");
-                    return false;
-                }
-                if (!confirm("您确定要删除选择的数据吗？")){
-                    return false;
-                }
-
-                for(var i=0;i<this.checkedRows.length;i++){
-                    var checkedRowIndex = this.checkedRows[i];
-                    this.facilities = $.grep(this.facilities,function (facility,j) {
-                        return j != checkedRowIndex;
-                    });
-                }
-                this.checkedRows = [];
-            },
-            selectColor:function () {
                 
             }
         },

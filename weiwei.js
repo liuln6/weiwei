@@ -8,8 +8,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json  
 app.use(bodyParser.json())  
 
-
-var warehousemanage=require('./models/warehousemanage.js');
+//产品
+var product=require('./models/product.js');
+//订单
+var order=require('./models/order.js');
 
 //设置handlebars视图引擎
 var handlebars=require('express3-handlebars')
@@ -38,7 +40,8 @@ app.set('port',process.env.PORT||3000);
 app.get('/',function (req,res) {
 	res.render('home');
 });
-app.use('/warehousemanage',warehousemanage);
+app.use('/product',product);
+app.use('/order',order);
 app.get('/stock',function (req,res) {
 	res.render('stock');
 });
