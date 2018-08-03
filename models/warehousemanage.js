@@ -146,16 +146,13 @@ router.post('/add',function (req,res) {
 function mkdir(dirpath) {
 	if(!fs.existsSync(path.dirname(dirpath))){
 		mkdir(path.dirname(dirpath))
-	}else
-	{
-		//
 	}
 	fs.mkdirSync(dirpath);
 }
 
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
-    
+
 router.use('/upload',function (req,res) {
 	// parse a file upload
     var form = new formidable.IncomingForm(),files=[],fields=[],docs=[];
@@ -226,7 +223,6 @@ router.use('/upload',function (req,res) {
 				var sout=JSON.stringify(resData);
 		        console.log("返回值："+sout);
 				res.end(sout);
-		        
         	}
         });
     });
