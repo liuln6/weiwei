@@ -169,29 +169,6 @@ $(function () {
     vm.productType=[];
     vm.warehouselist=[];
     GetWeiStockList() ;
-    var $selectStock=$('.selectstock').select2({
-        ajax: {
-            url: '/warehousemanage/getwarehouselistdata',
-            dataType: 'json',
-            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
-            processResults: function (data, params) {
-            params.page = params.page || 1;
-
-                return {
-                    results: data.results,
-                    pagination: {
-                        more: (params.page * 10) < data.count_filtered
-                    }
-                };
-            }
-        }
-    });
-    $(".selectstock").select2('val', vm.newRow.WID);
-    $('.selectstock').on("select2:select",function (e) {
-        vm.newRow.WID=$(".selectstock").select2('val');
-    });
-
-    var $selectColor=$(".selectColor").select2();
 
     $('#fileupload').fileupload({
         url: '/warehousemanage/upload',
@@ -267,7 +244,7 @@ $(function () {
     }); 
     function GetWeiStockList() {
         $.ajax({
-            url: '/warehousemanage/getwarehouselist',
+            url: '/product/getwarehouselist',
             dataType: 'json',
             type: 'get',
             data: {
