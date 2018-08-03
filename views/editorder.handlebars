@@ -37,6 +37,8 @@
 </div>
 {{#section 'jquery'}}
 	<script type="text/javascript">
+        Vue.use(VeeValidate,{locale: 'zh_CN'});
+        
 		var controlUrl="/warehousemanage/";
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
 	    var vm=new Vue({
@@ -62,5 +64,8 @@
             	}
 	    	 }
 	    });
+        $(function () {
+            
+        });
 	</script>
 {{/section}}
