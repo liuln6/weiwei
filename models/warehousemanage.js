@@ -205,7 +205,7 @@ router.use('/upload',function (req,res) {
         console.log(docsArr);
         async.eachSeries(docsArr,function (item,callback) {
         	//遍历执行新增
-        	connection.query(sql.addImages,[item.path,new Date(),0],function (err,results) {
+        	connection.query(sql.addImages,[item,new Date(),0],function (err,results) {
         		if(err){
         			console.log("添加图片失败",err.message);
 					res.json("添加图片失败");
