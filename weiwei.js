@@ -44,7 +44,7 @@ app.get('/',function (req,res) {
 });
 app.use('/product',product);
 app.use('/order',order);
-app.user('/user',user);
+app.use('/user',user);
 app.get('/stock',function (req,res) {
 	res.render('stock');
 });
