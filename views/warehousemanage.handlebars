@@ -178,6 +178,8 @@
                     .then(function (response) {
                         console.log(response);
                         swal.close();
+                        toastr.success('数据添加成功了，恭喜亲~', '')
+                        $("form").reset();
                     })
                     .catch(function (error) {
                         console.log(error);
