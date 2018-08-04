@@ -82,7 +82,7 @@ router.get('/getProductAll',function (req,res) {
 		if(err){
 			res.send('获取所有产品信息失败'+ err);
 		}else{
-			res.json({"result":{rows:rows}});
+			res.json(rows);
 		}
 	});
 });
