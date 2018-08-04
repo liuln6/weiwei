@@ -76,7 +76,7 @@ router.get('/getwarehouselist',function (req,res) {
 /**
 代客下单时选择产品
 **/
-router.post('/getProductAll',function (req,res) {
+router.get('/getProductAll',function (req,res) {
 	handleDisconnect();
 	connection.query(sql.queryPouductAllForSelect,function (err,rows) {
 		if(err){
