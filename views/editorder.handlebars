@@ -6,7 +6,7 @@
 		<div class="form-row">
             <div class="form-group">
                 <label for="productName">选布</label>
-                <input type="text" id="productName" name="productName" :class="{'is-invalid': errors.has('productID'),form-control:true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
+                <input type="text" id="productName" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
                 <input type="hidden" v-model="productID" name="productID">
                 <i v-show="errors.has('productName')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('productName')" class="help text-danger">\{{ errors.first('productName') }}</span>
@@ -15,7 +15,7 @@
         <div class="form-row">
             <div class="form-group">
                 <label for="UserWeiXinID">微信号</label>
-                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),form-control:true}" data-vv-delay="500" v-model="UserWeiXinID" v-validate="'required'" >
+                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="UserWeiXinID" v-validate="'required'" >
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
                 <input type="hidden" v-model="userID" class="form-control" name="userID">
                 <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
