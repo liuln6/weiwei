@@ -53,7 +53,7 @@
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             // 一次取所有数据
-            prefetch: '/product/getProductAll?q=%QUERY'
+            prefetch: '/product/getProductAll?q=%QUERYALL'
         });
 
         prefetch_product.initialize();
