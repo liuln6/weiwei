@@ -74,6 +74,19 @@ router.get('/getwarehouselist',function (req,res) {
 	});
 });
 /**
+代客下单时选择产品
+**/
+router.post('/getProductAll',function (req,res) {
+	handleDisconnect();
+	connection.query(sql.queryPouductAllForSelect,function (err,rows) {
+		if(err){
+			res.send('获取所有产品信息失败'+ err);
+		}else{
+			res.json({"result":{rows:rows}});
+		}
+	});
+});
+/**
 入库
 **/
 router.get('/add',function (req,res) {
@@ -89,6 +102,7 @@ router.post('/add',function (req,res) {
 	var TotalNumber=req.body.TotalNumber;
 	var ImageList=req.body.ImageList;
 	var TypeList=req.body.ImageType;
+	var productName=req.body.ProductName;
 	var postID=null;
 	var tasks=[
 		function (callback) {
@@ -99,7 +113,7 @@ router.post('/add',function (req,res) {
 		},
 		function(callback) {
 			//新增产品
-			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0,TotalNumber],function (err,result) {
+			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0,TotalNumber,productName],function (err,result) {
 				postID=result.insertId;
 				callback(err);
 			});

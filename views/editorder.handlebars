@@ -6,7 +6,7 @@
 		<div class="form-row">
             <div class="form-group">
                 <label for="productName">选布</label>
-                <input type="text" id="productName" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
+                <input type="text" id="productName" autocomplete="off" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
                 <input type="hidden" v-model="productID" name="productID">
                 <i v-show="errors.has('productName')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('productName')" class="help text-danger">\{{ errors.first('productName') }}</span>
@@ -44,24 +44,24 @@
     <!--typeahead-->
 	<script type="text/javascript">
 
-		var controlUrl="/warehousemanage/";
+		var controlUrl="/order/";
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
 
 
         //远程数据源
-        var remote_cities = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('CityName'),
+        var prefetch_product = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            // 在文本框输入字符时才发起请求
-            remote: controlUrl+'/user/getUser?q=%QUERY'
+            // 一次取所有数据
+            prefetch: '/product/getProductAll?q=%QUERY'
         });
 
-        remote_cities.initialize();
+        prefetch_product.initialize();
 
         $('#productName').typeahead(null, {
-            name: 'cities',
-            displayKey: 'userName',
-            source: remote_cities.ttAdapter()
+            name: 'productInfo',
+            displayKey: 'ProductName',
+            source: prefetch_product.ttAdapter()
         });
 
 
