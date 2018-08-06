@@ -23,13 +23,8 @@
         </div>
         <div class="form-row" v-if="productID>0&&number>0">
         	<div class="form-group col-md-6">
-        		<label for="productName">价格</label>
             	<span v-if="price>0">
-            		*<label>\{{price}}</label>
-            	</span>
-            	<label for="productName">总价</label>
-            	<span v-if="totalPrice>0">
-					=<label>\{{totalPrice}}</label>
+            		<label>\{{number}}</label>*<label>\{{price}}</label>=<label>\{{totalPrice}}</label>
             	</span>
             </div>
         </div>
