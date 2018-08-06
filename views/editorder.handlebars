@@ -102,7 +102,9 @@
 	            	suggestion: Handlebars.compile($("#resultTemplate").html())
 	            }
 	        });
-
+			$('#productName').bind('typeahead:select', function(ev, suggestion) {
+			  console.log('Selection: ' + suggestion);
+			});
         });
 	</script>
 {{/section}}
