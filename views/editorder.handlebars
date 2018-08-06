@@ -4,7 +4,7 @@
 <div class="container" id="order">
 	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 		<div class="form-row">
-            <div class="form-group">
+            <div class="form-group w-100">
                 <label for="productName">选布</label>
                 <input type="text" id="productName" autocomplete="off" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
                 <input type="hidden" v-model="productID" name="productID">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group">
+            <div class="form-group w-100">
                 <label for="UserWeiXinID">微信号</label>
                 <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="UserWeiXinID" v-validate="'required'" >
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
@@ -28,9 +28,12 @@
                 <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
             </div>
             <div class="form-group col-md-6">
-            	<div v-if="totalPrice>0">
-            	*<label>\{{price}}</label>=<label>\{{totalPrice}}</label>
-            	</div>
+            	<span v-if="price>0">
+            		*<label>\{{price}}</label>
+            	</span>
+            	<span v-if="totalPrice>0">
+					=<label>\{{totalPrice}}</label>
+            	</span>
             </div>
         </div>
         <button class="btn btn-primary" type="submit">保存</button>
@@ -62,6 +65,7 @@
 	    	 data:{
                 productName:'',
 	    	 	productID:0,
+	    	 	typeID:0,
                 UserWeiXinID:'',
 	    	 	number:0,
 	    	 	price:0,
@@ -102,8 +106,11 @@
 	            	suggestion: Handlebars.compile($("#resultTemplate").html())
 	            }
 	        });
-			$('#productName').bind('typeahead:select', function(ev, suggestion) {
-			  console.log('Selection: ' + suggestion);
+			$('#productName').bind('typeahead:select', function(ev, row) {
+				vm.productName=row.ProductName;
+				vm.productID=row.PID;
+				vm.typeID=row.TypeID;
+				vm.price=row.Price;
 			});
         });
 	</script>
