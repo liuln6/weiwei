@@ -48,22 +48,7 @@
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
 
 
-        //远程数据源
-        var prefetch_product = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            // 一次取所有数据
-            prefetch: '/product/getProductAll?q=%QUERYALLjson'
-        });
-
-        prefetch_product.initialize();
-        prefetch_product.get('0')
-        $('#productName').typeahead(null, {
-            name: 'productInfo',
-            displayKey: 'ProductName',
-            source: prefetch_product.ttAdapter()
-        });
-
+       
 
 	    var vm=new Vue({
 	    	 el: "#order",
@@ -91,7 +76,22 @@
 	    	 }
 	    });
         $(function () {
-            console.log("load");
+             //远程数据源
+	        var prefetch_product = new Bloodhound({
+	            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
+	            queryTokenizer: Bloodhound.tokenizers.whitespace,
+	            // 一次取所有数据
+	            prefetch: '/product/getProductAll?q=%QUERYALLjson'
+	        });
+
+	        prefetch_product.initialize();
+	        prefetch_product.get('0')
+	        $('#productName').typeahead(null, {
+	            name: 'productInfo',
+	            displayKey: 'ProductName',
+	            source: prefetch_product.ttAdapter()
+	        });
+
         });
 	</script>
 {{/section}}
