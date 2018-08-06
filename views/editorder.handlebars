@@ -36,6 +36,15 @@
         <button class="btn btn-primary" type="submit">保存</button>
 	</form>
 </div>
+<script type="text/x-handlebars-template" id="resultTemplate">
+	<div class="card w-90">
+		<img class="card-img-top" src="{{{ImgUrl}}}">
+		<div class="card-body">
+			<div class="card-title">{{{Remark}}}</div>
+			<div class="card-text">{{{ProductName}}}</div>
+		</div>
+	</div>
+</script>
 {{#section 'jquery'}}
     <!--typeahead-->
     <script src="https://cdn.bootcss.com/typeahead.js/0.11.1/bloodhound.min.js"></script>
@@ -46,9 +55,6 @@
 
 		var controlUrl="/order/";
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
-
-
-       
 
 	    var vm=new Vue({
 	    	 el: "#order",
@@ -89,7 +95,11 @@
 	        $('#productName').typeahead(null, {
 	            name: 'productInfo',
 	            displayKey: 'ProductName',
-	            source: prefetch_product.ttAdapter()
+	            source: prefetch_product.ttAdapter(),
+	            templates:{
+	            	empty:['<div class="empty">没找到相关产品信息</div>'].join('\n'),
+	            	suggestion:Handlebar.compile($("#resultTemplate"));
+	            }
 	        });
 
         });
