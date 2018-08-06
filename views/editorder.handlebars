@@ -13,27 +13,32 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group w-100">
-                <label for="UserWeiXinID">微信号</label>
-                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="UserWeiXinID" v-validate="'required'" >
-                <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
-                <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
-            </div>
-        </div>
-        <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="number">米数</label>
-                <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" v-validate="'required|numeric'" class="form-control" name="number">
+                <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="price" v-validate="'required|numeric'" class="form-control" name="number">
                 <i v-show="errors.has('number')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
             </div>
-            <div class="form-group col-md-6">
+            
+        </div>
+        <div class="form-row" v-if="productID>0">
+        	<div class="form-group col-md-6">
+        		<label for="productName">价格</label>
             	<span v-if="price>0">
             		*<label>\{{price}}</label>
             	</span>
+            	<label for="productName">总价</label>
             	<span v-if="totalPrice>0">
 					=<label>\{{totalPrice}}</label>
             	</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group w-100">
+                <label for="UserWeiXinID">微信号</label>
+                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'" >
+                <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
             </div>
         </div>
         <button class="btn btn-primary" type="submit">保存</button>
@@ -66,7 +71,7 @@
                 productName:'',
 	    	 	productID:0,
 	    	 	typeID:0,
-                UserWeiXinID:'',
+                userWeiXinID:'',
 	    	 	number:0,
 	    	 	price:0,
                 totalPrice:0
