@@ -57,8 +57,7 @@ router.get('/',function (req,res,next) {
 /**
 一单时获取用户
 **/
-router.post('/getAllUser',function (req,res) {
-    console.log("userConnection"+sql.queryAll);
+router.get('/getAllUser',function (req,res) {
     handleDisconnect();
     connection.query(sql.queryAll,function (err,rows) {
         if(err){

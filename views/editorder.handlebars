@@ -31,7 +31,7 @@
         <div class="form-row">
             <div class="form-group w-100">
                 <label for="UserWeiXinID">微信号</label>
-                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'" @blur="checkWeiXinID">
+                <input type="text" name="UserWeiXinID" id="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'">
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
             </div>
@@ -41,12 +41,20 @@
 </div>
 <script type="text/x-handlebars-template" id="resultTemplate">
 	<div class="card w-100">
-		<img class="card-img-top rounded" style="width:75px;height:75px;" src="/\{{ImgUrl}}">
+		<img class="card-img-top rounded" style="width:50px;height:50px;" src="/\{{ImgUrl}}">
 		<div class="card-body">
 			<div class="card-title">\{{Remark}}</div>
 			<div class="card-text">\{{ProductName}}</div>
 		</div>
 	</div>
+</script>
+<script type="text/x-handlebars-template" id="userTemp">
+    <div class="card w-100">
+        <div class="card-body">
+            <div class="card-title">\{{WeiXinName}}</div>
+            <div class="card-text">\{{userName}}-\{{userID}}</div>
+        </div>
+    </div>
 </script>
 {{#section 'jquery'}}
     <!--typeahead-->
@@ -86,17 +94,7 @@
             	},
             	add:function () {
             		
-            	},
-                checkWeiXinID:function () {
-                    $.each(userList,function (i,obj) {
-                        if(obj.WeiXinID==$.trim(vm.userWeiXinID)){
-                            vm.userName=obj.UserName;
-                            vm.userID=obj.ID;
-                            vm.userWeiXinName=obj.WeiXinName;
-                            return;
-                        }
-                    });
-                }
+            	}
 	    	 },
 	         watch: {
 	            'number':function newRowWID() {
@@ -105,7 +103,7 @@
 	        }
 	    });
         $(function () {
-             //远程数据源
+             //远程数据源  产品列表
 	        var prefetch_product = new Bloodhound({
 	            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
 	            queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -114,7 +112,7 @@
 	        });
 
 	        prefetch_product.initialize();
-	        prefetch_product.get('0')
+	        prefetch_product.get('0999')
 	        $('#productName').typeahead(null, {
 	            name: 'productInfo',
 	            displayKey: 'ProductName',
@@ -130,21 +128,30 @@
 				vm.typeID=row.TypeID;
 				vm.price=row.Price;
 			});
-            GetAllUser();
-        });
-        function GetAllUser() {
-            $.ajax({
-                url: '/user/getAllUser',
-                dataType: 'json',
-                type: 'post',
-                success: function (data) {
-                    console.log(data);
-                    userList=[];
-                    $.each(data,function (i,obj) {
-                        userList.push(obj);
-                    });
+
+            //远程数据源 用户
+            var prefetch_user=new Bloodhound({
+                datumTokenizer:Bloodhound.tokenizers.obj.whitespace('WeiXinName'),
+                queryTokenizer:Bloodhound.tokenizers.whitespace,
+                prefetch:'/user/getAllUser?q=queryall'
+            });
+            prefetch_user.initialize();
+            prefetch_user.get('Janny');
+            $('#UserWeiXinID').typeahead(null, {
+                name: 'userInfo',
+                displayKey: 'WeiXinName',
+                source: prefetch_product.ttAdapter(),
+                templates:{
+                    empty:['<div class="empty">没找到相关产品信息</div>'].join('\n'),
+                    suggestion: Handlebars.compile($("#userTemp").html())
                 }
-            })
-        }
+            });
+            $('#UserWeiXinID').bind('typeahead:select', function(ev, row) {
+                vm.userName=row.UserName;
+                vm.userID=row.ID;
+                vm.userWeiXinName=row.WeiXinName;
+            });
+        });
+        
 	</script>
 {{/section}}
