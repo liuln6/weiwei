@@ -67,7 +67,6 @@
 
 		var controlUrl="/order/";
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
-        var userList=[];
 	    var vm=new Vue({
 	    	 el: "#order",
 	    	 data:{
@@ -140,7 +139,7 @@
             $('#UserWeiXinID').typeahead(null, {
                 name: 'userInfo',
                 displayKey: 'WeiXinName',
-                source: prefetch_product.ttAdapter(),
+                source: prefetch_user.ttAdapter(),
                 templates:{
                     empty:['<div class="empty">没找到相关产品信息</div>'].join('\n'),
                     suggestion: Handlebars.compile($("#userTemp").html())
