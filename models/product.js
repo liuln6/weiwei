@@ -139,7 +139,18 @@ router.post('/add',function (req,res) {
 			connection.query(sql.addImageType,[typeData],function (err,result) {
 				callback(err);
 			});
-		},function (callback) {
+		},
+		function (callback) {
+			//新增库存添加记录
+			var stockData=[];
+			TypeList.forEach(function (item,index) {
+				stockData.push([TotalNumber,new Date(),item.id,postID]);
+			});
+			connection.query(sql.addStockList,[stockData],function (err,result) {
+				callback(err);
+			});
+		}
+		,function (callback) {
 			//提交事务
 			connection.commit(function (err) {
 				callback(err);

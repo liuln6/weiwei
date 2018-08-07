@@ -15,7 +15,7 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="number">米数</label>
-                <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" v-validate="'required|numeric'" class="form-control" name="number">
+                <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" :v-validate="'required|numeric|max:stockNumber'" class="form-control" name="number">
                 <i v-show="errors.has('number')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
             </div>
@@ -43,7 +43,7 @@
 	<div class="card w-100">
 		<img class="card-img-top rounded" style="width:50px;height:50px;" src="/\{{ImgUrl}}">
 		<div class="card-body">
-			<div class="card-title">\{{Remark}}</div>
+			<div class="card-title">\{{Remark}}|库存（\{{TotalNumber-UsedNumber}}）</div>
 			<div class="card-text">\{{ProductName}}</div>
 		</div>
 	</div>
@@ -78,20 +78,45 @@
                 userName:'',
 	    	 	number:0,
 	    	 	price:0,
-                totalPrice:0
+                totalPrice:0,
+                stockNumber:0
 	    	 },
 	    	 methods:{
 	    	 	validateBeforeSubmit:function () {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                      //this.saveRows();
+                      this.save();
                       console.log("success");
                       return;
                     }
                   });
             	},
-            	add:function () {
-            		
+            	save:function () {
+            		var order={
+                        productName:vm.productName,
+                        productID:vm.productID,
+                        typeID:vm.typeID,
+                        userWeiXinID:vm.userWeiXinID,
+                        userID:vm.userID,
+                        userWeiXinName:vm.userWeiXinName,
+                        userName:vm.userName,
+                        number:vm.number,
+                        price:vm.price,
+                        totalPrice:vm.totalPrice
+                    };
+                    swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+                    axios.post(controlUrl+'add',order)
+                    .then(function (response) {
+                        $('#orderform')[0].reset();
+                        swal.close();
+                        toastr.success('数据添加成功了，恭喜亲~', '')
+                    })
+                    .catch(function (error) {
+                        swal.close();
+                        console.log(error);
+                        toastr.error('下单失败了，亲稍等，截图联系管理员~', '')
+
+                    }); 
             	}
 	    	 },
 	         watch: {
@@ -125,6 +150,7 @@
 				vm.productID=row.PID;
 				vm.typeID=row.TypeID;
 				vm.price=row.Price;
+                vm.stockNumber=row.TotalNumber-row.UsedNumber;
 			});
 
             //远程数据源 用户

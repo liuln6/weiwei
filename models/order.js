@@ -4,7 +4,9 @@ var router=express.Router();
 var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
-var sql=require('../db/productSQL.js');
+var sql=require('../db/orderSQL.js');
+var productsql=require('../db/productSQL.js');
+
 
 var path=require('path');
 var async=require('async');
@@ -55,10 +57,78 @@ router.get('/',function (req,res,next) {
 });
 
 /**
-下单
+下单页面
 **/
 router.get('/add',function (req,res) {
 	res.render('editorder');
 });
+router.post('/add',function (req,res) {
+    handleDisconnect();
+    var order={
+        productName:req.body.productName,
+        productID:req.body.productID,
+        typeID:req.body.typeID,
+        userWeiXinID:req.body.userWeiXinID,
+        userID:req.body.userID,
+        userWeiXinName:req.body.userWeiXinName,
+        userName:req.body.userName,
+        number:req.body.number,
+        price:req.body.price,
+        totalPrice:req.body.totalPrice
+    };
+    var now=new Date();
+    var year=now.getFullYear();
+    var month=now.getMonth()+1;
+    var day=now.getDay();
+    var orderNO=year+month+day+order.productID+order.typeID+generateMixed(4);
 
+    var orderID=0;
+    var tasks=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function(callback) {
+            //新增产品
+            connection.query(sql.add,[order.productID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID],function (err,result) {
+                orderID=result.insertId;
+                callback(err);
+            });
+        },function (callback) {
+            //减库存
+            connection.query(productSql.minuxNumber,[order.number,order.number,order.productID],function (err,result) {
+                callback(err);
+            });
+        },
+        function(callback) {
+            //查产品剩余库存
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            res.json({"result": err});
+        }else{
+            res.json({"result":"保存成功"});
+        }
+
+    });
+})
+var chars = ['0','1','2','3','4','5','6','7','8','9'];
+function generateMixed(n) {
+     global.res = "";
+     for(var i = 0; i < n ; i ++) {
+         var id = Math.ceil(Math.random()*61);
+         res += chars[id];
+     }
+    return global.res;
+}
 module.exports=router;
