@@ -31,7 +31,7 @@
         <div class="form-row">
             <div class="form-group w-100">
                 <label for="UserWeiXinID">微信号</label>
-                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'" >
+                <input type="text" name="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'" @blur="checkWeiXinID">
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
             </div>
@@ -59,7 +59,7 @@
 
 		var controlUrl="/order/";
 	    Vue.use(VeeValidate,{locale: 'zh_CN'});
-
+        var userList=[];
 	    var vm=new Vue({
 	    	 el: "#order",
 	    	 data:{
@@ -67,6 +67,9 @@
 	    	 	productID:0,
 	    	 	typeID:0,
                 userWeiXinID:'',
+                userID:'',
+                userWeiXinName:'',
+                userName:'',
 	    	 	number:0,
 	    	 	price:0,
                 totalPrice:0
@@ -83,7 +86,17 @@
             	},
             	add:function () {
             		
-            	}
+            	},
+                checkWeiXinID:function () {
+                    $.each(userList,function (i,obj) {
+                        if(obj.WeiXinID==$.trim(vm.userWeiXinID)){
+                            vm.userName=obj.UserName;
+                            vm.userID=obj.ID;
+                            vm.userWeiXinName=obj.WeiXinName;
+                            return;
+                        }
+                    });
+                }
 	    	 },
 	         watch: {
 	            'number':function newRowWID() {
@@ -118,5 +131,19 @@
 				vm.price=row.Price;
 			});
         });
+        function GetAllUser() {
+            $.ajax({
+                url: '/user/getAllUser',
+                dataType: 'json',
+                type: 'post',
+                success: function (data) {
+                    console.log(data);
+                    userList=[];
+                    $.each(data,function (i,obj) {
+                        userList.push(obj);
+                    });
+                }
+            })
+        }
 	</script>
 {{/section}}

@@ -4,7 +4,7 @@ var router=express.Router();
 var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
-var sql=require('../db/productSQL.js');
+var sql=require('../db/userSQL.js');
 
 var path=require('path');
 var async=require('async');
@@ -51,14 +51,21 @@ function handleDisconnect() {
 用户列表
 **/
 router.get('/',function (req,res,next) {
-	res.render('userIndex',{title:'下单',datas:[]});
+	res.render('userIndex',{title:'用户列表',datas:[]});
 });
 
 /**
 一单时获取用户
 **/
-router.post('/getUser',function (req,res) {
-	res.json({rows:[]});
+router.post('/getAllUser',function (req,res) {
+    handleDisconnect();
+    connection.query(sql.queryAll,function (err,rows) {
+        if(err){
+            res.send('获取所有用户信息失败'+ err);
+        }else{
+            res.json(rows);
+        }
+    });
 });
 
 module.exports=router;
