@@ -5,7 +5,7 @@ var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/orderSQL.js');
-var productsql=require('../db/productSQL.js');
+var productSql=require('../db/productSQL.js');
 
 
 var path=require('path');
