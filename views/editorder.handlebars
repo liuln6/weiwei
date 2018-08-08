@@ -32,9 +32,9 @@
         <div class="form-group row">
             <label for="UserWeiXinID" class="col-3 col-form-label text-right">微信名</label>
             <div class="col-9">
-                <input type="text" name="UserWeiXinID" style="width:300px;" id="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'">
-                <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
-                <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
+                <input type="text" name="userWeiXinName" style="width:300px;" id="userWeiXinName" :class="{'is-invalid': errors.has('userWeiXinName'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinName" v-validate="'required'">
+                <i v-show="errors.has('userWeiXinName')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userWeiXinName') }}</span>
             </div>
         </div>
         <div class="form-group row">
@@ -46,9 +46,9 @@
 	</form>
 </div>
 <script type="text/x-handlebars-template" id="resultTemplate">
-	<div class="row w-100 bg-white">
+	<div class="row w-100 bg-white" style="width:300px;">
 		<div class="col-4 pr-0">
-			<img class="rounded" src="/\{{ImgUrl}}">
+			<img class="img-thumbnail rounded" src="/\{{ImgUrl}}">
 		</div>
 		<div class="col-8">
 			<div>\{{ProductName}}-\{{TypeName}}|库存（\{{StockNumber}}）</div>
@@ -56,7 +56,7 @@
 	</div>
 </script>
 <script type="text/x-handlebars-template" id="userTemp">
-	<li class="list-group-item">\{{WeiXinName}}-\{{UserName}}-\{{ID}}</li>
+	<li class="list-group-item" style="width:300px;">\{{WeiXinName}}-\{{UserName}}-\{{ID}}</li>
 </script>
 {{#section 'jquery'}}
     <!--typeahead-->
