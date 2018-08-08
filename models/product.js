@@ -103,6 +103,7 @@ router.post('/add',function (req,res) {
 	var ImageList=req.body.ImageList;
 	var TypeList=req.body.ImageType;
 	var productName=req.body.ProductName;
+	var width=req.body.Width;
 	var postID=null;
 	var tasks=[
 		function (callback) {
@@ -113,7 +114,7 @@ router.post('/add',function (req,res) {
 		},
 		function(callback) {
 			//新增产品
-			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0,TotalNumber,productName],function (err,result) {
+			connection.query(sql.add,[WID,new Date(),InputUerID,Remark,0,TotalNumber,productName,width],function (err,result) {
 				postID=result.insertId;
 				callback(err);
 			});

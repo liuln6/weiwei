@@ -44,21 +44,25 @@
             </div>
             <div class="form-group col-md-8">
                 <label >仓库</label>
-                <div class="">
-                    <div class="form-check form-check-inline" v-for="(ware,wareIndex) in warehouselist">
-                      <input class="form-check-input" v-model="newRow.WID" type="radio" name="warehouseSelect" v-bind:value="ware.ID" v-bind:id="'warehouse_'+wareIndex">
-                      <label class="form-check-label" :for="'warehouse_'+wareIndex">\{{ware.Name}}</label>
-                    </div>
+                <div class="form-check form-check-inline" v-for="(ware,wareIndex) in warehouselist">
+                  <input class="form-check-input" v-model="newRow.WID" type="radio" name="warehouseSelect" v-bind:value="ware.ID" v-bind:id="'warehouse_'+wareIndex">
+                  <label class="form-check-label" :for="'warehouse_'+wareIndex">\{{ware.Name}}</label>
                 </div>
             </div>
         </div>
-        
         <div class="form-row">
             <div class="form-group w-100">
                 <label for="ProductName">名称</label>
                 <textarea name="ProductName" v-model="newRow.ProductName" :class="{'is-invalid':errors.has('ProductName'),'form-control':true}" v-validate="'required'" data-vv-delay="500"></textarea>
                  <i v-show="errors.has('ProductName')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('ProductName')" class="help text-danger">\{{ errors.first('ProductName') }}</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <label>幅宽</label>
+            <div class="form-check form-check-inline" v-for="(item,index) in widthList">
+                <input type="radio" name="widthList" class="form-check-input" v-model="newRow.Width" v-bind:value="item.value" v-bind:id="'widthList_'+index">
+                <label class="form-check-label" :for="'widthList_'+index">\{{item.text}}</label>
             </div>
         </div>
         <div class="form-row">
@@ -93,6 +97,7 @@
         ID:0,
         Name:""
     }];
+    var productWidthList=[{text:'1.1',value:1.1},{text:'1.5',value:1.5},{text:'2.3',value:2.3},{text:'2.5',value:2.5},{text:'2.8',value:2.8},{text:'其它',value:0}];
     var vm=new Vue({
         el: "#AddWare",
         data: {
@@ -100,11 +105,13 @@
             checkedRows: [],
             productImage: imageArr,
             productType:imageArr,
+            widthList:productWidthList,
             newRow:{
                 WID:2,
                 No:'',
                 Remark:'',
-                ProductName:''
+                ProductName:'',
+                Width:1,
             },
             warehouselist:wareList
         },
@@ -124,6 +131,7 @@
                     Remark:this.newRow.Remark,
                     No:this.newRow.No,
                     ProductName:this.newRow.ProductName,
+                    Width:this.newRow.Width,
                     TotalNumber:0,
                     ImageList:[],
                     ImageType:[],

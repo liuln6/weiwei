@@ -1,5 +1,5 @@
 var productSQL = {
-    add:'insert into WeiProduct(WID,InputTime,InputUserID,Remark,UsedNumber,TotalNumber,ProductName,Status) values (?,?,?,?,?,?,?,30)',
+    add:'insert into WeiProduct(WID,InputTime,InputUserID,Remark,UsedNumber,TotalNumber,ProductName,Status,Width) values (?,?,?,?,?,?,?,30,?)',
     addImages:'insert into WeiImages ( ImgUrl,InputTime,WWMID ) values (?,?,?) ',
     addProductImage:'insert into WeiProductImage (Remark,ImageID,ProductID ) values ? ',
     addImageType:'insert into WeiProductImageType(ProductID,Price,UsedNumber,TotalNumber,Status,ImageID,Remark)values ? ',
