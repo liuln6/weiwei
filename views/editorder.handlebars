@@ -34,7 +34,7 @@
             <div class="col-9">
                 <input type="text" name="userWeiXinName" style="width:300px;" id="userWeiXinName" :class="{'is-invalid': errors.has('userWeiXinName'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinName" v-validate="'required'">
                 <i v-show="errors.has('userWeiXinName')" class="fa text-danger fa-warning"></i>
-                <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userWeiXinName') }}</span>
+                <span v-show="errors.has('userWeiXinName')" class="help text-danger">\{{ errors.first('userWeiXinName') }}</span>
             </div>
         </div>
         <div class="form-group row">
