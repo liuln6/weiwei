@@ -4,7 +4,7 @@
 <div class="container" id="order">
 	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 		<div class="form-group row">
-            <label for="productName" class="col-2 col-form-label">选布</label>
+            <label for="productName" class="col-2 col-form-label text-right">选布</label>
             <div class="col-10">
 	            <input type="text" id="productName" autocomplete="off" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
 	            <input type="hidden" v-model="productID" name="productID">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="number" class="col-2 col-form-label">米数</label>
+            <label for="number" class="col-2 col-form-label text-right">米数</label>
             <div class="col-10">
                 <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" :v-validate="'required|numeric|max:stockNumber'" class="form-control" name="number">
                 <i v-show="errors.has('number')" class="fa text-danger fa-warning"></i>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="UserWeiXinID" class="col-2 col-form-label">微信号</label>
+            <label for="UserWeiXinID" class="col-2 col-form-label text-right">微信号</label>
             <div class="col-10">
                 <input type="text" name="UserWeiXinID" id="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'">
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
