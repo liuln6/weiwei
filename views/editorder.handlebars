@@ -4,8 +4,8 @@
 <div class="container" id="order">
 	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 		<div class="form-group row">
-            <label for="productName" class="col-2 col-form-label text-right">选布</label>
-            <div class="col-10">
+            <label for="productName" class="col-3 col-form-label text-right">选布</label>
+            <div class="col-9">
 	            <input type="text" id="productName" autocomplete="off" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
 	            <span v-if="typeName!=''">\{{typeName}}</span>
 	            <input type="hidden" v-model="productID" name="productID">
@@ -14,37 +14,43 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="number" class="col-2 col-form-label text-right">米数</label>
-            <div class="col-10">
+            <label for="number" class="col-3 col-form-label text-right">米数</label>
+            <div class="col-9">
                 <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" :v-validate="'required|numeric|max:stockNumber'" class="form-control" name="number">
                 <i v-show="errors.has('number')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
             </div>
         </div>
         <div class="form-row" v-if="productID>0&&number>0">
-        	<div class="form-group col-md-6">
+        	 <label class="col-3 col-form-label text-right"></label>
+        	<div class="form-group col-9">
             	<span v-if="price>0">
             		<label>\{{number}}</label>*<label>\{{price}}</label>=<label>\{{totalPrice}}</label>
             	</span>
             </div>
         </div>
         <div class="form-group row">
-            <label for="UserWeiXinID" class="col-2 col-form-label text-right">微信号</label>
-            <div class="col-10">
+            <label for="UserWeiXinID" class="col-3 col-form-label text-right">微信名</label>
+            <div class="col-9">
                 <input type="text" name="UserWeiXinID" id="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'">
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
             </div>
         </div>
-        <button class="btn btn-primary" type="submit">保存</button>
+        <div class="form-group row">
+	        <div class="col-3"></div>
+	        <div class="col-9">
+	        	<button class="btn btn-primary" type="submit">保存</button>
+	        </div>
+        </div>
 	</form>
 </div>
 <script type="text/x-handlebars-template" id="resultTemplate">
 	<div class="card w-100">
 		<img class="card-img-top rounded" style="width:50px;height:50px;" src="/\{{ImgUrl}}">
 		<div class="card-body">
-			<div class="card-title">\{{Remark}}|库存（\{{StockNumber}}）</div>
-			<div class="card-text">\{{ProductName}}</div>
+			<div class="card-title">\{{ProductName}}-\{{TypeName}}|库存（\{{StockNumber}}）</div>
+			<div class="card-text">\{{Remark}}</div>
 		</div>
 	</div>
 </script>
@@ -132,7 +138,11 @@
 	            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
 	            queryTokenizer: Bloodhound.tokenizers.whitespace,
 	            // 一次取所有数据
-	            prefetch: '/product/getProductAll?q=%QUERYALL-01'
+	            prefetch: '/product/getProductAll',
+	            remote:{
+	            	url:'/product/getProductAllByName?q=%QUERY',
+	            	wildcard:'%QUERY'
+	            }
 	        });
 
 	        prefetch_product.initialize();

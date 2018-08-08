@@ -86,6 +86,17 @@ router.get('/getProductAll',function (req,res) {
 		}
 	});
 });
+router.get('/getProductAllByName',function (req,res) {
+	var name=req.body.q;
+	handleDisconnect();
+	connection.query(sql.queryPouductAllByName,[name],function (err,rows) {
+		if(err){
+			res.send('获取所有产品信息失败'+ err);
+		}else{
+			res.json(rows);
+		}
+	});
+});
 /**
 入库
 **/
