@@ -166,7 +166,11 @@
             var prefetch_user=new Bloodhound({
                 datumTokenizer:Bloodhound.tokenizers.obj.whitespace('WeiXinName'),
                 queryTokenizer:Bloodhound.tokenizers.whitespace,
-                prefetch:'/user/getAllUser?q=queryall'
+                prefetch:'/user/getAllUser',
+                remote:{
+	            	url:'/user/getAllUserByName?q=%QUERY',
+	            	wildcard:'%QUERY'
+	            }
             });
             prefetch_user.initialize();
             prefetch_user.get('Janny');

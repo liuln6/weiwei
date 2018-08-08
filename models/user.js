@@ -67,5 +67,15 @@ router.get('/getAllUser',function (req,res) {
         }
     });
 });
-
+router.get('/getAllUserByName',function (req,res) {
+    var name=req.query.q;
+    handleDisconnect();
+    connection.query(sql.queryAllByName,['%'+name+'%'],function (err,rows) {
+        if(err){
+            res.send('获取所有用户信息失败'+ err);
+        }else{
+            res.json(rows);
+        }
+    });
+});
 module.exports=router;
