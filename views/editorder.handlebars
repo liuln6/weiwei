@@ -170,7 +170,7 @@
             });
             prefetch_user.initialize();
             prefetch_user.get('Janny');
-            $('#UserWeiXinID').typeahead(null, {
+            $('#userWeiXinName').typeahead(null, {
                 name: 'userInfo',
                 displayKey: 'WeiXinName',
                 source: prefetch_user.ttAdapter(),
@@ -179,7 +179,7 @@
                     suggestion: Handlebars.compile($("#userTemp").html())
                 }
             });
-            $('#UserWeiXinID').bind('typeahead:select', function(ev, row) {
+            $('#userWeiXinName').bind('typeahead:select', function(ev, row) {
                 vm.userName=row.UserName;
                 vm.userID=row.ID;
                 vm.userWeiXinID=row.WeiXinID;
