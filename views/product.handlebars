@@ -61,11 +61,13 @@
             </div>
         </div>
         <div class="form-row">
-            <label>幅宽</label>
-            <div>
-                <div class="form-check form-check-inline" v-for="(item,index) in widthList">
-                    <input type="radio" name="widthList" class="form-check-input" v-model="newRow.Width" v-bind:value="item.value" v-bind:id="'widthList_'+index">
-                    <label class="form-check-label" :for="'widthList_'+index">\{{item.text}}</label>
+            <div class="form-group w-100">
+                <label>幅宽</label>
+                <div>
+                    <div class="form-check form-check-inline" v-for="(item,index) in widthList">
+                        <input type="radio" name="widthList" class="form-check-input" v-model="newRow.Width" v-bind:value="item.value" v-bind:id="'widthList_'+index">
+                        <label class="form-check-label" :for="'widthList_'+index">\{{item.text}}</label>
+                    </div>
                 </div>
             </div>
         </div>
