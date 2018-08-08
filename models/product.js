@@ -146,7 +146,7 @@ router.post('/add',function (req,res) {
 			var typeData=[];
 			console.log(TypeList);
 			TypeList.forEach(function (item,index) {
-				typeData.push([postID,item.price,0,item.totalNum,1,item.id,item.mark]);
+				typeData.push([postID,item.price,0,item.totalNum,30,item.id,item.mark]);
 			});
 			//新增产品类型
 			connection.query(sql.addImageType,[typeData],function (err,result) {

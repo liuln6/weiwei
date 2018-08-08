@@ -91,19 +91,25 @@ router.post('/add',function (req,res) {
             });
         },
         function(callback) {
-            //新增产品
-            connection.query(sql.add,[order.productID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID],function (err,result) {
+            //新增订单
+            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID],function (err,result) {
                 orderID=result.insertId;
+                console.log("下单");
                 callback(err);
             });
         },function (callback) {
-            //减库存
+            //减库存 产品
             connection.query(psql.minuxNumber,[order.number,order.number,order.productID],function (err,result) {
                 callback(err);
             });
+            console.log("减库存");
         },
         function(callback) {
-            //查产品剩余库存
+            //减库存 产品类型
+            connection.query(psql.minuxNumberType,[order.number,order.number,order.typeID],function (err,result) {
+                callback(err);
+            });
+            console.log("减库存");
         },function (callback) {
             //提交事务
             connection.commit(function (err) {
