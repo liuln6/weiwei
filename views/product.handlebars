@@ -117,7 +117,7 @@
                 No:'',
                 Remark:'',
                 ProductName:'',
-                Width:1,
+                Width:1.1,
             },
             warehouselist:wareList
         },
@@ -172,6 +172,11 @@
                     .then(function (response) {
                         $('#productform')[0].reset();
                         vm.productImage=[];
+                        vm.newRow.WID=2;
+                        vm.newRow.No='',
+                        vm.newRow.Remark='',
+                        vm.newRow.ProductName='',
+                        vm.newRow.Width=1.1,
                         swal.close();
                         toastr.success('数据添加成功了，恭喜亲~', '')
                     })
