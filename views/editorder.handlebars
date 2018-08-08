@@ -7,6 +7,7 @@
             <label for="productName" class="col-2 col-form-label text-right">选布</label>
             <div class="col-10">
 	            <input type="text" id="productName" autocomplete="off" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
+	            <span v-if="typeName!=''">\{{typeName}}</span>
 	            <input type="hidden" v-model="productID" name="productID">
 	            <i v-show="errors.has('productName')" class="fa text-danger fa-warning"></i>
 	            <span v-show="errors.has('productName')" class="help text-danger">\{{ errors.first('productName') }}</span>
@@ -71,6 +72,7 @@
                 productName:'',
 	    	 	productID:0,
 	    	 	typeID:0,
+	    	 	typeName:'',
                 userWeiXinID:'',
                 userID:'',
                 userWeiXinName:'',
@@ -148,6 +150,7 @@
 				vm.productName=row.ProductName;
 				vm.productID=row.PID;
 				vm.typeID=row.TypeID;
+				vm.typeName=row.TypeName;
 				vm.price=row.Price;
                 vm.stockNumber=row.TotalNumber-row.UsedNumber;
 			});
