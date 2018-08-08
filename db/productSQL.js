@@ -7,7 +7,7 @@ var productSQL = {
     queryPouductAllByName:'select p.`ID` PID,p.`ProductName`,p.`Remark`,p.`TotalNumber`,p.`UsedNumber`,p.Width,(p.TotalNumber-p.UsedNumber) StockNumber,imgType.`ID` TypeID,imgType.`ImageID`,imgType.`Price`,imgType.`Remark` TypeName,imgType.`TotalNumber`,imgType.`UsedNumber`,img.`ImgUrl` from `WeiProductImageType` imgType left join `WeiProduct` p on imgType.`ProductID`=p.`ID` left join `WeiImages` img on imgType.`ImageID`=img.`ID` where p.ProductName like ? and p.TotalNumber-p.UsedNumber>0 and p.`Status`=30 order by p.`ID`,imgType.`ID`',
     addStockList:'insert into `WeiStockList`(Number,InputTime,ProductImageTypeID,ProductID)values ?',
     queryHouseAll:'select * from WeiWarehouseType',
-    minuxNumber:' update WeiProduct set TotalNumber=TotalNumber-?,UsedNumber=UsedNumber+? where ProductID=? ',
+    minuxNumber:' update WeiProduct set TotalNumber=TotalNumber-?,UsedNumber=UsedNumber+? where ID=? ',
     deleteById:'DELETE FROM person WHERE id = ? ',
     updatePerson:'UPDATE person SET name = ?,age = ?,sex = ?,birth = ? WHERE id = ?',
     getPersonByName:'SELECT * FROM person WHERE name = ? ',
