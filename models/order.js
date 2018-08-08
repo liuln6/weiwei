@@ -5,7 +5,7 @@ var mysql= require('mysql');
 //var db=require('../db/dbprovider.js');
 var moment=require('moment');
 var sql=require('../db/orderSQL.js');
-var productSql=require('../db/productSQL.js');
+var psql=require('../db/productSQL.js');
 
 
 var path=require('path');
@@ -98,7 +98,7 @@ router.post('/add',function (req,res) {
             });
         },function (callback) {
             //减库存
-            connection.query(productSql.minuxNumber,[order.number,order.number,order.productID],function (err,result) {
+            connection.query(psql.minuxNumber,[order.number,order.number,order.productID],function (err,result) {
                 callback(err);
             });
         },
