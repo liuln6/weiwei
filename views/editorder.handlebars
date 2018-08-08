@@ -6,7 +6,7 @@
 		<div class="form-group row">
             <label for="productName" class="col-3 col-form-label text-right">选布</label>
             <div class="col-9">
-	            <input type="text" id="productName" autocomplete="off" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
+	            <input type="text" id="productName" autocomplete="off" style="width:300px;" name="productName" :class="{'is-invalid': errors.has('productID'),'form-control':true}" data-vv-delay="500" v-model="productName" v-validate="'required'" >
 	            <span v-if="typeName!=''">\{{typeName}}</span>
 	            <input type="hidden" v-model="productID" name="productID">
 	            <i v-show="errors.has('productName')" class="fa text-danger fa-warning"></i>
@@ -32,7 +32,7 @@
         <div class="form-group row">
             <label for="UserWeiXinID" class="col-3 col-form-label text-right">微信名</label>
             <div class="col-9">
-                <input type="text" name="UserWeiXinID" id="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'">
+                <input type="text" name="UserWeiXinID" style="width:300px;" id="UserWeiXinID" :class="{'is-invalid': errors.has('UserWeiXinID'),'form-control':true}" data-vv-delay="500" v-model="userWeiXinID" v-validate="'required'">
                 <i v-show="errors.has('UserWeiXinID')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('UserWeiXinID')" class="help text-danger">\{{ errors.first('userID') }}</span>
             </div>
@@ -47,10 +47,10 @@
 </div>
 <script type="text/x-handlebars-template" id="resultTemplate">
 	<div class="row w-100 bg-white">
-		<div class="col-3">
-			<img class="card-img-top rounded float-left" style="width:50px;height:50px;" src="/\{{ImgUrl}}">
+		<div class="col-4 p-0">
+			<img class="card-img-top rounded float-left p-1" style="width:50px;height:50px;" src="/\{{ImgUrl}}">
 		</div>
-		<div class="col-9">
+		<div class="col-8">
 			<div>\{{ProductName}}-\{{TypeName}}|库存（\{{StockNumber}}）</div>
 		</div>
 	</div>
