@@ -47,8 +47,8 @@
 </div>
 <script type="text/x-handlebars-template" id="resultTemplate">
 	<div class="row w-100 bg-white">
-		<div class="col-4 p-0">
-			<img class="card-img-top rounded float-left p-1" style="width:50px;height:50px;" src="/\{{ImgUrl}}">
+		<div class="col-4 pr-0">
+			<img class="rounded" src="/\{{ImgUrl}}">
 		</div>
 		<div class="col-8">
 			<div>\{{ProductName}}-\{{TypeName}}|库存（\{{StockNumber}}）</div>
@@ -56,9 +56,7 @@
 	</div>
 </script>
 <script type="text/x-handlebars-template" id="userTemp">
-    <div class="row w-100 bg-white">
-        <div>\{{WeiXinName}}-\{{UserName}}-\{{ID}}</div>
-    </div>
+	<li class="list-group-item">\{{WeiXinName}}-\{{UserName}}-\{{ID}}</li>
 </script>
 {{#section 'jquery'}}
     <!--typeahead-->
