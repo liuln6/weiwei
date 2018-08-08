@@ -88,6 +88,7 @@ router.get('/getProductAll',function (req,res) {
 });
 router.get('/getProductAllByName',function (req,res) {
 	var name=req.body.q;
+	console.log(name)
 	handleDisconnect();
 	connection.query(sql.queryPouductAllByName,['%'+name+'%'],function (err,rows) {
 		if(err){
