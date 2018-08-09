@@ -90,7 +90,7 @@ router.post('/add',function (req,res) {
     }
     var insertID=0;
     handleDisconnect();
-    var task=[
+    var tasks=[
         function (callback) {
             //开启事务
             connection.beginTransaction(function(err) {
