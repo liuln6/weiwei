@@ -21,7 +21,7 @@
 	    </div>
 	     <div class="form-group col-3">
 	      <label for="Phone">手机号</label>
-	      <input type="text" :class="{'is-invalid':errors.has('Phone'),'form-control':true}" id="Phone" v-model="Phone" placeholder="手机号" name="Phone" v-validate="'required|phone'" data-vv-delay="500">
+	      <input type="text" :class="{'is-invalid':errors.has('Phone'),'form-control':true}" id="Phone" v-model="Phone" placeholder="手机号" name="Phone" v-validate="{ required: true,length:11, regex: /^((13|14|15|17|18)[0-9]{1}\d{8})$/ }"data-vv-delay="500">
 	    </div>
 	  </div>
 	  <div class="form-row">
