@@ -4,30 +4,35 @@
 {{#section 'style'}}
 	<link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 {{/section}}
-<div class="container" id="order">
-	<form>
+<div class="container" id="user">
+	<form id="userForm" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 	  <div class="form-row">
 	    <div class="form-group col-3">
 	      <label for="WeiXinID">微信ID</label>
-	      <input type="email" class="form-control" id="WeiXinID" placeholder="微信ID">
+	      <input type="text" :class="{'is-invalid':errors.has('WeiXinID'),'form-control':true}" id="WeiXinID" v-model="WeiXinID" placeholder="微信ID" v-validate="'required'" data-vv-delay="500">
 	    </div>
 	    <div class="form-group col-3">
 	      <label for="WeiXinName">微信名</label>
-	      <input type="password" class="form-control" id="WeiXinName" placeholder="微信名">
+	      <input type="text" :class="{'is-invalid':errors.has('WeiXinName'),'form-control':true}" id="WeiXinName" v-model="WeiXinName" placeholder="微信名" v-validate="'required'" data-vv-delay="500">
 	    </div>
 	    <div class="form-group col-3">
 	      <label for="UserName">用户名</label>
-	      <input type="password" class="form-control" id="UserName" placeholder="用户名">
+	      <input type="text" :class="{'is-invalid':errors.has('UserName'),'form-control':true}" id="UserName" v-model="UserName" placeholder="用户名" >
 	    </div>
 	     <div class="form-group col-3">
-	      <label for="UserPhone">手机号</label>
-	      <input type="password" class="form-control" id="UserPhone" placeholder="手机号">
+	      <label for="Phone">手机号</label>
+	      <input type="password" :class="{'is-invalid':errors.has('Phone'),'form-control':true}" id="Phone" v-model="Phone" placeholder="手机号" v-validate="'required'" data-vv-delay="500">
 	    </div>
 	  </div>
 	  <div class="form-row">
-	    <div class="form-group col-12">
-	      <label for="UserAddredd">地址</label>
-	      <input type="password" class="form-control" id="UserAddredd" placeholder="地址">
+	  Phone
+	  <div class="form-group col-5">
+	      <label for="ZipCode">邮编</label>
+	      <input type="text" :class="{'is-invalid':errors.has('ZipCode'),'form-control':true}" id="ZipCode" v-model="ZipCode" placeholder="邮编">
+	    </div>
+	    <div class="form-group col-8">
+	      <label for="Address">地址</label>
+	      <textarea name="Remark" v-model="Address" :class="{'is-invalid':errors.has('Address'),'form-control':true}" placeholder="地址" v-validate="'required'" data-vv-delay="500"></textarea>
 	    </div>
 	  </div>
 	  <button type="submit" class="btn btn-primary">新增</button>
@@ -42,6 +47,58 @@
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 	<script type="text/javascript">
+	Vue.use(VeeValidate,{locale: 'zh_CN'});
+
+    var controlUrl="/user/";
+
+    var vm=new Vue({
+    	el:"#user",
+    	data:{
+    		ID:0,
+    		WeiXinID:'',
+    		WeiXinName:'',
+    		UserName:'',
+    		Phone:'',
+    		Address:''
+    	},
+    	methods:{
+    		validateBeforeSubmit:function () {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                      this.add();
+                      return;
+                    }
+                  });
+            },
+    		add:function () {
+    			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+    			var user={
+    				ID:0,
+		    		WeiXinID:vm.WeiXinID,
+		    		WeiXinName:vm.WeiXinName,
+		    		UserName:vm.UserName,
+		    		Phone:vm.Phone,
+		    		Address:vm.Address
+    			}
+    			axios.post(controlUrl+'add',product)
+                .then(function (response) {
+                    $('#userForm')[0].reset();
+                    vm.ID=0;
+                    vm.WeiXinID='';
+                    vm.WeiXinName='',
+                    vm.UserName='',
+                    vm.Phone='',
+                    vm.Address='',
+                    swal.close();
+                    toastr.success('数据添加成功了，恭喜亲~', '')
+                })
+                .catch(function (error) {
+                    console.log(error);
+                }); 
+    		}
+    	}
+    });
+
 	$(function () {
 		$('#example').DataTable({
 			language: {

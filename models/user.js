@@ -78,4 +78,54 @@ router.get('/getAllUserByName',function (req,res) {
         }
     });
 });
+router.post('/add',function () {
+    var user={
+        ID:0,
+        WeiXinID:req.body.WeiXinID,
+        WeiXinName:req.body.WeiXinName,
+        UserName:req.body.UserName,
+        Phone:req.body.Phone,
+        Address:req.body.Address,
+        ZipCode:req.body.ZipCode
+    }
+    var insertID=0;
+    handleDisconnect();
+    var task=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function (callback) {
+            //新增用户
+            connection.query(sql.add,[user.WeiXinID,user.WeiXinName,user.UserName,new Date()],function (err,result) {
+                insertID=result.insertId;
+                callback(err);
+            });
+        },function (callback) {
+            //新增用户地址
+            connection.query(sql.addAddress,[insertID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
+                callback(err);
+            });
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            res.json({"result": err});
+        }else{
+            res.json({"result":"保存成功"});
+        }
+
+    });
+
+});
 module.exports=router;
