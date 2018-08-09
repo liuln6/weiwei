@@ -78,7 +78,7 @@ router.get('/getAllUserByName',function (req,res) {
         }
     });
 });
-router.post('/add',function () {
+router.post('/add',function (req,res) {
     var user={
         ID:0,
         WeiXinID:req.body.WeiXinID,
