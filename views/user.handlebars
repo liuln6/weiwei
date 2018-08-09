@@ -491,7 +491,11 @@
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 	<script type="text/javascript">
 	$(function () {
-		$('#example').DataTable();
+		$('#example').DataTable({
+			language: {
+		        url: '/script/Chinese.json'
+		    }
+		});Chinese.lang
 	});
 	</script>
 {{/section}}
