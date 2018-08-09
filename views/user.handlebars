@@ -4,7 +4,7 @@
 {{#section 'style'}}
 	<link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 {{/section}}
-<div class="container" id="user">
+<div class="container" id="userContainer">
 	<form id="userForm" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 	  <div class="form-row">
 	    <div class="form-group col-3">
@@ -52,7 +52,7 @@
     var controlUrl="/user/";
 
     var vm=new Vue({
-    	el:"#user",
+    	el:"#userContainer",
     	data:{
     		ID:0,
     		WeiXinID:'',
