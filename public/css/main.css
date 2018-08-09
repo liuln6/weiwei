@@ -1,4 +1,4 @@
-body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
+body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei UI,Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
 .app-footer {
 	transition: margin-left .25s,margin-right .25s,width .25s,flex .25s,-ms-flex .25s;
 	flex: 0 0 50px;
