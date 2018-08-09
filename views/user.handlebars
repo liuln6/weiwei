@@ -21,7 +21,7 @@
 	    </div>
 	     <div class="form-group col-3">
 	      <label for="Phone">手机号</label>
-	      <input type="text" :class="{'is-invalid':errors.has('Phone'),'form-control':true}" id="Phone" v-model="Phone" placeholder="手机号" name="Phone" v-validate="'required|length:11'" data-vv-delay="500">
+	      <input type="text" :class="{'is-invalid':errors.has('Phone'),'form-control':true}" id="Phone" v-model="Phone" placeholder="手机号" name="Phone" v-validate="'required|phone'" data-vv-delay="500">
 	    </div>
 	  </div>
 	  <div class="form-row">

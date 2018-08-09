@@ -54,8 +54,15 @@
 	<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 	<script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
 	<script type="text/javascript">	
-    Vue.use(VeeValidate,{locale: 'zh_CN'});
-    
+    var validator=Vue.use(VeeValidate,{locale: 'zh_CN'});
+    validator.extend('phone', {
+	  messages: {
+	    zh_CN:field => field + '必须是11位手机号码',
+	  },
+	  validate: value => {
+	    return value.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+	  }
+	});
 
 	var WeiWeiHost="http://39.107.252.17:3000/";
 	toastr.options = {  
