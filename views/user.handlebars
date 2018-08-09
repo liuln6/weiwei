@@ -58,7 +58,8 @@
     		WeiXinName:'',
     		UserName:'',
     		Phone:'',
-    		Address:''
+    		Address:'',
+    		ZipCode:''
     	},
     	methods:{
     		validateBeforeSubmit:function () {
@@ -77,17 +78,19 @@
 		    		WeiXinName:vm.WeiXinName,
 		    		UserName:vm.UserName,
 		    		Phone:vm.Phone,
-		    		Address:vm.Address
+		    		Address:vm.Address,
+		    		ZipCode:vm.ZipCode
     			}
     			axios.post(controlUrl+'add',product)
                 .then(function (response) {
                     $('#userForm')[0].reset();
                     vm.ID=0;
                     vm.WeiXinID='';
-                    vm.WeiXinName='',
-                    vm.UserName='',
-                    vm.Phone='',
-                    vm.Address='',
+                    vm.WeiXinName='';
+                    vm.UserName='';
+                    vm.Phone='';
+                    vm.Address='';
+                    vm.ZipCode='';
                     swal.close();
                     toastr.success('数据添加成功了，恭喜亲~', '')
                 })
