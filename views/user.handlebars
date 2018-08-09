@@ -81,7 +81,7 @@
 		    		Address:vm.Address,
 		    		ZipCode:vm.ZipCode
     			}
-    			axios.post(controlUrl+'add',product)
+    			axios.post(controlUrl+'add',user)
                 .then(function (response) {
                     $('#userForm')[0].reset();
                     vm.ID=0;
