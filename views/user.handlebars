@@ -5,25 +5,39 @@
 	<link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 {{/section}}
 <div class="container" id="order">
+	<form>
+	  <div class="form-row">
+	    <div class="form-group col-3">
+	      <label for="WeiXinID">微信ID</label>
+	      <input type="email" class="form-control" id="WeiXinID" placeholder="微信ID">
+	    </div>
+	    <div class="form-group col-3">
+	      <label for="WeiXinName">微信名</label>
+	      <input type="password" class="form-control" id="WeiXinName" placeholder="微信名">
+	    </div>
+	    <div class="form-group col-3">
+	      <label for="UserName">用户名</label>
+	      <input type="password" class="form-control" id="UserName" placeholder="用户名">
+	    </div>
+	     <div class="form-group col-3">
+	      <label for="UserPhone">手机号</label>
+	      <input type="password" class="form-control" id="UserPhone" placeholder="手机号">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="form-group col-12">
+	      <label for="UserAddredd">地址</label>
+	      <input type="password" class="form-control" id="UserAddredd" placeholder="地址">
+	    </div>
+	  </div>
+	  <button type="submit" class="btn btn-primary">新增</button>
+	</form>
+	
 	<table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
-        <thead>
-            <tr>
-                <th>微信ID</th>
-                <th>微信昵称</th>
-                <th>用户名</th>
-                <th>地址管理</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>微信ID</th>
-                <th>微信昵称</th>
-                <th>用户名</th>
-                <th>地址管理</th>
-            </tr>
-        </tfoot>
     </table>
 </div>
+
+
 {{#section 'jquery'}}
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
@@ -33,29 +47,29 @@
 			language: {
 		        url: '/script/Chinese.json'
 		    },
-		    buttons: [ '新增' ],
 		    ajax:{
-		    	url:'/user/getAllUser',
-		    	type:'GET'
+		    	url:'/user/getAllUser' ,
+		    	"dataSrc": ""
 		    },
 		    columns:[
 		    	{
+		    		data:'WeiXinID',
+		    		title:'微信ID'
+		    	},
+		    	{
+		    		data:'WeiXinName',
+		    		title:'微信昵称'
+		    	},
+		    	{
+		    		data:'UserName',
+		    		title:'用户名'
+		    	},
+		    	{
 		    		data:'ID',
+		    		title:'操作',
 		    		render:function (data,type,row) {
-		    			return '<button type="button" class="btn btn-primary btn-sm" onclick="alert(\''+data.ID+'\')">编辑</button>';
+		    			return '<button type="button" class="btn btn-info btn-sm" onclick="alert(\''+row.ID+'\')">编辑</button>';
 		    		}
-		    	},
-		    	{
-		    		data:'WeiXinID'
-		    	},
-		    	{
-		    		data:'WeiXinName'
-		    	},
-		    	{
-		    		data:'UserName'
-		    	},
-		    	{
-		    		data:'ID',
 		    	}
 		    ]
 		});
