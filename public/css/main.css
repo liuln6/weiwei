@@ -13,3 +13,10 @@
 .imageAdd{
 	color:#ddd;
 }
+   
+table.dataTable{
+	border-collapse: collapse !important
+}
+.h8{
+	height: 8px;
+}
