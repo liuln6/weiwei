@@ -55,7 +55,7 @@
 	<script src="https://cdn.bootcss.com/toastr.js/latest/toastr.min.js"></script>
 	<script type="text/javascript">	
     Vue.use(VeeValidate,{locale: 'zh_CN'});
-    Validator.extend('phone', {
+    VeeValidate.extend('phone', {
 	  messages: {
 	    zh_CN:field => field + '必须是11位手机号码',
 	  },
