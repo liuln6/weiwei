@@ -51,7 +51,7 @@ function handleDisconnect() {
 用户列表
 **/
 router.get('/',function (req,res,next) {
-	res.render('userIndex',{title:'用户列表',datas:[]});
+	res.render('user',{title:'用户列表',datas:[]});
 });
 
 /**
