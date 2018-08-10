@@ -121,6 +121,19 @@
                     .then(function (response) {
                         $('#orderform')[0].reset();
                         swal.close();
+                        vm.productName='';
+	    	 			vm.productID=0;
+	    	 			vm.typeID=0;
+	    	 			vm.typeName='';
+                		vm.userWeiXinID='';
+                		vm.userID='';
+		                vm.userWeiXinName='';
+		                vm.userName='';
+			    	 	vm.number=0;
+			    	 	vm.price=0;
+		                vm.totalPrice=0;
+		                vm.stockNumber=0;
+		                vm.remark='';
                         toastr.success('数据添加成功了，恭喜亲~', '')
                     })
                     .catch(function (error) {
