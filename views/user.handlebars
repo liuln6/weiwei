@@ -37,7 +37,7 @@
 	  <button type="submit" class="btn btn-primary">新增</button>
 	</form>
 	
-	<table id="example" class="table table-striped table-bordered table-sm" style="width:100%">
+	<table id="userList" class="table table-striped table-bordered table-sm" style="width:100%">
     </table>
 </div>
 
@@ -83,7 +83,15 @@
     			}
     			axios.post(controlUrl+'add',user)
                 .then(function (response) {
-                    $('#userForm')[0].reset();
+                    swal.close();
+                    toastr.success('数据添加成功了，恭喜亲~', '');
+                    $('#userList').DataTable().row.add({
+                    	ID:response.insertID,
+						UserName:vm.UserName,
+						WeiXinID:vm.WeiXinID,
+						WeiXinName:vm.WeiXinName
+                    }).draw();
+					$('#userForm')[0].reset();
                     vm.ID=0;
                     vm.WeiXinID='';
                     vm.WeiXinName='';
@@ -91,8 +99,6 @@
                     vm.Phone='';
                     vm.Address='';
                     vm.ZipCode='';
-                    swal.close();
-                    toastr.success('数据添加成功了，恭喜亲~', '')
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -102,7 +108,7 @@
     });
 
 	$(function () {
-		$('#example').DataTable({
+		$('#userList').DataTable({
 			language: {
 		        url: '/script/Chinese.json'
 		    },

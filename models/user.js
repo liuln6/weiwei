@@ -120,7 +120,7 @@ router.post('/add',function (req,res) {
         if(err){
             console.log(err);
             connection.rollback();//发生错误时回滚
-            res.json({"result": err});
+            res.json({"result": err,"insertID":insertID});
         }else{
             res.json({"result":"保存成功"});
         }
