@@ -52,7 +52,7 @@
 	</form>
 </div>
 <script type="text/x-handlebars-template" id="resultTemplate">
-	<div class="row w-100 bg-white" style="width:300px;">
+	<div class="row bg-white">
 		<div class="col-4 pr-0">
 			<img class="img-thumbnail rounded" src="/\{{ImgUrl}}">
 		</div>
@@ -194,7 +194,7 @@
 	            }
             });
             prefetch_user.initialize();
-            prefetch_user.get('Janny');
+            //prefetch_user.get('Janny');
             $('#userWeiXinName').typeahead(null, {
                 name: 'userInfo',
                 displayKey: 'WeiXinName',

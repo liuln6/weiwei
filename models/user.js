@@ -129,6 +129,55 @@ router.post('/add',function (req,res) {
     });
 
 });
+router.post('/edit',function (req,res) {
+    var user={
+        ID:req.body.ID,
+        WeiXinID:req.body.WeiXinID,
+        WeiXinName:req.body.WeiXinName,
+        UserName:req.body.UserName,
+        Phone:req.body.Phone,
+        Address:req.body.Address,
+        ZipCode:req.body.ZipCode
+    }
+    var insertID=0;
+    handleDisconnect();
+    var tasks=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function (callback) {
+            //修改用户
+            connection.query(sql.edit,[user.WeiXinID,user.WeiXinName,user.UserName,user.ID],function (err,result) {
+                callback(err);
+            });
+        },function (callback) {
+            //修改用户地址
+            connection.query(sql.EditAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
+                callback(err);
+            });
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            res.json({"result": err});
+        }else{
+            res.json({"result":"保存成功","insertID":insertID});
+        }
+
+    });
+
+});
 router.get('/getUser',function (req,res) {
     var id=parseInt(req.query.ID);
     var userInfo={

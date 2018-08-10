@@ -104,6 +104,41 @@
                 .catch(function (error) {
                     console.log(error);
                 }); 
+    		},
+    		edit:function () {
+    			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+    			var user={
+    				ID:vm.ID,
+		    		WeiXinID:vm.WeiXinID,
+		    		WeiXinName:vm.WeiXinName,
+		    		UserName:vm.UserName,
+		    		Phone:vm.Phone,
+		    		Address:vm.Address,
+		    		ZipCode:vm.ZipCode
+    			}
+    			axios.post(controlUrl+'edit',user)
+                .then(function (response) {
+                    swal.close();
+                    toastr.success('数据修改成功了，恭喜亲~', '');
+                    console.log(response.insertID);
+                    $('#userList').DataTable().row.add({
+                    	ID:response.data.insertID,
+						UserName:vm.UserName,
+						WeiXinID:vm.WeiXinID,
+						WeiXinName:vm.WeiXinName
+                    }).draw();
+					$('#userForm')[0].reset();
+                    vm.ID=0;
+                    vm.WeiXinID='';
+                    vm.WeiXinName='';
+                    vm.UserName='';
+                    vm.Phone='';
+                    vm.Address='';
+                    vm.ZipCode='';
+                })
+                .catch(function (error) {
+                    console.log(error);
+                }); 
     		}
     		
     	}
@@ -154,9 +189,11 @@
             vm.WeiXinID=model.WeiXinID;
             vm.WeiXinName=model.WeiXinName;
             vm.UserName=model.UserName;
-            vm.Phone='';
-            vm.Address='';
-            vm.ZipCode='';
+            if(model.AddressList.length>0){
+	            vm.Phone=model.AddressList[0].Phone;
+	            vm.Address=model.AddressList[0].Address;
+	            vm.ZipCode=model.AddressList[0].ZipCode;
+            }
         })
         .catch(function (error) {
             console.log(error);
