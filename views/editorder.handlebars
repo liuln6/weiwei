@@ -146,7 +146,7 @@
 	    	 },
 	         watch: {
 	            'number':function newRowWID() {
-	               this.totalPrice=parseFloat(this.number)*this.price;
+	               this.totalPrice=(parseFloat(this.number)*this.price).toFixed(2);
 	            }
 	        }
 	    });
