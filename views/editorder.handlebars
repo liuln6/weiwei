@@ -16,7 +16,7 @@
         <div class="form-group row">
             <label for="number" class="col-3 col-form-label text-right">米数</label>
             <div class="col-9">
-                <input type="number" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" :v-validate="'required|numeric|max:stockNumber'" class="form-control" name="number">
+                <input type="text" :class="{'is-invalid': errors.has('number')}" data-vv-delay="500" v-model="number" v-validate="'required|decimal'" class="form-control" name="number">
                 <i v-show="errors.has('number')" class="fa text-danger fa-warning"></i>
                 <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
             </div>
@@ -133,7 +133,7 @@
 	    	 },
 	         watch: {
 	            'number':function newRowWID() {
-	               this.totalPrice=this.number*this.price;
+	               this.totalPrice=parseFloat(this.number)*this.price;
 	            }
 	        }
 	    });
