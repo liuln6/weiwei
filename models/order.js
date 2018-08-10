@@ -77,6 +77,7 @@ router.post('/add',function (req,res) {
         totalPrice:req.body.totalPrice,
         remark:req.body.remark
     };
+    console.lgo(order)
     var now=new Date();
     var year=now.getFullYear();
     var month=now.getMonth()+1;
