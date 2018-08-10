@@ -112,6 +112,10 @@
 		    },
 		    columns:[
 		    	{
+		    		data:'ID',
+		    		title:'ID'
+		    	},
+		    	{
 		    		data:'WeiXinID',
 		    		title:'微信ID'
 		    	},
@@ -124,7 +128,7 @@
 		    		title:'用户名'
 		    	},
 		    	{
-		    		data:'ID',
+		    		data:null,
 		    		title:'操作',
 		    		render:function (data,type,row) {
 		    			return '<button type="button" class="btn btn-info btn-sm" onclick="alert(\''+row.ID+'\')">编辑</button>';
