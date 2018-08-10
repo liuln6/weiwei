@@ -104,6 +104,22 @@
                 .catch(function (error) {
                     console.log(error);
                 }); 
+    		},
+    		getUser:function (id) {
+    			axios.get('/user/getUser?ID='+id)
+                .then(function (response) {
+                	var model=response.data.model;
+                    vm.ID=model.ID;
+                    vm.WeiXinID=model.WeiXinID;
+                    vm.WeiXinName=model.WeiXinName;
+                    vm.UserName=model.UserName;
+                    vm.Phone='';
+                    vm.Address='';
+                    vm.ZipCode='';
+                })
+                .catch(function (error) {
+                    console.log(error);
+                }); 
     		}
     	}
     });
@@ -138,7 +154,7 @@
 		    		data:null,
 		    		title:'操作',
 		    		render:function (data,type,row) {
-		    			return '<button type="button" class="btn btn-info btn-sm" onclick="alert(\''+row.ID+'\')">编辑</button>';
+		    			return '<button type="button" class="btn btn-info btn-sm" onclick="getUser(\''+row.ID+'\')">编辑</button>';
 		    		}
 		    	}
 		    ]

@@ -128,4 +128,33 @@ router.post('/add',function (req,res) {
     });
 
 });
+router.get('/getUser',function (req,res) {
+    var id=req.query.ID;
+    var userInfo={
+        ID:0,
+        WeiXinID:0,
+        WeiXinName:'',
+        UserName:'',
+        AddressList:[],
+    };
+    connection.query(sql.queryByID,[id,id],function (err,result) {
+        console.log(result[0]);
+        console.log(result[1]);
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            res.json({"result": err});
+        }else{
+            userInfo={
+                ID:result[0].ID,
+                WeiXinID:result[0].WeiXinID,
+                WeiXinName:result[0].WeiXinName,
+                UserName:result[0].UserName,
+                AddressList:result[1],
+            };
+            res.json({"result":"保存成功","model":userInfo});
+        }
+
+    });
+});
 module.exports=router;
