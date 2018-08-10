@@ -93,7 +93,7 @@ router.post('/add',function (req,res) {
         },
         function(callback) {
             //新增订单
-            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID,remark],function (err,result) {
+            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID,order.remark],function (err,result) {
                 orderID=result.insertId;
                 console.log("下单");
                 callback(err);
