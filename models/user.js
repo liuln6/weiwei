@@ -24,7 +24,8 @@ const dbconfig = {
     password : 'lina2010',
     port     : '3306',
     database : 'WeiWeiStock',
-    useConnectionPooling:true
+    useConnectionPooling:true,
+    multipleStatements: true
 };
 
 var connection;
@@ -129,7 +130,7 @@ router.post('/add',function (req,res) {
 
 });
 router.get('/getUser',function (req,res) {
-    var id=req.query.ID;
+    var id=parseInt(req.query.ID);
     var userInfo={
         ID:0,
         WeiXinID:0,
@@ -137,22 +138,26 @@ router.get('/getUser',function (req,res) {
         UserName:'',
         AddressList:[],
     };
+    handleDisconnect();
     connection.query(sql.queryByID,[id,id],function (err,result) {
-        console.log(result[0]);
-        console.log(result[1]);
+        var row = JSON.stringify(result[0]);//把results对象转为字符串，去掉RowDataPacket//'[{"count":"1","type":"RangeError"},{"count":"3","type":"ReferenceError"}]'
+        var row1 = JSON.stringify(result[1]);//把results对象转为字符串，去掉RowDataPacket
+        row= JSON.parse(row);//把results字符串转为json对象
+        row1=JSON.parse(row1)
         if(err){
             console.log(err);
             connection.rollback();//发生错误时回滚
             res.json({"result": err});
         }else{
             userInfo={
-                ID:result[0].ID,
-                WeiXinID:result[0].WeiXinID,
-                WeiXinName:result[0].WeiXinName,
-                UserName:result[0].UserName,
-                AddressList:result[1],
+                ID:row[0].ID,
+                WeiXinID:row[0].WeiXinID,
+                WeiXinName:row[0].WeiXinName,
+                UserName:row[0].UserName,
+                AddressList:row1
             };
-            res.json({"result":"保存成功","model":userInfo});
+            console.log(userInfo);
+            res.json({"result":"true","model":userInfo});
         }
 
     });

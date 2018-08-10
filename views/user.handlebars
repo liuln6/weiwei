@@ -7,34 +7,34 @@
 <div class="container" id="userContainer">
 	<form id="userForm" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 	  <div class="form-row">
-	    <div class="form-group col-3">
+	    <div class="form-group col-4">
 	      <label for="WeiXinID">微信ID</label>
 	      <input type="text" :class="{'is-invalid':errors.has('WeiXinID'),'form-control':true}" id="WeiXinID" v-model="WeiXinID" name="WeiXinID" placeholder="微信ID" v-validate="'required'" data-vv-delay="500">
 	    </div>
-	    <div class="form-group col-3">
+	    <div class="form-group col-4">
 	      <label for="WeiXinName">微信名</label>
 	      <input type="text" :class="{'is-invalid':errors.has('WeiXinName'),'form-control':true}" id="WeiXinName" v-model="WeiXinName" name="WeiXinName" placeholder="微信名" v-validate="'required'" data-vv-delay="500">
 	    </div>
-	    <div class="form-group col-3">
+	    <div class="form-group col-4">
 	      <label for="UserName">用户名</label>
 	      <input type="text" :class="{'is-invalid':errors.has('UserName'),'form-control':true}" id="UserName" v-model="UserName" name="UserName" placeholder="用户名" >
 	    </div>
-	     <div class="form-group col-3">
+	  </div>
+	  <div class="form-row">	  
+	     <div class="form-group col-4">
 	      <label for="Phone">手机号</label>
 	      <input type="text" :class="{'is-invalid':errors.has('Phone'),'form-control':true}" id="Phone" v-model="Phone" placeholder="手机号" name="Phone" v-validate="{ required: true,length:11, regex: /^((13|14|15|17|18)[0-9]{1}\d{8})$/ }"data-vv-delay="500">
 	    </div>
-	  </div>
-	  <div class="form-row">
-	  	<div class="form-group col-5">
+	  	<div class="form-group col-4">
 	      <label for="ZipCode">邮编</label>
 	      <input type="text" :class="{'is-invalid':errors.has('ZipCode'),'form-control':true}" id="ZipCode" v-model="ZipCode" name="ZipCode" placeholder="邮编">
 	    </div>
-	    <div class="form-group col-7">
+	    <div class="form-group col-4">
 	      <label for="Address">地址</label>
 	      <textarea name="Address" v-model="Address" :class="{'is-invalid':errors.has('Address'),'form-control':true}" placeholder="地址" v-validate="'required'" data-vv-delay="500"></textarea>
 	    </div>
 	  </div>
-	  <button type="submit" class="btn btn-primary">新增</button>
+	  <button type="submit" class="btn btn-primary">保存</button>
 	</form>
 	
 	<table id="userList" class="table table-striped table-bordered table-sm" style="width:100%">
@@ -144,22 +144,23 @@
 		    	}
 		    ]
 		});
-		function getUser(id) {
-    			axios.get('/user/getUser?ID='+id)
-                .then(function (response) {
-                	var model=response.data.model;
-                    vm.ID=model.ID;
-                    vm.WeiXinID=model.WeiXinID;
-                    vm.WeiXinName=model.WeiXinName;
-                    vm.UserName=model.UserName;
-                    vm.Phone='';
-                    vm.Address='';
-                    vm.ZipCode='';
-                })
-                .catch(function (error) {
-                    console.log(error);
-                }); 
-    		}
+
 	});
+	function getUser(id) {
+		axios.get('/user/getUser?ID='+id)
+        .then(function (response) {
+        	var model=response.data.model;
+            vm.ID=model.ID;
+            vm.WeiXinID=model.WeiXinID;
+            vm.WeiXinName=model.WeiXinName;
+            vm.UserName=model.UserName;
+            vm.Phone='';
+            vm.Address='';
+            vm.ZipCode='';
+        })
+        .catch(function (error) {
+            console.log(error);
+        }); 
+	}
 	</script>
 {{/section}}

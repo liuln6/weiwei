@@ -81,7 +81,7 @@ router.post('/add',function (req,res) {
     var year=now.getFullYear();
     var month=now.getMonth()+1;
     var day=now.getDay();
-    var orderNO=year+month+day+order.productID+order.typeID+generateMixed(4);
+    var orderNO=year+''+month+''+day+''+order.productID+''+order.typeID+generateMixed(4);
 
     var orderID=0;
     var tasks=[
