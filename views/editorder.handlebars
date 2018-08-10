@@ -38,6 +38,12 @@
             </div>
         </div>
         <div class="form-group row">
+            <label for="UserWeiXinID" class="col-3 col-form-label text-right">备注</label>
+            <div class="col-9">
+                <input type="text" name="remark" style="width:300px;" id="remark" :class="form-control" data-vv-delay="500" v-model="remark" >
+            </div>
+        </div>
+        <div class="form-group row">
 	        <div class="col-3"></div>
 	        <div class="col-9">
 	        	<button class="btn btn-primary" type="submit">保存</button>
@@ -83,7 +89,8 @@
 	    	 	number:0,
 	    	 	price:0,
                 totalPrice:0,
-                stockNumber:0
+                stockNumber:0,
+                remark:''
 	    	 },
 	    	 methods:{
 	    	 	validateBeforeSubmit:function () {
@@ -106,7 +113,8 @@
                         userName:vm.userName,
                         number:parseFloat(vm.number),
                         price:vm.price,
-                        totalPrice:vm.totalPrice
+                        totalPrice:vm.totalPrice,
+                        remark:vm.remark
                     };
                     swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
                     axios.post(controlUrl+'add',order)

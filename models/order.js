@@ -74,7 +74,8 @@ router.post('/add',function (req,res) {
         userName:req.body.userName,
         number:req.body.number,
         price:req.body.price,
-        totalPrice:req.body.totalPrice
+        totalPrice:req.body.totalPrice,
+        remark:req.body.remark
     };
     var now=new Date();
     var year=now.getFullYear();
@@ -92,7 +93,7 @@ router.post('/add',function (req,res) {
         },
         function(callback) {
             //新增订单
-            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID],function (err,result) {
+            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID,remark],function (err,result) {
                 orderID=result.insertId;
                 console.log("下单");
                 callback(err);
