@@ -85,6 +85,7 @@
                 .then(function (response) {
                     swal.close();
                     toastr.success('数据添加成功了，恭喜亲~', '');
+                    console.log(response.insertID);
                     $('#userList').DataTable().row.add({
                     	ID:response.insertID,
 						UserName:vm.UserName,
