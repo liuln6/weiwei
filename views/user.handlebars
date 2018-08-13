@@ -66,7 +66,11 @@
     		validateBeforeSubmit:function () {
                 this.$validator.validateAll().then((result) => {
                     if (result) {
-                      this.add();
+                    	if(vm.ID>0){
+                    		this.edit();
+                    	}else{
+                      		this.add();
+                    	}
                       return;
                     }
                   });
