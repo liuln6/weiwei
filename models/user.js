@@ -156,7 +156,7 @@ router.post('/edit',function (req,res) {
         },function (callback) {
             //修改用户地址
             if(user.AddressID>0){
-                connection.query(sql.editAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,user.AddressID],function (err,result) {
+                connection.query(sql.editAddress,[user.Address,user.UserName,user.Phone,user.ZipCode,user.AddressID],function (err,result) {
                     callback(err);
                 });
             }else{
