@@ -155,7 +155,7 @@ router.post('/edit',function (req,res) {
             });
         },function (callback) {
             //修改用户地址
-            connection.query(sql.EditAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
+            connection.query(sql.editAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
                 callback(err);
             });
         },function (callback) {
