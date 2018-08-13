@@ -59,7 +59,8 @@
     		UserName:'',
     		Phone:'',
     		Address:'',
-    		ZipCode:''
+    		ZipCode:'',
+    		AddressID:0
     	},
     	methods:{
     		validateBeforeSubmit:function () {
@@ -79,7 +80,8 @@
 		    		UserName:vm.UserName,
 		    		Phone:vm.Phone,
 		    		Address:vm.Address,
-		    		ZipCode:vm.ZipCode
+		    		ZipCode:vm.ZipCode,
+		    		AddressID:vm.AddressID
     			}
     			axios.post(controlUrl+'add',user)
                 .then(function (response) {
@@ -100,6 +102,7 @@
                     vm.Phone='';
                     vm.Address='';
                     vm.ZipCode='';
+                    vm.AddressID=0;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -114,7 +117,8 @@
 		    		UserName:vm.UserName,
 		    		Phone:vm.Phone,
 		    		Address:vm.Address,
-		    		ZipCode:vm.ZipCode
+		    		ZipCode:vm.ZipCode,
+		    		AddressID:vm.AddressID
     			}
     			axios.post(controlUrl+'edit',user)
                 .then(function (response) {
@@ -135,6 +139,7 @@
                     vm.Phone='';
                     vm.Address='';
                     vm.ZipCode='';
+                    vm.AddressID=0;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -193,6 +198,7 @@
 	            vm.Phone=model.AddressList[0].Phone;
 	            vm.Address=model.AddressList[0].Address;
 	            vm.ZipCode=model.AddressList[0].ZipCode;
+	            vm.AddressID=model.AddressList[0].ID;
             }
         })
         .catch(function (error) {

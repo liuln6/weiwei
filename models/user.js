@@ -137,7 +137,8 @@ router.post('/edit',function (req,res) {
         UserName:req.body.UserName,
         Phone:req.body.Phone,
         Address:req.body.Address,
-        ZipCode:req.body.ZipCode
+        ZipCode:req.body.ZipCode,
+        AddressID:req.body.AddressID
     }
     var insertID=0;
     handleDisconnect();
@@ -155,9 +156,15 @@ router.post('/edit',function (req,res) {
             });
         },function (callback) {
             //修改用户地址
-            connection.query(sql.editAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
-                callback(err);
-            });
+            if(user.AddressID>0){
+                connection.query(sql.editAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,user.AddressID],function (err,result) {
+                    callback(err);
+                });
+            }else{
+                 connection.query(sql.addAddress,[insertID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
+                    callback(err);
+                });
+            }
         },function (callback) {
             //提交事务
             connection.commit(function (err) {
