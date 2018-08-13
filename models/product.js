@@ -99,6 +99,19 @@ router.get('/getProductAllByName',function (req,res) {
 	});
 });
 /**
+产品列表
+**/
+router.get('/getProductAllList',function (req,res) {
+	handleDisconnect();
+	connection.query(sql.queryProductAll,function (err,rows) {
+		if(err){
+			res.send('获取所有产品信息失败'+ err);
+		}else{
+			res.json(rows);
+		}
+	});
+});
+/**
 入库
 **/
 router.get('/add',function (req,res) {
