@@ -1,9 +1,6 @@
 {{#section 'title'}}
 	<title>用户管理</title>
 {{/section}}
-{{#section 'style'}}
-	<link href="https://cdn.bootcss.com/datatables/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-{{/section}}
 <div class="container" id="userContainer">
 	<form id="userForm" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 	  <div class="form-row">
@@ -41,10 +38,7 @@
     </table>
 </div>
 
-
 {{#section 'jquery'}}
-	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 	<script type="text/javascript">
 	Vue.use(VeeValidate,{locale: 'zh_CN'});
 
