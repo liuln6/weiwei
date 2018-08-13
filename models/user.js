@@ -140,7 +140,6 @@ router.post('/edit',function (req,res) {
         ZipCode:req.body.ZipCode,
         AddressID:req.body.AddressID
     }
-    var insertID=0;
     handleDisconnect();
     var tasks=[
         function (callback) {
@@ -161,7 +160,7 @@ router.post('/edit',function (req,res) {
                     callback(err);
                 });
             }else{
-                 connection.query(sql.addAddress,[insertID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
+                 connection.query(sql.addAddress,[user.ID,user.Address,user.UserName,user.Phone,user.ZipCode,new Date()],function (err,result) {
                     callback(err);
                 });
             }
@@ -179,7 +178,7 @@ router.post('/edit',function (req,res) {
             connection.rollback();//发生错误时回滚
             res.json({"result": err});
         }else{
-            res.json({"result":"保存成功","insertID":insertID});
+            res.json({"result":"保存成功"});
         }
 
     });
