@@ -172,6 +172,17 @@
                     swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
                     axios.post(controlUrl+'add',product)
                     .then(function (response) {
+                        var rows=[];
+                        $.each(product.ImageType,function (item,index) {
+                            rows.push({
+                                PID:response.data.productID,
+                                ProductName:product.ProductName,
+                                TypeName:item.mark,
+                                StockNumber:item.totalNum
+                            });
+                        });
+                        $('#productList').DataTable().rows.add(rows).draw();
+
                         $('#productform')[0].reset();
                         vm.productImage=[];
                         vm.newRow.WID=2;
@@ -220,14 +231,13 @@ $(function () {
                 title:'名称'
             },
             {
-                data:'StockNumber',
-                title:'库存'
-            },
-            {
                 data:'TypeName',
                 title:'标识'
-            }
-            
+            },
+            {
+                data:'StockNumber',
+                title:'库存'
+            }            
         ]
     });
 

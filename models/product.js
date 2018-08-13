@@ -190,7 +190,7 @@ router.post('/add',function (req,res) {
 			connection.rollback();//发生错误时回滚
 			res.json({"result": err});
 		}else{
-			res.json({"result":"保存成功"});
+			res.json({"result":"保存成功","productID":postID});
 		}
 
 	});
