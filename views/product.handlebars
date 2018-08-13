@@ -217,7 +217,7 @@ $(function () {
         language: {
             url: '/script/Chinese.json'
         },
-        "lengthMenu": [[25, 50, -1], [25, 50, "All"]]
+        "lengthMenu": [[25, 50, -1], [25, 50, "All"]],
         ajax:{
             url:'/product/getProductAllList' ,
             "dataSrc": ""
@@ -229,7 +229,10 @@ $(function () {
             },
             {
                 data:'ProductName',
-                title:'名称'
+                title:'名称',
+                render:function (data,type,row) {
+                        return '<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">'+row.ProductName+'</a>';
+                    }
             },
             {
                 data:'TypeName',

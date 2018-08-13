@@ -24,7 +24,8 @@ const dbconfig = {
     password : 'lina2010',
     port     : '3306',
     database : 'WeiWeiStock',
-    useConnectionPooling:true
+    useConnectionPooling:true,
+    multipleStatements: true
 };
 
 var connection;
@@ -70,6 +71,36 @@ router.get('/getwarehouselist',function (req,res) {
 		else{
 
 			res.json({"result":{rows:rows}});
+		}
+	});
+});
+/**
+产品详情页面
+**/
+router.get('/info',function (req,res,next) {
+	var productID=req.query.ID;
+	res.render('productinfo',{title:'产品详情页面【'+productID+'】',id:productID});
+
+});
+router.post('/info',function (req,res,next) {
+	var productID=req.body.ID;
+	console.log(productID);
+	handleDisconnect();
+	var product={};
+	connection.query(sql.queryProductByID,[productID,productID,productID],function (err,result) {
+		if(err){
+			res.send('获取所有产品信息失败'+ err);
+		}else{
+			var resultProduct = JSON.stringify(result[0]);
+	        var resultImg = JSON.stringify(result[1]);
+	        var resultType=JSON.stringify(result[2]);
+	        resultProduct= JSON.parse(resultProduct);//把results字符串转为json对象
+	        resultImg=JSON.parse(resultImg);
+	        resultType=JSON.parse(resultType);
+			product=resultProduct[0];
+			product.ImageList=resultImg;
+			product.TypeList=resultType;
+			res.json({"result":"true","model":product});
 		}
 	});
 });

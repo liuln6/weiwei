@@ -11,6 +11,7 @@ var productSQL = {
     minuxNumber:' update WeiProduct set TotalNumber=TotalNumber-?,UsedNumber=UsedNumber+? where ID=? ',
     minuxNumberType:' update WeiProductImageType set TotalNumber=TotalNumber-?,UsedNumber=UsedNumber+? where ID=? ',
     queryStock:'SELECT TotalNumber-UsedNumber as StockNum from WeiProductImageType where ID=?',
+    queryProductByID:'SELECT * FROM WeiProduct where ID=? ; SELECT img.ID,Remark,ImageID,ProductID,ImgUrl,InputTime from WeiProductImage as img LEFT JOIN WeiImages as i on img.ImageID=i.ID  where ProductID=? ;  SELECT tp.*,i.ImgUrl FROM WeiProductImageType as tp LEFT JOIN WeiImages as i on tp.ImageID=i.ID WHERE ProductID=? ; ',
     deleteById:'DELETE FROM person WHERE id = ? ',
     updatePerson:'UPDATE person SET name = ?,age = ?,sex = ?,birth = ? WHERE id = ?',
     getPersonByName:'SELECT * FROM person WHERE name = ? ',

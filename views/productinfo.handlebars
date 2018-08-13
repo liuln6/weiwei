@@ -1,0 +1,80 @@
+{{#section 'title'}}
+	<title>{{title}}</title>
+{{/section}}
+<div class="container" id="productInfo">
+	<div class="text-center" v-for="(item,index) in ImageTypeList" v-model="ImageTypeList">
+	  <img :src="item.url" class="rounded img-fluid">
+	  <div class="h8"></div>
+	</div>	
+	<div class="text-center" v-for="(item,index) in ImageList" v-model="ImageList">
+	  <img :src="item.url" class="rounded img-fluid">
+	  <div class="h8"></div>
+	</div>
+	<div>
+	<p>\{{ProductName}}</p>
+	<p>\{{Width}}</p>
+	\{{Remark}}
+	</div>
+</div>
+{{#section 'jquery'}}
+<script type="text/javascript">
+    var imageArr=[{
+        id:{{id}},
+        url:'',
+        price:null,
+        stockNum:null,
+        mark:''
+    }]; 
+    var vm=new Vue({
+    	el: "#productInfo",
+        data: {
+        	ID:0,
+        	WID:0,
+            ProductNo:'',
+            Remark:'',
+            ProductName:'',
+            Width:0,
+            ImageList:imageArr,
+            ImageTypeList:imageArr
+        }
+    });
+$(function () {
+	getProductInfo();
+})
+function getProductInfo() {
+	var productID={{id}};
+	axios.post('/product/info',{ID:productID})
+    .then(function (response) {
+    	var model=response.data.model;
+    	vm.ImageList=[];
+    	$.each(model.ImageList,function (index,item) {
+    		vm.ImageList.push({
+    			id:item.ID,
+		        url:'/'+item.ImgUrl,
+		        price:0,
+		        stockNum:0,
+		        mark:''
+    		});
+    	});
+        vm.ImageTypeList=[];
+    	$.each(model.ImageTypeList,function (index,item) {
+    		vm.ImageTypeList.push({
+    			id:item.ID,
+		        url:'/'+item.ImgUrl,
+		        price:item.Price,
+		        stockNum:item.TotalNumber-item.UsedNumber,
+		        mark:item.Remark
+    		});
+    	});
+        vm.WID=model.WID;
+        vm.ProductNo=model.ProductNo;
+        vm.Remark=model.Remark;
+        vm.ProductName=model.ProductName;
+        vm.Width=model.Width;
+    })
+    .catch(function (error) {
+        console.log(error);
+    }); 
+}
+</script>
+{{/section}}
