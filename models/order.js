@@ -81,7 +81,7 @@ router.post('/add',function (req,res) {
     var year=now.getFullYear();
     var month=now.getMonth()+1;
     var day=now.getDay();
-    var orderNO=year+''+month+''+day+''+order.productID+''+order.typeID+generateMixed(4);
+    var orderNO=year+''+month+''+day+''+order.productID+''+order.typeID+''+generateMixed(4);
 
     var orderID=0;
     var tasks=[
@@ -93,7 +93,7 @@ router.post('/add',function (req,res) {
         },
         function(callback) {
             //新增订单
-            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID,order.remark],function (err,result) {
+            connection.query(sql.add,[order.productID,order.typeID,orderNO,order.price,order.userID,new Date(),order.totalPrice,order.number,order.userWeiXinID,order.remark,order.userWeiXinName],function (err,result) {
                 orderID=result.insertId;
                 console.log("下单");
                 callback(err);
@@ -101,13 +101,6 @@ router.post('/add',function (req,res) {
         },function (callback) {
             //减库存 产品
             connection.query(psql.minuxNumber,[order.number,order.number,order.productID],function (err,result) {
-                callback(err);
-            });
-            console.log("减库存");
-        },
-        function(callback) {
-            //减库存 产品类型
-            connection.query(psql.minuxNumberType,[order.number,order.number,order.typeID],function (err,result) {
                 callback(err);
             });
             console.log("减库存");
@@ -129,6 +122,19 @@ router.post('/add',function (req,res) {
 
     });
 })
+/**
+新下单列表
+**/
+router.get('/queryAllNoPack',function (req,res) {
+    handleDisconnect();
+    connection.query(sql.queryAllNoPack,function (err,rows) {
+        if(err){
+            res.send('获取所有产品信息失败'+ err);
+        }else{
+            res.json(rows);
+        }
+    });
+});
 var chars = ['0','1','2','3','4','5','6','7','8','9'];
 function generateMixed(n) {
      global.res = "";

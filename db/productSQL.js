@@ -10,6 +10,7 @@ var productSQL = {
     queryHouseAll:'select * from WeiWarehouseType',
     minuxNumber:' update WeiProduct set TotalNumber=TotalNumber-?,UsedNumber=UsedNumber+? where ID=? ',
     minuxNumberType:' update WeiProductImageType set TotalNumber=TotalNumber-?,UsedNumber=UsedNumber+? where ID=? ',
+    queryStock:'SELECT TotalNumber-UsedNumber as StockNum from WeiProductImageType where ID=?',
     deleteById:'DELETE FROM person WHERE id = ? ',
     updatePerson:'UPDATE person SET name = ?,age = ?,sex = ?,birth = ? WHERE id = ?',
     getPersonByName:'SELECT * FROM person WHERE name = ? ',
