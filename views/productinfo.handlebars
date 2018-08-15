@@ -1,11 +1,14 @@
 {{#section 'title'}}
 	<title>{{title}}</title>
 {{/section}}
-<div class="container-fiuld" id="productInfo">
-	<div class="text-center" v-for="(item,index) in ImageTypeList" v-model="ImageTypeList">
-	  <img :src="item.url" class="rounded img-fluid">
-	  <div class="h8"></div>
-	</div>	
+<div class="container" id="productInfo">	
+    <div class="card bg-dark text-white" v-for="(item,index) in ImageTypeList" v-model="ImageTypeList">
+      <img class="card-img" :src="item.url" :alt="item.mark">
+      <div class="card-img-overlay">
+        <h5 class="card-title text-white bg-secondary">\{{ProductName}}-\{{item.mark}}</h5>
+        <p class="card-text text-white bg-secondary">价格：￥\{{item.price}} 库存：\{{item.stockNum}} 产品编号：\{{ID}}-\{{item.id}} 描述信息：\{{Remark}}</p>
+      </div>
+    </div>
 	<div class="text-center" v-for="(item,index) in ImageList" v-model="ImageList">
 	  <img :src="item.url" class="rounded img-fluid">
 	  <div class="h8"></div>
@@ -57,7 +60,7 @@ function getProductInfo() {
     		});
     	});
         vm.ImageTypeList=[];
-    	$.each(model.ImageTypeList,function (index,item) {
+    	$.each(model.TypeList,function (index,item) {
     		vm.ImageTypeList.push({
     			id:item.ID,
 		        url:'/'+item.ImgUrl,
@@ -71,6 +74,7 @@ function getProductInfo() {
         vm.Remark=model.Remark;
         vm.ProductName=model.ProductName;
         vm.Width=model.Width;
+        vm.ID=model.ID;
     })
     .catch(function (error) {
         console.log(error);

@@ -122,13 +122,6 @@
                 .then(function (response) {
                     swal.close();
                     toastr.success('数据修改成功了，恭喜亲~', '');
-                    console.log(response.insertID);
-                    $('#userList').DataTable().row.add({
-                    	ID:response.data.insertID,
-						UserName:vm.UserName,
-						WeiXinID:vm.WeiXinID,
-						WeiXinName:vm.WeiXinName
-                    }).draw();
 					$('#userForm')[0].reset();
                     vm.ID=0;
                     vm.WeiXinID='';

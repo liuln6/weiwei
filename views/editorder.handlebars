@@ -1,7 +1,7 @@
 {{#section 'title'}}
 	<title>代客下单</title>
 {{/section}}
-<div class="container-fiuld" id="order">
+<div class="container" id="order">
 	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 		<div class="form-group row">
             <label for="productName" class="col-3 col-form-label text-right">选布</label>
@@ -107,20 +107,31 @@
             	save:function () {
             		var order={
                         productName:vm.productName,
-                        productID:vm.productID,
-                        typeID:vm.typeID,
+                        productID:parseFloat(vm.productID),
+                        typeID:parseFloat(vm.typeID),
                         userWeiXinID:vm.userWeiXinID,
                         userID:vm.userID,
                         userWeiXinName:vm.userWeiXinName,
                         userName:vm.userName,
                         number:parseFloat(vm.number),
-                        price:vm.price,
-                        totalPrice:vm.totalPrice,
+                        price:parseFloat(vm.price),
+                        totalPrice:parseFloat(vm.totalPrice),
                         remark:vm.remark
                     };
                     swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
                     axios.post(controlUrl+'add',order)
                     .then(function (response) {
+						var row={
+                                ID:response.data.orderID,
+                                WeiXinName:vm.userName,
+                                ProductName:vm.productName,
+                                Price:vm.price,
+                                Number:vm.number,
+                                TotalPrice:vm.totalPrice,
+                                Remark:vm.remark
+                            };
+                        $('#orderList').DataTable().row.add(row).draw();
+
                         $('#orderform')[0].reset();
                         swal.close();
                         vm.productName='';
@@ -228,6 +239,10 @@
 		                title:'ID'
 		            },
 		            {
+		                data:'WeiXinName',
+		                title:'微信名'
+		            },
+		            {
 		                data:'ProductName',
 		                title:'名称'
 		            },
@@ -242,6 +257,10 @@
 		            {
 		                data:'TotalPrice',
 		                title:'总价'
+		            },
+		            {
+		                data:'Remark',
+		                title:'备注'
 		            }             
 		        ]
 		    });

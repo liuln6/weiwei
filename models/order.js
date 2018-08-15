@@ -100,10 +100,16 @@ router.post('/add',function (req,res) {
             });
         },function (callback) {
             //减库存 产品
-            connection.query(psql.minuxNumber,[order.number,order.number,order.productID],function (err,result) {
+            connection.query(psql.minuxNumber,[order.number,order.productID],function (err,result) {
                 callback(err);
             });
-            console.log("减库存");
+            console.log("减库存 产品");
+        },function (callback) {
+            //减库存 类型
+            connection.query(psql.minuxNumberType,[order.number,order.typeID],function (err,result) {
+                callback(err);
+            });
+            console.log("减库存 类型");
         },function (callback) {
             //提交事务
             connection.commit(function (err) {
@@ -117,7 +123,7 @@ router.post('/add',function (req,res) {
             connection.rollback();//发生错误时回滚
             res.json({"result": err});
         }else{
-            res.json({"result":"保存成功"});
+            res.json({"result":"保存成功","orderID":orderID});
         }
 
     });
