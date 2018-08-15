@@ -1,7 +1,7 @@
 {{#section 'title'}}
 	<title>代客下单</title>
 {{/section}}
-<div class="container" id="order">
+<div class="container-fluid" id="order">
 	<form id="orderform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
 		<div class="form-group row">
             <label for="productName" class="col-3 col-form-label text-right">选布</label>
@@ -128,7 +128,11 @@
                                 Price:vm.price,
                                 Number:vm.number,
                                 TotalPrice:vm.totalPrice,
-                                Remark:vm.remark
+                                Remark:vm.remark,
+                                UserID:vm.userID,
+                                ProductID:vm.productID,
+                                TypeID:vm.typeID,
+                                TypeName:vm.typeName
                             };
                         $('#orderList').DataTable().row.add(row).draw();
 
@@ -169,7 +173,7 @@
 	            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ProductName'),
 	            queryTokenizer: Bloodhound.tokenizers.whitespace,
 	            // 一次取所有数据
-	            prefetch: '/product/getProductAll',
+	            //prefetch: '/product/getProductAll',
 	            remote:{
 	            	url:'/product/getProductAllByName?q=%QUERY',
 	            	wildcard:'%QUERY'
@@ -243,8 +247,24 @@
 		                title:'微信名'
 		            },
 		            {
+		                data:'UserID',
+		                title:'用户ID'
+		            },
+		            {
 		                data:'ProductName',
 		                title:'名称'
+		            },
+		            {
+		                data:'ProductID',
+		                title:'产品ID'
+		            },
+		            {
+		                data:'TypeName',
+		                title:'颜色'
+		            },
+		            {
+		                data:'TypeID',
+		                title:'颜色ID'
 		            },
 		            {
 		                data:'Price',

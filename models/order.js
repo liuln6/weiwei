@@ -49,6 +49,17 @@ function handleDisconnect() {
         }
     });
 }
+//查询成功后关闭mysql
+function closeMysql(connect){
+    connect.end((err)=>{
+        if(err){
+            console.log(`mysql关闭失败:${err}!`);
+        }else{
+            console.log('mysql关闭成功!');
+        }
+    });
+    // connect.destory();   //end()和destory()都可以关闭数据库
+}
 /**
 订单列表
 **/
@@ -121,8 +132,10 @@ router.post('/add',function (req,res) {
         if(err){
             console.log(err);
             connection.rollback();//发生错误时回滚
+            closeMysql(connection);
             res.json({"result": err});
         }else{
+            closeMysql(connection);
             res.json({"result":"保存成功","orderID":orderID});
         }
 
@@ -134,6 +147,7 @@ router.post('/add',function (req,res) {
 router.get('/queryAllNoPack',function (req,res) {
     handleDisconnect();
     connection.query(sql.queryAllNoPack,function (err,rows) {
+        closeMysql(connection);
         if(err){
             res.send('获取所有产品信息失败'+ err);
         }else{

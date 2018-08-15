@@ -1,7 +1,7 @@
 {{#section 'title'}}
 	<title>{{title}}</title>
 {{/section}}
-<div class="container" id="productInfo">	
+<div class="container-fluid" id="productInfo">	
     <div class="card bg-dark text-white" v-for="(item,index) in ImageTypeList" v-model="ImageTypeList">
       <img class="card-img" :src="item.url" :alt="item.mark">
       <div class="card-img-overlay">

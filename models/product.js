@@ -48,6 +48,19 @@ function handleDisconnect() {
         }
     });
 }
+
+//查询成功后关闭mysql
+function closeMysql(connect){
+    connect.end((err)=>{
+        if(err){
+            console.log(`mysql关闭失败:${err}!`);
+        }else{
+            console.log('mysql关闭成功!');
+        }
+    });
+    // connect.destory();   //end()和destory()都可以关闭数据库
+}
+
 /**
 库存查询列表
 **/
@@ -55,6 +68,7 @@ router.get('/',function (req,res,next) {
 	handleDisconnect();
 	connection.query(sql.queryAll,function (err,rows) {
 		console.log(rows);
+		closeMysql(connection);
 		if(err){
 			res.render('product',{title:'入库',datas:[]});
 		}else{
@@ -65,6 +79,7 @@ router.get('/',function (req,res,next) {
 router.get('/getwarehouselist',function (req,res) {
 	handleDisconnect();
 	connection.query(sql.queryHouseAll,function (err,rows) {
+		closeMysql(connection);
 		if(err){
 			res.send('获取仓库数据失败'+err);
 		}
@@ -88,6 +103,7 @@ router.post('/info',function (req,res,next) {
 	handleDisconnect();
 	var product={};
 	connection.query(sql.queryProductByID,[productID,productID,productID],function (err,result) {
+		closeMysql(connection);
 		if(err){
 			res.send('获取所有产品信息失败'+ err);
 		}else{
@@ -110,6 +126,7 @@ router.post('/info',function (req,res,next) {
 router.get('/getProductAll',function (req,res) {
 	handleDisconnect();
 	connection.query(sql.queryPouductAllForSelect,function (err,rows) {
+		closeMysql(connection);
 		if(err){
 			res.send('获取所有产品信息失败'+ err);
 		}else{
@@ -122,6 +139,7 @@ router.get('/getProductAllByName',function (req,res) {
 	console.log(name)
 	handleDisconnect();
 	connection.query(sql.queryPouductAllByName,['%'+name+'%'],function (err,rows) {
+		closeMysql(connection);
 		if(err){
 			res.send('获取所有产品信息失败'+ err);
 		}else{
@@ -135,6 +153,7 @@ router.get('/getProductAllByName',function (req,res) {
 router.get('/getProductAllList',function (req,res) {
 	handleDisconnect();
 	connection.query(sql.queryProductAll,function (err,rows) {
+		closeMysql(connection);
 		if(err){
 			res.send('获取所有产品信息失败'+ err);
 		}else{
@@ -216,11 +235,14 @@ router.post('/add',function (req,res) {
 		}
 	];
 	async.series(tasks,function (err,results) {
+
 		if(err){
 			console.log(err);
 			connection.rollback();//发生错误时回滚
+			closeMysql(connection);
 			res.json({"result": err});
 		}else{
+			closeMysql(connection);
 			res.json({"result":"保存成功","productID":postID});
 		}
 
@@ -298,6 +320,7 @@ router.use('/upload',function (req,res) {
         		}
         	});
         },function (err) {
+        	closeMysql(connection);
         	if(err){
         		console.log(err); 
         		res.render(err);

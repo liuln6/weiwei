@@ -3,8 +3,8 @@
 <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload-ui-noscript.min.css" rel="stylesheet">
 <link href="https://cdn.bootcss.com/blueimp-file-upload/9.21.0/css/jquery.fileupload.min.css" rel="stylesheet">
 {{/section}}
-<div class="container" id="AddWare">
-    <form id="productform" class="needs-validation" @submit.prevent="validateBeforeSubmit">
+<div class="container-fluid" id="AddWare">
+    <form id="productform" class="needs-validation p18" @submit.prevent="validateBeforeSubmit">
         <div class="row text-center">
            <span class="btn imageAdd fileinput-button col align-self-center">
                 <span class="fa-stack fa-3x">
@@ -178,7 +178,9 @@
                                 PID:response.data.productID,
                                 ProductName:product.ProductName,
                                 TypeName:item.mark,
-                                StockNumber:item.totalNum
+                                StockNumber:item.totalNum,
+                                TypeID:0,
+                                Price:item.price
                             });
                         });
                         $('#productList').DataTable().rows.add(rows).draw();
@@ -237,6 +239,10 @@ $(function () {
             {
                 data:'TypeName',
                 title:'标识'
+            },
+            {
+                data:'TypeID',
+                title:'标识ID'
             },
             {
                 data:'StockNumber',

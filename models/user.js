@@ -48,6 +48,17 @@ function handleDisconnect() {
         }
     });
 }
+//查询成功后关闭mysql
+function closeMysql(connect){
+    connect.end((err)=>{
+        if(err){
+            console.log(`mysql关闭失败:${err}!`);
+        }else{
+            console.log('mysql关闭成功!');
+        }
+    });
+    // connect.destory();   //end()和destory()都可以关闭数据库
+}
 /**
 用户列表
 **/
@@ -61,6 +72,7 @@ router.get('/',function (req,res,next) {
 router.get('/getAllUser',function (req,res) {
     handleDisconnect();
     connection.query(sql.queryAll,function (err,rows) {
+        closeMysql(connection);
         if(err){
             res.send('获取所有用户信息失败'+ err);
         }else{
@@ -72,6 +84,7 @@ router.get('/getAllUserByName',function (req,res) {
     var name=req.query.q;
     handleDisconnect();
     connection.query(sql.queryAllByName,['%'+name+'%'],function (err,rows) {
+        closeMysql(connection);
         if(err){
             res.send('获取所有用户信息失败'+ err);
         }else{
@@ -121,8 +134,10 @@ router.post('/add',function (req,res) {
         if(err){
             console.log(err);
             connection.rollback();//发生错误时回滚
+            closeMysql(connection);
             res.json({"result": err});
         }else{
+            closeMysql(connection);
             res.json({"result":"保存成功","insertID":insertID});
         }
 
@@ -176,8 +191,10 @@ router.post('/edit',function (req,res) {
         if(err){
             console.log(err);
             connection.rollback();//发生错误时回滚
+            closeMysql(connection);
             res.json({"result": err});
         }else{
+            closeMysql(connection);
             res.json({"result":"保存成功"});
         }
 
@@ -195,6 +212,7 @@ router.get('/getUser',function (req,res) {
     };
     handleDisconnect();
     connection.query(sql.queryByID,[id,id],function (err,result) {
+        closeMysql(connection);
         var row = JSON.stringify(result[0]);//把results对象转为字符串，去掉RowDataPacket//'[{"count":"1","type":"RangeError"},{"count":"3","type":"ReferenceError"}]'
         var row1 = JSON.stringify(result[1]);//把results对象转为字符串，去掉RowDataPacket
         row= JSON.parse(row);//把results字符串转为json对象
