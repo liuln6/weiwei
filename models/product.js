@@ -187,7 +187,7 @@ router.get('/packinfo',function (req,res) {
 			var resultType = JSON.stringify(result[0]);
 	        var resultOrder=JSON.stringify(result[1]);
 	        resultType= JSON.parse(resultType);//把results字符串转为json对象
-	        resultOrder=JSON.parse(resultOrder);
+	        //resultOrder=JSON.parse(resultOrder);
 			typeInfo=resultType[0];
 			console.log(typeInfo);
 			console.log(resultOrder);
