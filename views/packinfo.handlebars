@@ -27,12 +27,13 @@
 {{#section 'jquery'}}
 	<script type="text/javascript">
 	var vm=new Vue({
-    	el:"#userContainer",
+    	el:"#orderList",
     	data:{
     		ProductName:'',
     		ProductID:'',
     		TypeID:{{id}},
     		TypeName:'',
+    		TotalNumber:0,
     		OrderList:[{
     			ID: 73,
 		        ProductID: 46,
@@ -72,32 +73,16 @@
 		axios.post('/product/packinfo',{ID:ID})
 	    .then(function (response) {
 	    	var model=response.data.model;
-	    	vm.ImageList=[];
-	    	$.each(model.ImageList,function (index,item) {
-	    		vm.ImageList.push({
-	    			id:item.ID,
-			        url:'/'+item.ImgUrl,
-			        price:0,
-			        stockNum:0,
-			        mark:''
-	    		});
-	    	});
-	        vm.ImageTypeList=[];
-	    	$.each(model.TypeList,function (index,item) {
-	    		vm.ImageTypeList.push({
-	    			id:item.ID,
-			        url:'/'+item.ImgUrl,
-			        price:item.Price,
-			        stockNum:item.TotalNumber-item.UsedNumber,
-			        mark:item.Remark
-	    		});
-	    	});
-	        vm.WID=model.WID;
-	        vm.ProductNo=model.ProductNo;
-	        vm.Remark=model.Remark;
+	    	
+	        vm.TypeID=model.ID;
+	        vm.Price=model.Price;
+	        vm.ProductID=model.ProductID;
 	        vm.ProductName=model.ProductName;
-	        vm.Width=model.Width;
-	        vm.ID=model.ID;
+	        vm.TypeName=model.Remark;
+	        vm.TotalNumber=model.TotalNumber;
+	        $.each(model.OrderList,function (index,item) {
+	        	vm.OrderList.push(item);
+	        });
 	    })
 	    .catch(function (error) {
 	        console.log(error);
