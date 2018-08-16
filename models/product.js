@@ -173,7 +173,7 @@ router.get('/queryProductTypeListForPack',function (req,res) {
 	});
 })
 router.get('/packinfo',function (req,res) {
-	var typeID=req.body.ID;
+	var typeID=req.query.ID;
 	console.log(typeID);
 	handleDisconnect();
 	var orderList=[];
