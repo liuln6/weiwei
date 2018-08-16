@@ -2,7 +2,7 @@
 	<title>打包信息</title>
 {{/section}}
 <div class="container-fluid" id="orderList">
-	<div class="text-center"><h3>{{ProductName}}-{{Typename}}</h3></div>
+	<div class="text-center"><h3>\{{ProductName}}-\{{Typename}}</h3></div>
 	<table class="table">
 	  <thead>
 	    <tr>
@@ -33,7 +33,27 @@
     		ProductID:{{model.ProductID}},
     		TypeID:{{model.ID}},
     		TypeName:'{{model.Remark}}',
-    		OrderList:{{model.OrderList}}
+    		OrderList:[{
+    			ID: 73,
+		        ProductID: 46,
+		       OrderNO: '20188246',
+		       Price: 30,
+		       UserID: 72,
+		       IsBalance: 0,
+		       InputTime: '2018-08-14T13:54:41.629Z',
+		       TotalPrice: 60,
+		       Number: 2,
+		       IsPack: 0,
+		       IsPost: 0,
+		       PostCode: '',
+		       BalanceTime: null,
+		       PackTime: null,
+		       PostTime: null,
+		       UserWeiXinID: 'weixinID',
+		       TypeID: 23,
+		       Remark: '',
+		       WeiXinName: 'Fiona Miss'
+    		}]
     	},
     	methods:{
     		validateBeforeSubmit:function () {
@@ -45,7 +65,10 @@
     	}
     });
 	$(function () {
-		
+		var orderList={{model.OrderList}};
+		$.each(orderList,function (index,item) {
+			console.info(item);
+		})
 	});
 	</script>
 {{/section}}
