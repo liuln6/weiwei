@@ -172,7 +172,12 @@ router.get('/queryProductTypeListForPack',function (req,res) {
 		}
 	});
 })
-router.get('/packinfo',function (req,res) {
+router.get('/packinfo',function (req,res,next) {
+	var ID=req.query.ID;
+	res.render('packinfo',{title:'打包【'+ID+'】',id:ID});
+
+});
+router.post('/packinfo',function (req,res) {
 	var typeID=req.query.ID;
 	console.log(typeID);
 	handleDisconnect();
@@ -187,14 +192,14 @@ router.get('/packinfo',function (req,res) {
 			var resultType = JSON.stringify(result[0]);
 	        var resultOrder=JSON.stringify(result[1]);
 	        resultType= JSON.parse(resultType);//把results字符串转为json对象
-	        //resultOrder=JSON.parse(resultOrder);
+	        resultOrder=JSON.parse(resultOrder);
 			typeInfo=resultType[0];
 			console.log(typeInfo);
 			console.log(resultOrder);
-			//typeInfo.OrderList=resultOrder;
+			typeInfo.OrderList=resultOrder;
 			console.log(typeInfo);
-			//res.json({"result":"true","model":typeInfo});
-			res.render('packinfo',{model:typeInfo,orderList:resultOrder});
+			res.json({"result":"true","model":typeInfo});
+			//res.render('packinfo',{model:typeInfo,orderList:resultOrder});
 		}
 	});
 })
