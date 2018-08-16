@@ -1,20 +1,39 @@
 {{#section 'title'}}
-	<title>用户管理</title>
+	<title>打包信息</title>
 {{/section}}
 <div class="container-fluid" id="orderList">
-	<h3>\{{ProductName}}</h3>
-	<table id="orderList" class="table table-striped table-bordered table-sm" style="width:100%">
-    </table>
+	<div class="text-center"><h3>{{ProductName}}-{{Typename}}</h3></div>
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">用户</th>
+	      <th scope="col">单价</th>
+	      <th scope="col">数量</th>
+	      <th scope="col">总价</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
+	      <th scope="row">\{{item.ID}}</th>
+	      <td>\{{item.UserID}}-\{{item.UserName}}</td>
+	      <td>\{{item.Price}}</td>
+	      <td>\{{item.Number}}</td>
+	      <td>\{{item.TotalPrice}}</td>
+	    </tr>
+	  </tbody>
+	</table>
 </div>
 {{#section 'jquery'}}
 	<script type="text/javascript">
 	var vm=new Vue({
     	el:"#userContainer",
     	data:{
-    		ProductName:'',
-    		ProductID:0,
-    		TypeID:0,
-    		TypeName:''
+    		ProductName:{{model.ProductName}},
+    		ProductID:{{model.ProductID}},
+    		TypeID:{{model.TypeID}},
+    		TypeName:{{model.Remark}},
+    		OrderList:{{model.OrderList}}
     	},
     	methods:{
     		validateBeforeSubmit:function () {
@@ -26,46 +45,7 @@
     	}
     });
 	$(function () {
-		$('#orderList').DataTable({
-			language: {
-		        url: '/script/Chinese.json'
-		    },
-		    lengthMenu: [[25, 50, -1], [25, 50, "All"]],
-		    ajax:{
-		    	url:'/product/queryProductTypeListForPack' ,
-		    	"dataSrc": ""
-		    },
-		    columns:[
-		    	{
-                data:'ProductID',
-                title:'产品ID'
-	            },
-	            {
-	                data:'ProductName',
-	                title:'名称',
-	                render:function (data,type,row) {
-	                        return '<a class="btn btn-link" href="/product/packinfo?ID='+row.TypeID+'" role="button">'+row.ProductName+'</a>';
-	                    }
-	            },
-	            {
-	                data:'TypeName',
-	                title:'标识'
-	            },
-	            {
-	                data:'TypeID',
-	                title:'标识ID',
-	                visible:false
-	            },
-	            {
-	                data:'Total',
-	                title:'订单数'
-	            },
-	            {
-	                data:'TotalNumber',
-	                title:'米数'
-	            }   
-		    ]
-		});
+		
 	});
 	</script>
 {{/section}}

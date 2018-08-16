@@ -172,6 +172,28 @@ router.get('/queryProductTypeListForPack',function (req,res) {
 		}
 	});
 })
+router.get('/packinfo',function (req,res) {
+	var typeID=req.body.ID;
+	console.log(typeID);
+	handleDisconnect();
+	var orderList=[];
+	var typeInfo={};
+	connection.query(sql.queryTypeInfo,[typeID,typeID],function (err,result) {
+		closeMysql(connection);
+		if(err){
+			res.send('获取打包信息失败'+ err);
+		}else{
+			var result = JSON.stringify(result[0]);
+	        var resultOrder=JSON.stringify(result[1]);
+	        result= JSON.parse(result);//把results字符串转为json对象
+	        resultOrder=JSON.parse(resultOrder);
+			typeInfo=result[0];
+			typeInfo.OrderList=resultOrder;
+			res.json({"result":"true","model":typeInfo});
+			res.render('packinfo',{model:typeInfo});
+		}
+	});
+})
 /**
 入库
 **/
