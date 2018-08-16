@@ -178,7 +178,7 @@ router.get('/packinfo',function (req,res,next) {
 
 });
 router.post('/packinfo',function (req,res) {
-	var typeID=req.query.ID;
+	var typeID=req.body.ID;
 	console.log(typeID);
 	handleDisconnect();
 	var orderList=[];
