@@ -161,6 +161,17 @@ router.get('/getProductAllList',function (req,res) {
 		}
 	});
 });
+router.get('/queryProductTypeListForPack',function (req,res) {
+	handleDisconnect();
+	connection.query(sql.queryProductTypeListForPack,function (err,rows) {
+		closeMysql(connection);
+		if(err){
+			res.send('获取所有产品信息失败'+ err);
+		}else{
+			res.json(rows);
+		}
+	});
+})
 /**
 入库
 **/

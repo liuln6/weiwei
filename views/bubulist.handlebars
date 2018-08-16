@@ -1,1 +1,52 @@
-列表
+{{#section 'title'}}
+	<title>用户管理</title>
+{{/section}}
+<div class="container-fluid">
+	<table id="userList" class="table table-striped table-bordered table-sm" style="width:100%">
+    </table>
+</div>
+{{#section 'jquery'}}
+	<script type="text/javascript">
+	$(function () {
+		$('#userList').DataTable({
+			language: {
+		        url: '/script/Chinese.json'
+		    },
+		    ajax:{
+		    	url:'/product/queryProductTypeListForPack' ,
+		    	"dataSrc": ""
+		    },
+		    columns:[
+		    	{
+                data:'ProductID',
+                title:'产品ID'
+	            },
+	            {
+	                data:'ProductName',
+	                title:'名称',
+	                render:function (data,type,row) {
+	                        return '<a class="btn btn-link" href="/product/packinfo?ID='+row.TypeID+'" role="button">'+row.ProductName+'</a>';
+	                    }
+	            },
+	            {
+	                data:'TypeName',
+	                title:'标识'
+	            },
+	            {
+	                data:'TypeID',
+	                title:'标识ID',
+	                visible:false
+	            },
+	            {
+	                data:'Total',
+	                title:'订单数'
+	            },
+	            {
+	                data:'TotalNumber',
+	                title:'米数'
+	            }   
+		    ]
+		});
+	});
+	</script>
+{{/section}}
