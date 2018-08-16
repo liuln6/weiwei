@@ -191,7 +191,8 @@ router.get('/packinfo',function (req,res) {
 			typeInfo=result[0];
 			console.log(typeInfo);
 			console.log(resultOrder);
-			typeInfo.OrderList=resultOrder;
+			typeInfo.OrderList=[];
+			typeInfo.orderList.push(resultOrder);
 			console.log(typeInfo);
 			//res.json({"result":"true","model":typeInfo});
 			res.render('packinfo',{model:typeInfo});
