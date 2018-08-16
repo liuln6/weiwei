@@ -15,7 +15,7 @@ var productSQL = {
     deleteById:'DELETE FROM person WHERE id = ? ',
     updatePerson:'UPDATE person SET name = ?,age = ?,sex = ?,birth = ? WHERE id = ?',
     getPersonByName:'SELECT * FROM person WHERE name = ? ',
-    queryProductTypeListForPack:'select wo.*,wp.`ProductName`,wpt.`Remark` TypeName from (select `ProductID`,`TypeID`,count(1) Total,sum(`Number`) TotalNumber from `WeiOrder` where `IsPack`=0 group by `ProductID`,`TypeID` ) wo left join `WeiProduct` wp on wo.`ProductID`=wp.`ID`  left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.`ID` '，
+    queryProductTypeListForPack:'select wo.*,wp.`ProductName`,wpt.`Remark` TypeName from (select `ProductID`,`TypeID`,count(1) Total,sum(`Number`) TotalNumber from `WeiOrder` where `IsPack`=0 group by `ProductID`,`TypeID` ) wo left join `WeiProduct` wp on wo.`ProductID`=wp.`ID`  left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.`ID` ',
     queryTypeInfo:'select wpt.*,wp.`ProductName` from `WeiProductImageType` wpt left join `WeiProduct` wp on wpt.`ProductID`=wp.`ID` where wpt.ID=?;select * from `WeiOrder` where `TypeID`=?'
 };
 module.exports = productSQL;
