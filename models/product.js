@@ -183,6 +183,7 @@ router.get('/packinfo',function (req,res) {
 		if(err){
 			res.send('获取打包信息失败'+ err);
 		}else{
+			console.log(result);
 			var result = JSON.stringify(result[0]);
 	        var resultOrder=JSON.stringify(result[1]);
 	        result= JSON.parse(result);//把results字符串转为json对象
