@@ -192,7 +192,8 @@ router.get('/packinfo',function (req,res) {
 			console.log(typeInfo);
 			console.log(resultOrder);
 			typeInfo.OrderList=resultOrder;
-			res.json({"result":"true","model":typeInfo});
+			console.log(typeInfo);
+			//res.json({"result":"true","model":typeInfo});
 			res.render('packinfo',{model:typeInfo});
 		}
 	});
