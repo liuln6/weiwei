@@ -65,7 +65,7 @@
     	}
     });
 	$(function () {
-		var orderList={{orderList}};
+		var orderList=JSON.parse({{orderList}});
 		$.each(orderList,function (index,item) {
 			console.info(item);
 		})
