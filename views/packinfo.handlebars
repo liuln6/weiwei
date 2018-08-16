@@ -69,7 +69,7 @@
 	});
 	function getProductInfo() {
 		var ID={{id}};
-		axios.post('/product/packinfo',{ID:productID})
+		axios.post('/product/packinfo',{ID:ID})
 	    .then(function (response) {
 	    	var model=response.data.model;
 	    	vm.ImageList=[];
