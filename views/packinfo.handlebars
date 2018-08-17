@@ -80,7 +80,8 @@
     			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
     			axios.post('/order/delOrder',{ID:parseInt(obj.ID),TypeID:parseInt(vm.TypeID)})
                     .then(function (response) {
-						vm.OrderList.splice(obj,1);
+                    	var index=vm.OrderList.indexOf(obj);
+						vm.OrderList.splice(index,1);
                         swal.close();
                         
                         toastr.success('订单删除成功了，恭喜亲~', '')
