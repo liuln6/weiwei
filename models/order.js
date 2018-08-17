@@ -155,6 +155,52 @@ router.get('/queryAllNoPack',function (req,res) {
         }
     });
 });
+//删除订单
+router.post('delOrder',function (req,res) {
+    var ID=req.body.ID;
+    var TypeID=req.body.TypeID;
+    handleDisconnect();
+    
+    var tasks=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function (callback) {
+            //还库存
+            connection.query(sql.rebackStock,[ID,TypeID],function (err,result) {
+                console.log("还库存");
+                callback(err);
+            });
+        },
+        function (callback) {
+            //删除订单
+            connection.query(sql.delOrder,[ID],function (err,result) {
+                console.log("删除订单"+ID);
+                callback(err);
+            });
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            closeMysql(connection);
+            res.json({"result": err});
+        }else{
+            closeMysql(connection);
+            res.json({"result":"删除成功","orderID":ID});
+        }
+
+    });
+});
 var chars = ['0','1','2','3','4','5','6','7','8','9'];
 function generateMixed(n) {
      global.res = "";

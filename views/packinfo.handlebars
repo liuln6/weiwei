@@ -11,15 +11,27 @@
 	      <th scope="col">单价</th>
 	      <th scope="col">数量</th>
 	      <th scope="col">总价</th>
+	      <th scope="col">操作</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
 	      <th scope="row">\{{item.ID}}</th>
 	      <td>\{{item.UserID}}-\{{item.WeiXinName}}</td>
-	      <td>\{{item.Price}}</td>
-	      <td>\{{item.Number}}</td>
-	      <td>\{{item.TotalPrice}}</td>
+	      <td>
+	      	\{{item.Price}}
+	      </td>
+	      <td>
+	      	<div class="detail">\{{item.Number}}</div>
+	      
+	      </td>
+	      <td>
+	      \{{item.TotalPrice}}
+	      </td>
+	      <td>
+	      	<!--<button type="button" class="btn btn-sm btn-danger">调整</button>-->
+	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder('{{item.ID}}')">删除</button>
+	      </td>
 	    </tr>
 	  </tbody>
 	</table>
@@ -62,7 +74,22 @@
                     
                   });
             }
-    		
+    		,delOrder:function (ID) {
+    			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+    			axios.post('/order/delOrder',{ID:parseInt(ID),TypeID:parseInt(vm.TypeID)})
+                    .then(function (response) {
+						
+                        swal.close();
+                        
+                        toastr.success('订单删除成功了，恭喜亲~', '')
+                    })
+                    .catch(function (error) {
+                        swal.close();
+                        console.log(error);
+                        toastr.error('下单失败了，亲稍等，截图联系管理员~', '')
+
+                    }); 
+    		}
     	}
     });
 	$(function () {
@@ -80,6 +107,7 @@
 	        vm.ProductName=model.ProductName;
 	        vm.TypeName=model.Remark;
 	        vm.TotalNumber=model.TotalNumber;
+	        vm.OrderList=[];
 	        $.each(model.OrderList,function (index,item) {
 	        	vm.OrderList.push(item);
 	        });
