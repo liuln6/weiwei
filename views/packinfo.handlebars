@@ -11,6 +11,7 @@
 	      <th scope="col">单价</th>
 	      <th scope="col">数量</th>
 	      <th scope="col">总价</th>
+	      <th scope="col">备注</th>
 	      <th scope="col">操作</th>
 	    </tr>
 	  </thead>
@@ -28,9 +29,10 @@
 	      <td>
 	      \{{item.TotalPrice}}
 	      </td>
+	      <td>\{{item.Remark}}</td>
 	      <td>
 	      	<!--<button type="button" class="btn btn-sm btn-danger">调整</button>-->
-	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder('\{{item.ID}}')">删除</button>
+	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item.ID)">删除</button>
 	      </td>
 	    </tr>
 	  </tbody>
