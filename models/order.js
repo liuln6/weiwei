@@ -156,7 +156,7 @@ router.get('/queryAllNoPack',function (req,res) {
     });
 });
 //删除订单
-router.post('delOrder',function (req,res) {
+router.post('/delOrder',function (req,res) {
     var ID=req.body.ID;
     var TypeID=req.body.TypeID;
     handleDisconnect();
