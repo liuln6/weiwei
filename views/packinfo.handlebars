@@ -32,7 +32,7 @@
 	      <td>\{{item.Remark}}</td>
 	      <td>
 	      	<!--<button type="button" class="btn btn-sm btn-danger">调整</button>-->
-	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item.ID)">删除</button>
+	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
 	      </td>
 	    </tr>
 	  </tbody>
@@ -76,11 +76,11 @@
                     
                   });
             }
-    		,delOrder:function (ID) {
+    		,delOrder:function (obj) {
     			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
-    			axios.post('/order/delOrder',{ID:parseInt(ID),TypeID:parseInt(vm.TypeID)})
+    			axios.post('/order/delOrder',{ID:parseInt(obj.ID),TypeID:parseInt(vm.TypeID)})
                     .then(function (response) {
-						
+						vm.OrderList.splice(obj,1);
                         swal.close();
                         
                         toastr.success('订单删除成功了，恭喜亲~', '')
