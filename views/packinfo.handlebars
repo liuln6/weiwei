@@ -24,7 +24,7 @@
 	      	\{{item.Price}}
 	      </td>
 	      <td>
-	      	<div class="edit" v-if="item.edit" style="width:80px;">
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
 	      		<input type="text" v-model="item.newNumber" class="form-control" :name="'number_'+item.ID">
 	      	</div>
 	      	<div class="detail" v-if="!item.editFlag">\{{item.newNumber}}</div>
