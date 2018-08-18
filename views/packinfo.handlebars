@@ -98,7 +98,7 @@
             	vm.OrderList[index].editFlag=!vm.OrderList[index].editFlag;
             }
             ,edit:function (obj) {
-            	var vr= validator.validateAll({
+            	var vr= this.$validator.validateAll({
 				    decimal: obj.Number,
 				    decimal: obj.TotalPrice
 				}).then((result)=>{
