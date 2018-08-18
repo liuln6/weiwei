@@ -70,7 +70,7 @@ router.post('/eidtorder',function (req,res,next) {
     var order={
         ID:req.body.ID,
         Number:req.body.newNumber,
-        diffNumber:req.body.diffNumber;
+        diffNumber:req.body.diffNumber,
         Total:req.body.Total,
         Remark:req.body.Remark,
         TypeID:req.body.TypeID
