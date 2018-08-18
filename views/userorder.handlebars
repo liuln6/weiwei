@@ -1,0 +1,48 @@
+{{#section 'title'}}
+	<title>用户管理</title>
+{{/section}}
+<div class="container-fluid">
+	<table id="userList" class="table table-striped table-bordered table-sm" style="width:100%">
+    </table>
+</div>
+{{#section 'jquery'}}
+	<script type="text/javascript">
+	$(function () {
+		$('#userList').DataTable({
+			language: {
+		        url: '/script/Chinese.json'
+		    },
+		    lengthMenu: [[25, 50, -1], [25, 50, "All"]],
+		    ajax:{
+		    	url:'/order/queryOrderUserList' ,
+		    	"dataSrc": ""
+		    },
+		    columns:[
+		    	{
+                data:'UserID',
+                title:'用户ID'
+	            },
+	            {
+	                data:'WeiXinName',
+	                title:'昵称',
+	                render:function (data,type,row) {
+	                        return '<a class="btn btn-link" href="/order/userorderlist?ID='+row.UserID+'" role="button">'+row.WeiXinName+'</a>';
+	                    }
+	            },
+	            {
+	                data:'Total',
+	                title:'订单数'
+	            },
+	            {
+	                data:'TotalNumber',
+	                title:'总米数'
+	            },
+	            {
+	                data:'TotalPrice',
+	                title:'总价格'
+	            }  
+		    ]
+		});
+	});
+	</script>
+{{/section}}

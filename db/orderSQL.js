@@ -4,6 +4,7 @@ var orderSQL={
 	delOrder:'delete from `WeiOrder` where ID=?',
 	rebackStock:'update `WeiProductImageType` set `UsedNumber`=`UsedNumber`-(select `Number` from `WeiOrder` where `ID`=?) where `ID`=?',
 	editStock:'update `WeiProductImageType` set `UsedNumber`=`UsedNumber` +? where `ID`=?',
-	editOrder:'update WeiOrder set Number=?,TotalPrice=?,Remark=? where ID=?'
+	editOrder:'update WeiOrder set Number=?,TotalPrice=?,Remark=? where ID=?',
+	queryOrderUserList:'select od.*,wu.`UserName`,wu.`WeiXinName` from ( select `UserID`,count(1) Total,sum(`Number`) TotalNumber ,sum(`TotalPrice`) TotalPrice from `WeiOrder` where `IsPack`=0 group by `UserID`) od left join `WeiUsers` wu on od.`UserID`=wu.`ID`'
 };
 module.exports = orderSQL;
