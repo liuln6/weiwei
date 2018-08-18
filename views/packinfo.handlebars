@@ -30,24 +30,24 @@
 	      	</div>
 	      </td>
 	      <td>
-		    <div class="detail" v-if="!item.edit">
+		    <div class="detail" v-if="!item.editFlag">
 		      \{{item.TotalPrice}}
 		    </div>
-	      	<div class="edit" v-if="item.edit" style="width:80px;">
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
 	      		<input type="text" v-model="item.TotalPrice" class="form-control" :name="TotalPrice_item.ID">
 	      	</div>
 	      </td>
 	      <td>
-	      	<div class="detail" v-if="!item.edit">
+	      	<div class="detail" v-if="!item.editFlag">
 		      \{{item.Remark}}
 		    </div>
-	      	<div class="edit" v-if="item.edit" style="width:80px;">
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
 	      		<input type="text" v-model="item.Remark" class="form-control" :name="Remark_item.ID">
 	      	</div>
 	      </td>
 	      <td>
-	      	<button type="button" v-if="!item.edit" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
-	      	<button type="button" v-if="item.edit" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
+	      	<button type="button" v-if="!item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
+	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
 	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
 	      </td>
 	    </tr>
@@ -87,14 +87,14 @@
 		       TypeID: 23,
 		       Remark: '',
 		       WeiXinName: 'Fiona Miss',
-		       edit:false,
+		       editFlag:false,
 		       newNumber:0
     		}]
     	},
     	methods:{
             editor:function (obj) {
             	var index=vm.OrderList.indexOf(obj);
-            	vm.OrderList[index].edit=!vm.OrderList[index].edit;
+            	vm.OrderList[index].editFlag=!vm.OrderList[index].editFlag;
             }
             ,edit:function (obj) {
             	var vr= validator.validateAll({
