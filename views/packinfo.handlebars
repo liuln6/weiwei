@@ -112,7 +112,7 @@
 						axios.post('/order/eidtorder',{
 							ID:parseInt(obj.ID),
 							Number:parseFloat(obj.newNumber),
-							diffNumber:parseFloat(obj.Number)-parseFloat(obj.newNumber);
+							diffNumber:parseFloat(obj.Number)-parseFloat(obj.newNumber),
 							Total:obj.Total,
 							Remark:obj.Remark,
 							TypeID:vm.TypeID
