@@ -66,7 +66,56 @@ function closeMysql(connect){
 router.get('/',function (req,res,next) {
 	res.render('order',{title:'下单',datas:[]});
 });
+router.post('/eidtorder',function (req,res,next) {
+    var order={
+        ID:req.body.ID,
+        Number:req.body.newNumber,
+        diffNumber:req.body.diffNumber;
+        Total:req.body.Total,
+        Remark:req.body.Remark,
+        TypeID:req.body.TypeID
+    };
+    handleDisconnect();
+    var tasks=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function (callback) {
+            //还库存
+            connection.query(sql.editStock,[order.diffNumber,TypeID],function (err,result) {
+                console.log("还库存");
+                callback(err);
+            });
+        },
+        function (callback) {
+            //修改订单
+            connection.query(sql.editOrder,[order.Number,order.TotalPrice,order.Remark,order.ID],function (err,result) {
+                console.log("修改成功"+ID);
+                callback(err);
+            });
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            closeMysql(connection);
+            res.json({"result": err});
+        }else{
+            closeMysql(connection);
+            res.json({"result":"修改成功","orderID":ID});
+        }
 
+    });
+});
 /**
 下单页面
 **/
