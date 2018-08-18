@@ -93,7 +93,7 @@ router.post('/eidtorder',function (req,res,next) {
         function (callback) {
             //修改订单
             connection.query(sql.editOrder,[order.Number,order.TotalPrice,order.Remark,order.ID],function (err,result) {
-                console.log("修改成功"+ID);
+                console.log("修改成功"+order.ID);
                 callback(err);
             });
         },function (callback) {
