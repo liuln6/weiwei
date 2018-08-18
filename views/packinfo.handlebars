@@ -27,7 +27,7 @@
 	      	<div class="edit" v-if="item.edit" style="width:80px;">
 	      		<input type="text" v-model="item.newNumber" class="form-control" :name="'number_'+item.ID">
 	      	</div>
-	      	<div class="detail" v-else>\{{item.newNumber}}</div>
+	      	<div class="detail" v-if="!item.editFlag">\{{item.newNumber}}</div>
 
 	      </td>
 	      <td>
@@ -42,7 +42,7 @@
 	      	<div class="detail" v-if="!item.editFlag">
 		      \{{item.Remark}}
 		    </div>
-	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
+	      	<div class="edit" v-if="item.editFlag" style="width:200px;">
 	      		<input type="text" v-model="item.Remark" class="form-control" :name="'Remark_'+item.ID">
 	      	</div>
 	      </td>
