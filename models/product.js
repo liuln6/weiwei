@@ -227,9 +227,8 @@ router.post('/userproductinfo',function (req,res) {
 			console.log(resultOrder);
 			userInfo.OrderList=resultOrder;
 			userInfo.AddressList=resultAddress;
-			console.log(typeInfo);
+			console.log(userInfo);
 			res.json({"result":"true","model":userInfo});
-			//res.render('packinfo',{model:typeInfo,orderList:resultOrder});
 		}
 	});
 })
