@@ -17,6 +17,6 @@ var productSQL = {
     getPersonByName:'SELECT * FROM person WHERE name = ? ',
     queryProductTypeListForPack:'select wo.*,wp.`ProductName`,wpt.`Remark` TypeName from (select `ProductID`,`TypeID`,count(1) Total,sum(`Number`) TotalNumber from `WeiOrder` where `IsPack`=0 group by `ProductID`,`TypeID` ) wo left join `WeiProduct` wp on wo.`ProductID`=wp.`ID`  left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.`ID` ',
     queryTypeInfo:'select wpt.*,wp.`ProductName` from `WeiProductImageType` wpt left join `WeiProduct` wp on wpt.`ProductID`=wp.`ID` where wpt.ID=?;select * from `WeiOrder` where `TypeID`=?',
-    queryUserOrderInfo:'select ID,WeiXinID,WeiXinName,`UserName` from `WeiUsers` where ID=?; select ID,Address,Name,Phone,ZipCode from `WeiUsersAddress` where `UserID`=5; select wo.*,wp.`ProductName`,wpt.`Remark` from `WeiOrder` wo left join `WeiProduct` wp on wo.`ProductID`=wp.ID left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.ID where `UserID`=? and `IsPack`=0 and `IsPost`=0'
+    queryUserOrderInfo:'select ID,WeiXinID,WeiXinName,`UserName` from `WeiUsers` where ID=?; select ID,Address,Name,Phone,ZipCode from `WeiUsersAddress` where `UserID`=?; select wo.*,wp.`ProductName`,wpt.`Remark` TypeName from `WeiOrder` wo left join `WeiProduct` wp on wo.`ProductID`=wp.ID left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.ID where `UserID`=? and `IsPack`=0 and `IsPost`=0'
 };
 module.exports = productSQL;
