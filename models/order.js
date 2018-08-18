@@ -133,7 +133,7 @@ router.get('/queryOrderUserList',function (req,res) {
 
 router.get('/userorderlist',function (req,res) {
     var ID=req.query.ID;
-    res.render('packinfo',{title:'分单【'+ID+'】',id:ID});
+    res.render('userorderlist',{title:'分单【'+ID+'】',id:ID});
 });
 /**
 下单页面
