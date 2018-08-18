@@ -111,7 +111,7 @@ router.post('/eidtorder',function (req,res,next) {
             res.json({"result": err});
         }else{
             closeMysql(connection);
-            res.json({"result":"修改成功","orderID":ID});
+            res.json({"result":"修改成功","orderID":order.ID});
         }
 
     });
