@@ -19,9 +19,9 @@
 	  <tbody>
 	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
 	      <th scope="row">\{{item.ID}}</th>
-	      <td>\{{item.ProductName}}</td>
+	      <td>\{{item.WeiXinName}}</td>
 	      <td>
-	      	\{{item.Price}}
+	      	\{{item.UserName}}
 	      </td>
 	      <td>
 	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
