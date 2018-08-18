@@ -130,6 +130,10 @@ router.get('/queryOrderUserList',function (req,res) {
         }
     });
 });
+
+router.get('/userorderlist',function (req,res) {
+    res.render('userorderlist');
+});
 /**
 下单页面
 **/
