@@ -9,6 +9,10 @@
 	  姓名：\{{item.Name}}  电话：\{{item.Phone}}  住址：\{{item.Address}}  邮编：\{{item.ZipCode}}
 	  </li>
 	</ul>
+	<div class="text-right">
+      	<button type="button" v-if="IsPack" class="btn btn-sm btn-info" @click="IsPackFun()">已打包</button>
+
+	</div>
 	<div class="h8"></div>
 	<table class="table table-hover table-sm table-striped">
 	  <thead>
@@ -80,6 +84,7 @@
     		WeiXinName:'',
     		UserName:'',
     		TotalPrice:0,
+    		IsPack:false,
     		AddressList:[{
     			ID:0,
     			Address:'',
@@ -114,6 +119,39 @@
     		}]
     	},
     	methods:{
+    		IsPackFun:function() {
+    			var IsPack=0;
+    			if(vm.IsPack){
+    				IsPack=1;
+    			}else{
+    				IsPack=0;
+    			}
+    			var IDs=[];
+    			$.each(vm.OrderList,function (index,item) {
+    				IDs.push(item.ID);
+    			});
+    			axios.post('/order/eidtorder',{
+					IsPack:IsPack,
+					UserID:vm.ID,
+					Number:parseFloat(obj.newNumber),
+					TotalPrice:parseFloat(obj.TotalPrice),
+					diffNumber:parseFloat(obj.Number)-parseFloat(obj.newNumber),
+					Remark:obj.Remark,
+					TypeID:vm.TypeID
+				})
+                .then(function (response) {
+    				vm.IsPack=!vm.IsPack;
+                    swal.close();
+                    toastr.success('已打包，恭喜亲~', '')
+                })
+                .catch(function (error) {
+                    swal.close();
+                    console.log(error);
+                    toastr.error('打包失败了，亲稍等，截图联系管理员~', '')
+
+                }); 
+
+    		}
             editor:function (obj) {
             	var index=vm.OrderList.indexOf(obj);
             	vm.OrderList[index].editFlag=!vm.OrderList[index].editFlag;

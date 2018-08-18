@@ -116,6 +116,9 @@ router.post('/eidtorder',function (req,res,next) {
 
     });
 });
+/**
+分单页面
+**/
 router.get('/userorder',function (req,res) {
     res.render('userorder');
 });
@@ -134,6 +137,64 @@ router.get('/queryOrderUserList',function (req,res) {
 router.get('/userorderlist',function (req,res) {
     var ID=req.query.ID;
     res.render('userorderlist',{title:'分单【'+ID+'】',id:ID});
+});
+/**
+标记打包
+**/
+router.post('/setPack',function (req,res) {
+    var IsPack=req.body.IsPack;
+    var OrderIDs=req.body.OrderIDs;
+    var UserID=req.body.UserID;
+    console.log(OrderIDs);
+    var insertID=0;
+    var tasks=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function(callback) {
+            //更新打包信息
+            connection.query(sql.updatePack,[IsPack,new Date(),OrderIDs],function (err,result) {
+                console.log("打包"+OrderIDs);
+                callback(err);
+            });
+        },function (callback) {
+            //新建打包记录
+            connection.query(sql.insertPack,[IsPack,new Date(),OrderIDs],function (err,result) {
+                insertId=result.insertId;
+                callback(err);
+            });
+            console.log("添加订单与打包信息关联");
+        },function (callback) {
+            var orderPacks=[];
+            OrderIDs.foreach(function (item,index) {
+                orderPacks.push([insertId,item,new Date()])
+            });
+            connection.query(sql.insertOrderPack,orderPacks,function (err,result) {
+                callback(err);
+            });
+            console.log("添加订单与打包信息关联");
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            closeMysql(connection);
+            res.json({"result": err});
+        }else{
+            closeMysql(connection);
+            res.json({"result":"打包成功"});
+        }
+
+    });
 });
 /**
 下单页面
