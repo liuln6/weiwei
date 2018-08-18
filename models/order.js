@@ -69,7 +69,7 @@ router.get('/',function (req,res,next) {
 router.post('/eidtorder',function (req,res,next) {
     var order={
         ID:req.body.ID,
-        Number:req.body.newNumber,
+        Number:req.body.Number,
         diffNumber:req.body.diffNumber,
         Remark:req.body.Remark,
         TypeID:req.body.TypeID,
