@@ -25,7 +25,9 @@
 	  <tbody>
 	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
 	      <th scope="row">\{{item.ID}}</th>
-	      <td>\{{item.ProductName}}-\{{item.TypeName}}</td>
+	      <td>
+ 			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
+	      </td>
 	      <td>
 	      	\{{item.Price}}
 	      </td>
