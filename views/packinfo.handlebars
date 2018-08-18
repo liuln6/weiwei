@@ -112,6 +112,7 @@
 							TypeID:vm.TypeID
 						})
 	                    .then(function (response) {
+	                    	obj.editFlag=false;
 	                        swal.close();
 	                        toastr.success('订单修改成功了，恭喜亲~', '')
 	                    })
