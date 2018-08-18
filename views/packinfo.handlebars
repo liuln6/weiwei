@@ -24,13 +24,13 @@
 	      	\{{item.Price}}
 	      </td>
 	      <td>
-	      	<div class="detail" v-if="item.edit==false">\{{item.newNumber}}</div>
+	      	<div class="detail" v-if="!item.edit">\{{item.newNumber}}</div>
 	      	<div class="edit" v-if="item.edit" style="width:80px;">
 	      		<input type="text" v-model="item.newNumber" class="form-control" :name="number_item.ID">
 	      	</div>
 	      </td>
 	      <td>
-		    <div class="detail" v-if="item.edit==false">
+		    <div class="detail" v-if="!item.edit">
 		      \{{item.TotalPrice}}
 		    </div>
 	      	<div class="edit" v-if="item.edit" style="width:80px;">
@@ -38,7 +38,7 @@
 	      	</div>
 	      </td>
 	      <td>
-	      	<div class="detail" v-if="item.edit==false">
+	      	<div class="detail" v-if="!item.edit">
 		      \{{item.Remark}}
 		    </div>
 	      	<div class="edit" v-if="item.edit" style="width:80px;">
