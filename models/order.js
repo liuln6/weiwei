@@ -71,9 +71,9 @@ router.post('/eidtorder',function (req,res,next) {
         ID:req.body.ID,
         Number:req.body.newNumber,
         diffNumber:req.body.diffNumber,
-        Total:req.body.Total,
         Remark:req.body.Remark,
-        TypeID:req.body.TypeID
+        TypeID:req.body.TypeID,
+        TotalPrice:req.body.TotalPrice
     };
     handleDisconnect();
     var tasks=[
