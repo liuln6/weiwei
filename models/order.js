@@ -85,7 +85,7 @@ router.post('/eidtorder',function (req,res,next) {
         },
         function (callback) {
             //还库存
-            connection.query(sql.editStock,[order.diffNumber,TypeID],function (err,result) {
+            connection.query(sql.editStock,[order.diffNumber,order.TypeID],function (err,result) {
                 console.log("还库存");
                 callback(err);
             });
