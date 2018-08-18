@@ -48,6 +48,7 @@
 	      </td>
 	      <td>
 	      	<button type="button" v-if="!item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
+	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">取消</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
 	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
 	      </td>
