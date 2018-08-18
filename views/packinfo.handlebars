@@ -25,7 +25,7 @@
 	      </td>
 	      <td>
 	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
-	      		<input type="text" v-model="item.newNumber" class="form-control" :name="'number_'+item.ID">
+	      		<input type="text" v-model="item.newNumber" class="form-control" :name="'number_'+item.ID" @blur="calcuteTotal(item)">
 	      	</div>
 	      	<div class="detail" v-if="!item.editFlag">\{{item.newNumber}}</div>
 
@@ -96,6 +96,9 @@
             editor:function (obj) {
             	var index=vm.OrderList.indexOf(obj);
             	vm.OrderList[index].editFlag=!vm.OrderList[index].editFlag;
+            }
+            ,calcuteTotal:function (obj) {
+            	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
             }
             ,edit:function (obj) {
             	var vr= this.$validator.validateAll({
