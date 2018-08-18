@@ -92,15 +92,6 @@
     		}]
     	},
     	methods:{
-    		validateBeforeSubmit:function () {
-                this.$validator.validateAll().then((result) => {
-                    if (result) {
-                      this.edit();
-                      console.log("success");
-                      return;
-                    }
-                  });
-            },
             editor:function (obj) {
             	obj.edit=!obj.edit;
             }
@@ -173,7 +164,7 @@
 	        vm.TotalNumber=model.TotalNumber;
 	        vm.OrderList=[];
 	        $.each(model.OrderList,function (index,item) {
-	        	item.eidt=0;
+	        	item.eidt=false;
 	        	item.newNumber=item.Number;
 	        	vm.OrderList.push(item);
 	        });
