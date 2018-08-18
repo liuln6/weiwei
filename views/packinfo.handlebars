@@ -46,8 +46,8 @@
 	      	</div>
 	      </td>
 	      <td>
-	      	<button type="button" v-if="!item.edit" class="btn btn-sm btn-danger" @click="editor(item)">调整</button>
-	      	<button type="button" v-if="item.edit" class="btn btn-sm btn-danger" @click="edit(item)">保存</button>
+	      	<button type="button" v-if="!item.edit" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
+	      	<button type="button" v-if="item.edit" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
 	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
 	      </td>
 	    </tr>
@@ -93,7 +93,8 @@
     	},
     	methods:{
             editor:function (obj) {
-            	obj.edit=!obj.edit;
+            	var index=vm.OrderList.indexOf(obj);
+            	vm.OrderList[index].edit=!vm.OrderList[index].edit;
             }
             ,edit:function (obj) {
             	var vr= validator.validateAll({
