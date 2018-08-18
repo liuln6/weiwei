@@ -203,6 +203,36 @@ router.post('/packinfo',function (req,res) {
 		}
 	});
 })
+
+router.post('/userproductinfo',function (req,res) {
+	var userID=req.body.ID;
+	console.log(userID);
+	handleDisconnect();
+	var orderList=[];
+	var userInfo={};
+	connection.query(sql.queryTypeInfo,[userID,userID,userID],function (err,result) {
+		closeMysql(connection);
+		if(err){
+			res.send('获取打包信息失败'+ err);
+		}else{
+			console.log(result);
+			var resultUser = JSON.stringify(result[0]);
+	        var resultAddress=JSON.stringify(result[1]);
+	        var resultOrder=JSON.stringify(result[2]);
+	        resultUser= JSON.parse(resultUser);//把results字符串转为json对象
+	        resultAddress=JSON.parse(resultAddress);
+	        resultOrder=JSON.parse(resultOrder);
+			userInfo=resultUser[0];
+			console.log(userInfo);
+			console.log(resultOrder);
+			userInfo.OrderList=resultOrder;
+			userInfo.AddressList=resultAddress;
+			console.log(typeInfo);
+			res.json({"result":"true","model":userInfo});
+			//res.render('packinfo',{model:typeInfo,orderList:resultOrder});
+		}
+	});
+})
 /**
 入库
 **/
