@@ -112,10 +112,7 @@
 							TypeID:vm.TypeID
 						})
 	                    .then(function (response) {
-	                    	var index=vm.OrderList.indexOf(obj);
-							vm.OrderList.splice(index,1);
 	                        swal.close();
-	                        
 	                        toastr.success('订单修改成功了，恭喜亲~', '')
 	                    })
 	                    .catch(function (error) {
