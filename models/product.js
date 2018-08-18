@@ -210,7 +210,7 @@ router.post('/userproductinfo',function (req,res) {
 	handleDisconnect();
 	var orderList=[];
 	var userInfo={};
-	connection.query(sql.queryTypeInfo,[userID,userID,userID],function (err,result) {
+	connection.query(sql.queryUserOrderInfo,[userID,userID,userID],function (err,result) {
 		closeMysql(connection);
 		if(err){
 			res.send('获取打包信息失败'+ err);
