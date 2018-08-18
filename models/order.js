@@ -119,7 +119,7 @@ router.post('/eidtorder',function (req,res,next) {
 router.get('/userorder',function (req,res) {
     res.render('userorder');
 });
-router.post('/queryOrderUserList',function (req,res) {
+router.get('/queryOrderUserList',function (req,res) {
     handleDisconnect();
     connection.query(sql.queryOrderUserList,function (err,rows) {
         closeMysql(connection);
