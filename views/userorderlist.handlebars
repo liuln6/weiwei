@@ -157,6 +157,7 @@
             }
             ,calcuteTotal:function (obj) {
             	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
+            	obj.Number=obj.newNumber;
             	calcuteMsg();
             },
             calcuteMsg:function () {
