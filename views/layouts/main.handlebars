@@ -106,7 +106,7 @@
                 reinit         : true,                  // TRUE = to re-init when images is re-initialized for the second time. FALSE = nothing would happen.
                 error          : function(dom, imgUrl){ // callback on error, returns image url
                     console.log(dom, ' with its url "' + imgUrl + '" is invalid.');
-                }
+                },
                 before         : function(oriImage){    // callback before each image starts processing.
                     alert("I'm about to start processing now...");
                 },
