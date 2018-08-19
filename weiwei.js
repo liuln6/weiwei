@@ -16,7 +16,7 @@ var order=require('./models/order.js');
 var user=require('./models/user.js');
 
 //设置handlebars视图引擎
-var handlebars=require('handlebars');
+var handlebars=require('express3-handlebars')
 	.create({
 		defaultLayout:'main',
 		helpers:{
