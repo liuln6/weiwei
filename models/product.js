@@ -399,7 +399,7 @@ router.use('/upload',function (req,res) {
         			console.log(results.insertId);
         			
         			resData.push({
-						url:item.path,
+						url:item.thumbPath,
 						id:results.insertId
 					});
 					item.id=results.insertId;
