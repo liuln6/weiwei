@@ -48,7 +48,7 @@
 		      \{{item.TotalPrice}}
 		    </div>
 	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
-	      		<input type="text" v-model="item.TotalPrice" class="form-control" :name="'TotalPrice_'+item.ID" @blur="calcuteMsg()">
+	      		<input type="text" v-model="item.TotalPrice" class="form-control" :name="'TotalPrice_'+item.ID" >
 	      	</div>
 	      </td>
 	      <td>
@@ -67,10 +67,14 @@
 	      </td>
 	    </tr>
 	  </tbody>
+	  <tfoot>
+	    <tr class="table-info">
+	      <td colspan="2">\{{TotalOrderNumber}}</td>
+	      <td>\{{TotalNumber}}</td>
+	      <td colspan="3">\￥{{TotalPrice}}</td>
+	    </tr>
+	  </tfoot>
 	</table>
-	<div class="text-right">
-		统计信息   订单个数：\{{TotalOrderNumber}}    数量：\{{TotalNumber}}    总价：\{{TotalPrice}}
-	</div>
 </form>
 </div>
 {{#section 'jquery'}}
@@ -158,16 +162,14 @@
             ,calcuteTotal:function (obj) {
             	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
             	obj.Number=obj.newNumber;
-            	this.calcuteMsg();
             },
             calcuteMsg:function () {
             	vm.TotalNumber=0;
 	        	vm.TotalPrice=0;
 	        	vm.TotalOrderNumber=0;
 	        	$.each(vm.OrderList,function (index,item) {
-		        	vm.TotalNumber+=item.Number;
-		        	vm.TotalPrice+=item.TotalPrice;
-		        	vm.TotalOrderNumber+=1;
+		        	vm.TotalNumber+=parseFloat(item.Number);
+		        	vm.TotalPrice+=parseFloat(item.TotalPrice);
 		        });
             }
             ,edit:function (obj) {
@@ -185,6 +187,7 @@
 							TypeID:vm.TypeID
 						})
 	                    .then(function (response) {
+	                    	this.calcuteMsg();
 	                    	obj.editFlag=false;
 	                        swal.close();
 	                        toastr.success('订单修改成功了，恭喜亲~', '')
