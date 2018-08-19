@@ -65,7 +65,6 @@
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 	<!--表格-->
-	<script src="/script/jqthumb.min.js"></script>
 	<script type="text/javascript">	
     Vue.use(VeeValidate,{locale: 'zh_CN'});
    
@@ -85,44 +84,7 @@
         showMethod: "fadeIn",  //显示的方式
         hideMethod: "fadeOut"  //隐藏的方式
 	};
-	$(function () {
-		thumbImg();
-	});
-	function thumbImg() {
-		$('img').jqthumb({
-            classname      : 'jqthumb',             // class name. DEFUALT IS jqthumb
-            width          : '100%',                // new image width after cropping. DEFAULT IS 100px.
-            height         : '100%',                // new image height after cropping. DEFAULT IS 100px.
-            position       : {
-                x : '50%',                          // x position of the image. DEFAULT is 50%. 50% also means centerize the image.
-                y : '50%'                           // y position of the image. DEFAULT is 50%. 50% also means centerize the image.
-            },
-            source         : 'src',                 // to specify the image source attribute. DEFAULT IS src.
-            show           : false,                 // TRUE = show immediately after processing. FALSE = do not show it. DEFAULT IS TRUE.
-            renderPosition : 'before',              // available: "before" and "after".
-            onDemand       : false,                 // TRUE = load image only when scolling position has reached the DOM
-            onDemandEvent  : 'scroll',              // available: "scroll", "click", "mouseenter". DEFAULT IS "scroll"
-            threshold      : 0,                     // used when "onDemand" is set to true AND "onDemandEvent" is set to "scroll". Eg. Start loading the image 200px before scolling position reaches the DOM. DEFUALT IS 0
-            responsive     : 20,                    // used by older browsers only. 0 to disable. DEFAULT IS 20
-            zoom           : 1,                     // zoom the output, 2 would double of the actual image size. DEFAULT IS 1
-            method         : 'auto',                // 3 methods available: "auto", "modern" and "native". DEFAULT IS auto
-            reinit         : true,                  // TRUE = to re-init when images is re-initialized for the second time. FALSE = nothing would happen.
-            error          : function(dom, imgUrl){ // callback on error, returns image url
-                console.log(dom, ' with its url "' + imgUrl + '" is invalid.');
-            },
-            before         : function(oriImage){    // callback before each image starts processing.
-                //alert("I'm about to start processing now...");
-            },
-            after          : function(imgObj){      // callback when each image is cropped.
-                //console.log(imgObj);
-            },
-            done           : function(imgArray){    // callback when all images are cropped.
-                for(i in imgArray){
-                    $(imgArray[i]).fadeIn();
-                }
-            }
-        });
-	}
+	
 	</script>
 	{{{_sections.jquery}}}
 </body>
