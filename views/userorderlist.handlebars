@@ -45,7 +45,7 @@
 	      </td>
 	      <td>
 		    <div class="detail" v-if="!item.editFlag">
-		      \{{item.TotalPrice}}
+		     ￥\{{item.TotalPrice}}
 		    </div>
 	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
 	      		<input type="text" v-model="item.TotalPrice" class="form-control" :name="'TotalPrice_'+item.ID" >
@@ -71,7 +71,7 @@
 	    <tr class="table-info">
 	      <td colspan="2">\{{TotalOrderNumber}}</td>
 	      <td>\{{TotalNumber}}</td>
-	      <td colspan="3">\￥{{TotalPrice}}</td>
+	      <td colspan="3">￥\{{TotalPrice}}</td>
 	    </tr>
 	  </tfoot>
 	</table>
