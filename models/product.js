@@ -359,16 +359,16 @@ router.use('/upload',function (req,res) {
         var ms = Date.parse(date);
         var msfive=generateMixed(5);
         var newPath='public/tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[types.length-1];
-        var newThumbPath='tmp/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
+        var newThumbPath='public/thumb/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
         fs.renameSync(file.path, newPath);
         gm(newPath)
 		.resizeExact(500, 800)
-		.write(thumbDir+'/' + ms + msfive+'.'+types[types.length-1], function (err) {
+		.write(newThumbPath, function (err) {
 		  if (!err) console.log('done');
 		});
-        file.path=newPath;
+        file.path='tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[types.length-1];
         // use the .resizeExact with only width and/or height arguments
-        file.thumbPath=newThumbPath;
+        file.thumbPath='thumb/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
 		
         docs.push(file);
     }).on('end', function() {
