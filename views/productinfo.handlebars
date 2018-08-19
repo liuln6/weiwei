@@ -3,14 +3,14 @@
 {{/section}}
 <div class="container-fluid" id="productInfo">	
     <div class="card bg-dark text-white" v-for="(item,index) in ImageTypeList" v-model="ImageTypeList">
-      <img class="card-img jqthumb" :src="item.url" :alt="item.mark">
+      <img class="card-img jqthumb" src="\{{item.url}}" :alt="item.mark">
       <div class="card-img-overlay">
         <h5 class="card-title text-white bg-secondary">\{{ProductName}}-\{{item.mark}}</h5>
         <p class="card-text text-white bg-secondary">价格：￥\{{item.price}} 库存：\{{item.stockNum}} 产品编号：\{{ID}}-\{{item.id}} 描述信息：\{{Remark}}</p>
       </div>
     </div>
 	<div class="text-center" v-for="(item,index) in ImageList" v-model="ImageList">
-	  <img :src="item.url" class="rounded img-fluid jqthumb">
+	  <img src="\{{item.url}}" class="rounded img-fluid jqthumb">
 	  <div class="h8"></div>
 	</div>
 	<div>
