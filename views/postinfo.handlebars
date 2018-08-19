@@ -1,0 +1,276 @@
+{{#section 'title'}}
+	<title>{{title}}</title>
+{{/section}}
+<div class="container-fluid" id="orderList">
+<form id="eidtform" class="needs-validation">
+	<div class="text-center"><h3>\{{WeiXinName}}-\{{UserName}}</h3></div>
+	<ul class="list-group">
+	  <li class="list-group-item" v-for="(item,index) in AddressList">
+	  姓名：\{{item.Name}}  电话：\{{item.Phone}}  住址：\{{item.Address}}  邮编：\{{item.ZipCode}}
+	  </li>
+	</ul>
+	<div class="h8"></div>
+	<div class="text-right">
+      	<button type="button" v-if="!IsPack" class="btn btn-sm btn-primary" @click="IsPackFun()">已打包</button>
+
+	</div>
+	<div class="h8"></div>
+	<table class="table table-hover table-sm table-striped">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">产品</th>
+	      <th scope="col">单价</th>
+	      <th scope="col">数量</th>
+	      <th scope="col">总价</th>
+	      <th scope="col">备注</th>
+	      <th scope="col">操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
+	      <th scope="row">\{{index+1}}</th>
+	      <td>
+ 			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
+	      </td>
+	      <td>
+	      	\{{item.Price}}
+	      </td>
+	      <td>
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
+	      		<input type="text" v-model="item.newNumber" class="form-control" :name="'number_'+item.ID" @blur="calcuteTotal(item)">
+	      	</div>
+	      	<div class="detail" v-if="!item.editFlag">\{{item.newNumber}}</div>
+
+	      </td>
+	      <td>
+		    <div class="detail" v-if="!item.editFlag">
+		     ￥\{{item.TotalPrice}}
+		    </div>
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
+	      		<input type="text" v-model="item.TotalPrice" class="form-control" :name="'TotalPrice_'+item.ID" >
+	      	</div>
+	      </td>
+	      <td>
+	      	<div class="detail" v-if="!item.editFlag">
+		      \{{item.Remark}}
+		    </div>
+	      	<div class="edit" v-if="item.editFlag" style="width:200px;">
+	      		<input type="text" v-model="item.Remark" class="form-control" :name="'Remark_'+item.ID">
+	      	</div>
+	      </td>
+	      <td>
+	      	<button type="button" v-if="!item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
+	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">取消</button>
+	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
+	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
+	      </td>
+	    </tr>
+	  </tbody>
+	  <tfoot>
+	    <tr class="table-info">
+	      <td colspan="3" class="text-right">统计：    \{{TotalOrderNumber}}个订单 </td>
+	      <td>\{{TotalNumber}}米（件）</td>
+	      <td colspan="3">￥\{{TotalPrice}}</td>
+	    </tr>
+	  </tfoot>
+	</table>
+</form>
+</div>
+{{#section 'jquery'}}
+	<script type="text/javascript">
+
+	Vue.use(VeeValidate,{locale: 'zh_CN'});
+	var vm=new Vue({
+    	el:"#orderList",
+    	data:{
+    		ID:0,
+    		WeiXinID:'',
+    		WeiXinName:'',
+    		UserName:'',
+    		TotalPrice:0,
+    		TotalNumber:0,
+    		TotalOrderNumber:0,
+    		IsPack:false,
+    		AddressList:[{
+    			ID:0,
+    			Address:'',
+    			Name:'',
+    			Phone:'',
+    			ZipCode:''
+    		}],
+    		OrderList:[{
+    			ID: 73,
+		        ProductID: 46,
+		        ProductName:'',
+		       OrderNO: '20188246',
+		       Price: 30,
+		       UserID: 72,
+		       IsBalance: 0,
+		       InputTime: '2018-08-14T13:54:41.629Z',
+		       TotalPrice: 60,
+		       Number: 2,
+		       IsPack: 0,
+		       IsPost: 0,
+		       PostCode: '',
+		       BalanceTime: null,
+		       PackTime: null,
+		       PostTime: null,
+		       UserWeiXinID: 'weixinID',
+		       TypeID: 23,
+		       TypeName:'',
+		       Remark: '',
+		       WeiXinName: 'Fiona Miss',
+		       editFlag:false,
+		       newNumber:0
+    		}]
+    	},
+    	methods:{
+    		IsPackFun:function() {
+    			var IsPack=0;
+    			if(vm.IsPack){
+    				IsPack=0;
+    			}else{
+    				IsPack=1;
+    			}
+    			var IDs=[];
+    			$.each(vm.OrderList,function (index,item) {
+    				IDs.push(item.ID);
+    			});
+    			axios.post('/order/setPack',{
+					IsPack:IsPack,
+					UserID:vm.ID,
+					OrderIDs:IDs
+				})
+                .then(function (response) {
+    				vm.IsPack=!vm.IsPack;
+                    swal.close();
+                    toastr.success('已打包，恭喜亲~', '')
+                })
+                .catch(function (error) {
+                    swal.close();
+                    console.log(error);
+                    toastr.error('打包失败了，亲稍等，截图联系管理员~', '')
+
+                }); 
+
+    		},
+            editor:function (obj) {
+            	var index=vm.OrderList.indexOf(obj);
+            	vm.OrderList[index].editFlag=!vm.OrderList[index].editFlag;
+            }
+            ,calcuteTotal:function (obj) {
+            	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
+            	obj.Number=obj.newNumber;
+            },
+            calcuteMsg:function () {
+            	vm.TotalNumber=0;
+	        	vm.TotalPrice=0;
+	        	vm.TotalOrderNumber=0;
+	        	$.each(vm.OrderList,function (index,item) {
+		        	vm.TotalNumber+=parseFloat(item.Number);
+		        	vm.TotalPrice+=parseFloat(item.TotalPrice);
+		        });
+            }
+            ,edit:function (obj) {
+            	var vr= this.$validator.validateAll({
+				    decimal: obj.Number,
+				    decimal: obj.TotalPrice
+				}).then((result)=>{
+					if(result){
+						axios.post('/order/eidtorder',{
+							ID:parseInt(obj.ID),
+							Number:parseFloat(obj.newNumber),
+							TotalPrice:parseFloat(obj.TotalPrice),
+							diffNumber:parseFloat(obj.Number)-parseFloat(obj.newNumber),
+							Remark:obj.Remark,
+							TypeID:vm.TypeID
+						})
+	                    .then(function (response) {
+	                    	this.calcuteMsg();
+	                    	obj.editFlag=false;
+	                        swal.close();
+	                        toastr.success('订单修改成功了，恭喜亲~', '')
+	                    })
+	                    .catch(function (error) {
+	                        swal.close();
+	                        console.log(error);
+	                        toastr.error('修改失败了，亲稍等，截图联系管理员~', '')
+
+	                    }); 
+					}else{
+						toastr.success('输入正确的格式亲~', '')
+					}
+				});
+				
+            }
+    		,delOrder:function (obj) {
+    			swal({ 
+				  title: '确定删除吗？', 
+				  text: '你将无法恢复它！', 
+				  type: 'warning',
+				  showCancelButton: true, 
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '确定删除！', 
+				}).then(function(){
+					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+	    			axios.post('/order/delOrder',{ID:parseInt(obj.ID),TypeID:parseInt(vm.TypeID)})
+	                .then(function (response) {
+	                	var index=vm.OrderList.indexOf(obj);
+						vm.OrderList.splice(index,1);
+	                    swal.close();
+	                    
+	                    toastr.success('订单删除成功了，恭喜亲~', '')
+	                })
+	                .catch(function (error) {
+	                    swal.close();
+	                    console.log(error);
+	                    toastr.error('删除失败了，亲稍等，截图联系管理员~', '')
+
+	                });
+				})
+
+
+
+
+    			
+    		}
+    	}
+    });
+	$(function () {
+		getProductInfo();
+	});
+	function getProductInfo() {
+		var ID={{id}};
+		axios.post('/product/userproductinfo',{ID:ID})
+	    .then(function (response) {
+	    	var model=response.data.model;
+	    	
+	        vm.ID=model.ID;
+	        vm.WeiXinID=model.WeiXinID;
+	        vm.WeiXinName=model.WeiXinName;
+	        vm.UserName=model.UserName;
+	        vm.OrderList=[];
+	        vm.AddressList=[];
+	        vm.TotalNumber=0;
+	        vm.TotalPrice=0;
+	        vm.TotalOrderNumber=0;
+	        $.each(model.OrderList,function (index,item) {
+	        	item.editFlag=false;
+	        	item.newNumber=item.Number;
+	        	vm.TotalNumber+=item.Number;
+	        	vm.TotalOrderNumber+=1;
+	        	vm.TotalPrice+=item.TotalPrice;
+	        	vm.OrderList.push(item);
+	        });
+	        $.each(model.AddressList,function (index,item) {
+	        	vm.AddressList.push(item);
+	        });
+	    })
+	    .catch(function (error) {
+	        console.log(error);
+	    }); 
+	}
+	</script>
+{{/section}}
