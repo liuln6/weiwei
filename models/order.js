@@ -147,6 +147,7 @@ router.post('/setPack',function (req,res) {
     var UserID=req.body.UserID;
     console.log(OrderIDs);
     var insertID=0;
+    handleDisconnect();
     var tasks=[
         function (callback) {
             //开启事务
