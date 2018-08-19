@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="card float-left w-25" v-for="(item,index) in productImage">
-                <img class="card-img-top" :src="item.url" v-model="productImage[index].url">
+                <img class="card-img-top jqthumb" :src="item.url" v-model="productImage[index].url">
                 <div class="p-2">
                     <div class="form-group col-md-4">
                         <label :for="'totalNumber_'+index" class="text-muted">米数</label>
