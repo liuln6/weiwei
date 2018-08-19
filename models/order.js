@@ -131,6 +131,9 @@ router.get('/postList',function (req,res) {
         }
     });
 });
+router.get('/postInfo',function (req,res) {
+    res.render('postInfo');
+});
 /**
 分单页面
 **/
