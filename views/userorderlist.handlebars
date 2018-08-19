@@ -165,8 +165,9 @@
 	        	vm.TotalOrderNumber=0;
 	        	$.each(vm.OrderList,function (index,item) {
 		        	vm.TotalNumber+=item.Number;
-		        	vm.TotalOrderNumber+=1;
 		        	vm.TotalPrice+=item.TotalPrice;
+		        	vm.TotalOrderNumber+=1;
+		        	
 		        });
             }
             ,edit:function (obj) {
