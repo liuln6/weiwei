@@ -11,6 +11,7 @@ var orderSQL={
 	insertOrderPack:'insert into WeiOrderPack (PackID,OrderID,InputTime)values ?',
 	updatePost:'update `WeiOrder` set `IsPost`=?,`PostTime`=? where `UserID`=? and ID in(?) ',
 	updateAllot:'update `WeiOrder` set `IsAllot`=?,`AllotTime`=? where `UserID`=? and ID in(?)',
-	updateBalence:'update `WeiOrder` set `IsBalance`=?,`BalanceTime`=? where `UserID`=? and ID in(?)'
+	updateBalence:'update `WeiOrder` set `IsBalance`=?,`BalanceTime`=? where `UserID`=? and ID in(?)',
+	queryPostList:'select wp.*,wu.`UserName`,wu.`WeiXinName` from WeiPack wp left join `WeiUsers` wu on wp.UserID=wu.`ID`'
 };
 module.exports = orderSQL;

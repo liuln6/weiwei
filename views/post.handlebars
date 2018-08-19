@@ -1,0 +1,44 @@
+{{#section 'title'}}
+	<title>邮寄管理</title>
+{{/section}}
+<div class="container-fluid">
+	<table id="userList" class="table table-striped table-bordered table-sm" style="width:100%">
+    </table>
+</div>
+{{#section 'jquery'}}
+	<script type="text/javascript">
+	$(function () {
+		$('#postList').DataTable({
+			language: {
+		        url: '/script/Chinese.json'
+		    },
+		    lengthMenu: [[25, 50, -1], [25, 50, "All"]],
+		    ajax:{
+		    	url:'/order/postList' ,
+		    	"dataSrc": ""
+		    },
+		    columns:[
+		    	{
+                data:'UserID',
+                title:'用户ID'
+	            },
+	            {
+	                data:'WeiXinName',
+	                title:'昵称',
+	                render:function (data,type,row) {
+	                        return '<a class="btn btn-link" href="/order/userorderlist?ID='+row.UserID+'" role="button">'+row.WeiXinName+'</a>';
+	                    }
+	            },
+	            {
+	                data:'UserName',
+	                title:'姓名'
+	            },
+	            {
+	                data:'DateTime',
+	                title:'打包日期'
+	            } 
+		    ]
+		});
+	});
+	</script>
+{{/section}}

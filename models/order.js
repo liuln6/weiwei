@@ -116,6 +116,21 @@ router.post('/eidtorder',function (req,res,next) {
 
     });
 });
+router.get('/post',function (req,res) {
+    res.render('post');
+    
+})
+router.get('/postList',function (req,res) {
+    handleDisconnect();
+    connection.query(sql.queryPostList,function (err,rows) {
+        closeMysql(connection);
+        if(err){
+            res.send('获取所有用户订单信息失败'+ err);
+        }else{
+            res.json(rows);
+        }
+    });
+});
 /**
 分单页面
 **/
