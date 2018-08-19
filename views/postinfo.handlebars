@@ -11,11 +11,62 @@
 	</ul>
 	<div class="h8"></div>
 	<div class="text-right">
-      	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" @click="IsPostFun()">已打包</button>
-
+      	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" @click="IsPostFun()">已发送</button>
 	</div>
 	<div class="h8"></div>
-	
+	<table class="table table-hover table-sm table-striped">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">产品</th>
+	      <th scope="col">单价</th>
+	      <th scope="col">数量</th>
+	      <th scope="col">总价</th>
+	      <th scope="col">备注</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
+	      <th scope="row">\{{index+1}}</th>
+	      <td>
+ 			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
+	      </td>
+	      <td>
+	      	\{{item.Price}}
+	      </td>
+	      <td>
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
+	      		<input type="text" v-model="item.newNumber" class="form-control" :name="'number_'+item.ID" @blur="calcuteTotal(item)">
+	      	</div>
+	      	<div class="detail" v-if="!item.editFlag">\{{item.newNumber}}</div>
+
+	      </td>
+	      <td>
+		    <div class="detail" v-if="!item.editFlag">
+		     ￥\{{item.TotalPrice}}
+		    </div>
+	      	<div class="edit" v-if="item.editFlag" style="width:80px;">
+	      		<input type="text" v-model="item.TotalPrice" class="form-control" :name="'TotalPrice_'+item.ID" >
+	      	</div>
+	      </td>
+	      <td>
+	      	<div class="detail" v-if="!item.editFlag">
+		      \{{item.Remark}}
+		    </div>
+	      	<div class="edit" v-if="item.editFlag" style="width:200px;">
+	      		<input type="text" v-model="item.Remark" class="form-control" :name="'Remark_'+item.ID">
+	      	</div>
+	      </td>
+	    </tr>
+	  </tbody>
+	  <tfoot>
+	    <tr class="table-info">
+	      <td colspan="3" class="text-right">统计：    \{{TotalOrderNumber}}个订单 </td>
+	      <td>\{{TotalNumber}}米（件）</td>
+	      <td colspan="3">￥\{{TotalPrice}}</td>
+	    </tr>
+	  </tfoot>
+	</table>
 </form>
 </div>
 {{#section 'jquery'}}
