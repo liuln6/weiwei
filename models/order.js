@@ -132,7 +132,9 @@ router.get('/postList',function (req,res) {
     });
 });
 router.get('/postinfo',function (req,res) {
-    res.render('postinfo');
+    var ID=req.query.ID;
+    var userID=req.query.userID;
+    res.render('postinfo',{title:'快递【'+ID+'】',id:ID,userID:userID});
 });
 /**
 分单页面
@@ -155,6 +157,38 @@ router.get('/queryOrderUserList',function (req,res) {
 router.get('/userorderlist',function (req,res) {
     var ID=req.query.ID;
     res.render('userorderlist',{title:'分单【'+ID+'】',id:ID});
+});
+/**
+快递页面
+**/
+router.post('/queryPostInfo',function (req,res) {
+    var ID=req.body.ID;
+    var userID=req.body.UserID;
+    console.log(userID);
+    handleDisconnect();
+    var orderList=[];
+    var userInfo={};
+    connection.query(sql.queryPostInfo,[userID,userID,ID],function (err,result) {
+        closeMysql(connection);
+        if(err){
+            res.send('获取打包信息失败'+ err);
+        }else{
+            console.log(result);
+            var resultUser = JSON.stringify(result[0]);
+            var resultAddress=JSON.stringify(result[1]);
+            var resultOrder=JSON.stringify(result[2]);
+            resultUser= JSON.parse(resultUser);//把results字符串转为json对象
+            resultAddress=JSON.parse(resultAddress);
+            resultOrder=JSON.parse(resultOrder);
+            userInfo=resultUser[0];
+            console.log(userInfo);
+            console.log(resultOrder);
+            userInfo.OrderList=resultOrder;
+            userInfo.AddressList=resultAddress;
+            console.log(userInfo);
+            res.json({"result":"true","model":userInfo});
+        }
+    });
 });
 /**
 标记打包

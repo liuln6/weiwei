@@ -12,6 +12,7 @@ var orderSQL={
 	updatePost:'update `WeiOrder` set `IsPost`=?,`PostTime`=? where `UserID`=? and ID in(?) ',
 	updateAllot:'update `WeiOrder` set `IsAllot`=?,`AllotTime`=? where `UserID`=? and ID in(?)',
 	updateBalence:'update `WeiOrder` set `IsBalance`=?,`BalanceTime`=? where `UserID`=? and ID in(?)',
-	queryPostList:'select wp.*,wu.`UserName`,wu.`WeiXinName` from WeiPack wp left join `WeiUsers` wu on wp.UserID=wu.`ID`'
+	queryPostList:'select wp.*,wu.`UserName`,wu.`WeiXinName` from WeiPack wp left join `WeiUsers` wu on wp.UserID=wu.`ID`',
+	queryPostInfo:'select ID,WeiXinID,WeiXinName,`UserName` from `WeiUsers` where ID=?; select ID,Address,Name,Phone,ZipCode from `WeiUsersAddress` where `UserID`=?; select wo.*,wp.`ProductName`,wpt.`Remark` TypeName from `WeiOrder` wo left join `WeiProduct` wp on wo.`ProductID`=wp.ID left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.ID where wo.ID in( select `OrderID` from `WeiOrderPack` where `PackID`=?)'
 };
 module.exports = orderSQL;
