@@ -89,7 +89,7 @@
 	function getPostInfo() {
 		var ID={{id}};
 		var userID={{userID}}
-		axios.post('/product/queryPostInfo',{ID:ID,UserID:userID})
+		axios.post('/order/queryPostInfo',{ID:ID,UserID:userID})
 	    .then(function (response) {
 	    	var model=response.data.model;
 	    	
