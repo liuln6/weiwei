@@ -173,7 +173,7 @@
                     axios.post(controlUrl+'add',product)
                     .then(function (response) {
                         var rows=[];
-                        $.each(product.ImageType,function (item,index) {
+                        $.each(product.ImageType,function (index,item) {
                             rows.push({
                                 PID:response.data.productID,
                                 ProductName:product.ProductName,
