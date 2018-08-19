@@ -364,7 +364,11 @@ router.use('/upload',function (req,res) {
         gm(newPath)
 		.resizeExact(500, 800)
 		.write(newThumbPath, function (err) {
-		  if (!err) console.log('done');
+		  if (err) {
+		  	console.log(err);
+		  }else{
+		  	console.log('done');
+		  }
 		});
         file.path='tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[types.length-1];
         // use the .resizeExact with only width and/or height arguments
