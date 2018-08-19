@@ -26,7 +26,9 @@ const dbconfig = {
     password : 'lina2010',
     port     : '3306',
     database : 'WeiWeiStock',
-    useConnectionPooling:true
+    useConnectionPooling:true,
+    multipleStatements: true
+    
 };
 
 var connection;
