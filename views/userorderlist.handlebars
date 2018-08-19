@@ -131,14 +131,10 @@
     			$.each(vm.OrderList,function (index,item) {
     				IDs.push(item.ID);
     			});
-    			axios.post('/order/eidtorder',{
+    			axios.post('/order/setPack',{
 					IsPack:IsPack,
 					UserID:vm.ID,
-					Number:parseFloat(obj.newNumber),
-					TotalPrice:parseFloat(obj.TotalPrice),
-					diffNumber:parseFloat(obj.Number)-parseFloat(obj.newNumber),
-					Remark:obj.Remark,
-					TypeID:vm.TypeID
+					OrderIDs:OrderIDs
 				})
                 .then(function (response) {
     				vm.IsPack=!vm.IsPack;
