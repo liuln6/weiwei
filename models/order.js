@@ -163,7 +163,7 @@ router.post('/setPack',function (req,res) {
             });
         },function (callback) {
             //新建打包记录
-            connection.query(sql.insertPack,[IsPack,new Date(),OrderIDs],function (err,result) {
+            connection.query(sql.insertPack,[new Date(),UserID],function (err,result) {
                 insertId=result.insertId;
                 callback(err);
             });
