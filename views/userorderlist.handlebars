@@ -69,7 +69,7 @@
 	  </tbody>
 	</table>
 	<div class="text-right">
-		总价：\{{TotalPrice}}
+		统计信息   订单个数：\{{TotalOrderNumber}}    数量：\{{TotalNumber}}    总价：\{{TotalPrice}}
 	</div>
 </form>
 </div>
@@ -85,6 +85,8 @@
     		WeiXinName:'',
     		UserName:'',
     		TotalPrice:0,
+    		TotalNumber:0,
+    		TotalOrderNumber:0,
     		IsPack:false,
     		AddressList:[{
     			ID:0,
@@ -155,6 +157,17 @@
             }
             ,calcuteTotal:function (obj) {
             	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
+            	calcuteMsg();
+            },
+            calcuteMsg:function () {
+            	vm.TotalNumber=0;
+	        	vm.TotalPrice=0;
+	        	vm.TotalOrderNumber=0;
+	        	$.each(vm.OrderList,function (index,item) {
+		        	vm.TotalNumber+=item.Number;
+		        	vm.TotalOrderNumber+=1；
+		        	vm.TotalPrice+=item.TotalPrice;
+		        });
             }
             ,edit:function (obj) {
             	var vr= this.$validator.validateAll({
@@ -221,9 +234,14 @@
 	        vm.UserName=model.UserName;
 	        vm.OrderList=[];
 	        vm.AddressList=[];
+	        vm.TotalNumber=0;
+	        vm.TotalPrice=0;
+	        vm.TotalOrderNumber=0;
 	        $.each(model.OrderList,function (index,item) {
 	        	item.editFlag=false;
 	        	item.newNumber=item.Number;
+	        	vm.TotalNumber+=item.Number;
+	        	vm.TotalOrderNumber+=1；
 	        	vm.TotalPrice+=item.TotalPrice;
 	        	vm.OrderList.push(item);
 	        });
