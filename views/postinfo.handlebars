@@ -19,6 +19,7 @@
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">产品</th>
+	      <th scope="col">数量</th>
 	      <th scope="col" class="text-right">总价</th>
 	      <th scope="col">备注</th>
 	    </tr>
@@ -29,8 +30,9 @@
 	      <td>
  			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
 	      </td>
+	      <td>×\{{item.newNumber}}</td>
 	      <td class="text-right">
-		     ×\{{item.newNumber}}    ￥\{{item.TotalPrice}}
+		     ￥\{{item.TotalPrice}}
 	      </td>
 	      <td>
 		      \{{item.Remark}}
@@ -40,7 +42,7 @@
 	  <tfoot>
 	    <tr class="table-info">
 	      <td colspan="2" class="text-right">统计：    \{{TotalOrderNumber}}个订单 </td>
-	      <td colspan="2">\{{TotalNumber}}米（件）    总价：￥\{{TotalPrice}}</td>
+	      <td colspan="3">\{{TotalNumber}}米（件）    总价：￥\{{TotalPrice}}</td>
 	      <td></td>
 	    </tr>
 	  </tfoot>
