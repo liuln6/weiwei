@@ -190,7 +190,11 @@
 	            	empty:['<div class="empty">没找到相关产品信息</div>'].join('\n'),
 	            	suggestion: Handlebars.compile($("#resultTemplate").html())
 	            }
-	        });
+	        })
+	        .on('typeahead:asynccancel typeahead:asyncreceive', function() {
+			    //$('.Typeahead-spinner').hide();
+			    thumbImg();
+			});
 			$('#productName').bind('typeahead:select', function(ev, row) {
 				vm.productName=row.ProductName;
 				vm.productID=row.PID;

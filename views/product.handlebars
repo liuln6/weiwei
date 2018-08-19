@@ -317,6 +317,7 @@ $(function () {
                 mark:''
             });
         });
+        thumbImg();
     }).on('fileuploadfail', function (e, data) {
         $.each(data.files, function (index, file) {
             var error = $('<span class="text-danger"/>').text('File upload failed.');
