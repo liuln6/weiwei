@@ -170,7 +170,7 @@ router.post('/setPack',function (req,res) {
             console.log("添加订单与打包信息关联");
         },function (callback) {
             var orderPacks=[];
-            OrderIDs.foreach(function (item,index) {
+            OrderIDs.forEach(function (item,index) {
                 orderPacks.push([insertId,item,new Date()])
             });
             connection.query(sql.insertOrderPack,orderPacks,function (err,result) {
