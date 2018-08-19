@@ -29,11 +29,8 @@
 	      <td>
  			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
 	      </td>
-	      <td>
-		    <div class="detail" v-if="!item.editFlag">
+	      <td class="text-right">
 		     ￥\{{item.Price}}*\{{item.newNumber}}=￥\{{item.TotalPrice}}
-		    </div>
-	      	
 	      </td>
 	      <td>
 		      \{{item.Remark}}
