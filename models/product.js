@@ -329,6 +329,7 @@ function mkdir(dirpath) {
 
 var formidable = require('formidable'),
     util = require('util'),fs=require('fs');
+var gm = require('gm').subClass({imageMagick: true});
 
 router.use('/upload',function (req,res) {
 	// parse a file upload
@@ -340,10 +341,11 @@ router.use('/upload',function (req,res) {
 
     //存放目录
     form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
-
+    //缩略图目录
+    var thumbDir='public/thumb/' + year +'/' + month + '/';
     let myPath=form.uploadDir;
     fs.existsSync(myPath)==false&&mkdir(myPath);
-
+	fs.existsSync(thumbDir)==false&&mkdir(thumbDir);
     form.on('field', function(field, value) {
         //console.log(field, value);
         fields.push([field, value]);
@@ -356,8 +358,18 @@ router.use('/upload',function (req,res) {
         var date = new Date();
         var ms = Date.parse(date);
         var msfive=generateMixed(5);
-        fs.renameSync(file.path, 'public/tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[1] );
-        file.path='tmp/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
+        var newPath='public/tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[types.length-1];
+        var newThumbPath='tmp/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
+        fs.renameSync(file.path, newPath);
+        gm(newPath)
+		.resizeExact(500, 800)
+		.write(thumbDir+'/' + ms + msfive+'.'+types[types.length-1], function (err) {
+		  if (!err) console.log('done');
+		});
+        file.path=newPath;
+        // use the .resizeExact with only width and/or height arguments
+        file.thumbPath=newThumbPath;
+		
         docs.push(file);
     }).on('end', function() {
         console.log('-> upload done');
@@ -375,7 +387,7 @@ router.use('/upload',function (req,res) {
         var resData=[];
         async.eachSeries(docs,function (item,callback) {
         	//遍历执行新增
-        	connection.query(sql.addImages,[item.path,new Date(),0],function (err,results) {
+        	connection.query(sql.addImages,[item.path,item.thumbPath,new Date(),0],function (err,results) {
         		if(err){
         			console.log("添加图片失败",err.message);
 					res.json("添加图片失败");
