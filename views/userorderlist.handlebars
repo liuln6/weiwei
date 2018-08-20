@@ -28,7 +28,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
+	    <tr v-for="(item,index) in OrderList" :class="{table-success:item.checkFlag}" v-model="OrderList">
 	      <th scope="row">\{{index+1}}</th>
 	      <td>
  			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
@@ -60,6 +60,7 @@
 	      	</div>
 	      </td>
 	      <td>
+	      	<button type="button" class="btn btn-sm btn-info" @click="checkItem(item)">核对</button>
 	      	<button type="button" v-if="!item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">取消</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
@@ -159,6 +160,9 @@
             	var index=vm.OrderList.indexOf(obj);
             	vm.OrderList[index].editFlag=!vm.OrderList[index].editFlag;
             }
+            ,checkItem:function (obj) {
+            	obj.checkFlag=!obj.checkFlag;
+            }
             ,calcuteTotal:function (obj) {
             	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
             	obj.Number=obj.newNumber;
@@ -256,6 +260,7 @@
 	        $.each(model.OrderList,function (index,item) {
 	        	item.editFlag=false;
 	        	item.newNumber=item.Number;
+	        	item.checkFlag=false;
 	        	vm.TotalNumber+=item.Number;
 	        	vm.TotalOrderNumber+=1;
 	        	vm.TotalPrice+=item.TotalPrice;
