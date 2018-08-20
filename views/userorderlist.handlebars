@@ -171,6 +171,7 @@
 		        	vm.TotalNumber+=parseFloat(item.Number);
 		        	vm.TotalPrice+=parseFloat(item.TotalPrice);
 		        });
+		        vm.TotalPrice=vm.TotalPrice.toFixed(2);
             }
             ,edit:function (obj) {
             	var vr= this.$validator.validateAll({
@@ -230,10 +231,6 @@
 
 	                });
 				})
-
-
-
-
     			
     		}
     	}
@@ -264,6 +261,8 @@
 	        	vm.TotalPrice+=item.TotalPrice;
 	        	vm.OrderList.push(item);
 	        });
+		    vm.TotalPrice=vm.TotalPrice.toFixed(2);
+
 	        $.each(model.AddressList,function (index,item) {
 	        	vm.AddressList.push(item);
 	        });
