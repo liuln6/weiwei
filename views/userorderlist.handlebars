@@ -28,7 +28,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr v-for="(item,index) in OrderList" :class="{table-success:item.checkFlag}" v-model="OrderList">
+	    <tr v-for="(item,index) in OrderList" :class="{'table-success':item.checkFlag}" v-model="OrderList">
 	      <th scope="row">\{{index+1}}</th>
 	      <td>
  			<a class="btn btn-link" href="/product/info?ID='+row.PID+'" role="button">\{{item.ProductName}}-\{{item.TypeName}}</a>
