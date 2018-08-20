@@ -12,16 +12,16 @@
 	<div class="h8"></div>
 	<div class="text-right" style="display:none">
       	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" @click="IsPostFun()">已发送</button>
+      	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" on-click="toPrintView()">打印</button>
 	</div>
 	<div class="h8"></div>
-	<table class="table table-hover table-sm table-striped">
+	<table class="table table-hover table-sm table-striped" id="priantTable">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col" style="width:220px">产品</th>
 	      <th scope="col" style="width:50px">数量</th>
 	      <th scope="col" style="width:70px" class="text-right">总价</th>
-	      <th scope="col">备注</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -33,9 +33,6 @@
 	      <td>×\{{item.newNumber}}</td>
 	      <td class="text-right">
 		     ￥\{{item.TotalPrice}}
-	      </td>
-	      <td>
-		      \{{item.Remark}}
 	      </td>
 	    </tr>
 	  </tbody>
@@ -155,5 +152,23 @@
 	        console.log(error);
 	    }); 
 	}
+	/*         打印预览        */        
+	function toPrintView(){          
+	    execPrint('priantTable','Preview');        
+	}
+	/*打印或预览print--打印，Preview--预览*/       
+	function execPrint(myDiv,type){                    
+	    var isCanPreview = (!-[1,]);                   
+	    if(isCanPreview){ /*这个条件满足说明可以打印预览*/                    
+	        document.all.WebBrowser.ExecWB(7,1);             
+	    }else{                                          　　      
+            var newstr = document.getElementById(myDiv).innerHTML;       　　     
+            var oldstr = document.body.innerHTML;       　　      
+            document.body.innerHTML = newstr;       　　      
+            window.print();       　　      
+            document.body.innerHTML = oldstr;                  
+            return false;              
+        }         
+	} 
 	</script>
 {{/section}}
