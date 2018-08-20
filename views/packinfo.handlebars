@@ -17,7 +17,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr v-for="(item,index) in OrderList" v-model="OrderList">
+	    <tr v-for="(item,index) in OrderList" :class="{'table-success':item.checkFlag}" v-model="OrderList">
 	      <th scope="row">\{{index+1}}</th>
 	      <td>\{{item.UserID}}-\{{item.WeiXinName}}</td>
 	      <td>
@@ -47,6 +47,7 @@
 	      	</div>
 	      </td>
 	      <td>
+	      	<button type="button" class="btn btn-sm btn-info" @click="checkItem(item)">核对</button>
 	      	<button type="button" v-if="!item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">调整</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">取消</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
@@ -100,6 +101,9 @@
             }
             ,calcuteTotal:function (obj) {
             	obj.TotalPrice=parseFloat(obj.newNumber)*obj.Price;
+            }
+            ,checkItem:function (obj) {
+            	obj.checkFlag=!obj.checkFlag;
             }
             ,edit:function (obj) {
             	var vr= this.$validator.validateAll({
@@ -169,6 +173,7 @@
 	        vm.OrderList=[];
 	        $.each(model.OrderList,function (index,item) {
 	        	item.editFlag=false;
+	        	item.checkFlag=false;
 	        	item.newNumber=item.Number;
 	        	vm.OrderList.push(item);
 	        });
