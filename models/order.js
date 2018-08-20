@@ -198,7 +198,10 @@ router.post('/queryPostInfo',function (req,res) {
 router.post('/setPack',function (req,res) {
     var IsPack=req.body.IsPack;
     var OrderIDs=req.body.OrderIDs;
-    var UserID=req.body.UserID;
+    var UserID=parseInt(req.body.UserID);
+    var TotalNumber=parseFloat(req.body.TotalNumber);
+    var TotalOrderNumber=parseInt(req.body.TotalOrderNumber);
+    var TotalPrice=parseFloat(req.body.TotalPrice);
     console.log(OrderIDs);
     var insertID=0;
     handleDisconnect();
@@ -217,7 +220,7 @@ router.post('/setPack',function (req,res) {
             });
         },function (callback) {
             //新建打包记录
-            connection.query(sql.insertPack,[new Date(),UserID],function (err,result) {
+            connection.query(sql.insertPack,[new Date(),UserID,TotalNumber,totalPrice,TotalOrderNumber],function (err,result) {
                 insertId=result.insertId;
                 callback(err);
             });

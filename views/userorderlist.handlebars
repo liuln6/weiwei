@@ -141,7 +141,10 @@
     			axios.post('/order/setPack',{
 					IsPack:IsPack,
 					UserID:vm.ID,
-					OrderIDs:IDs
+					OrderIDs:IDs,
+					TotalNumber:vm.TotalNumber,
+					TotalPrice:vm.TotalPrice,
+					TotalOrderNumber:vm.TotalOrderNumber
 				})
                 .then(function (response) {
     				vm.IsPack=!vm.IsPack;
