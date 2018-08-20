@@ -3,7 +3,7 @@
 {{/section}}
 <div class="container-fluid" id="orderList">
 <form id="eidtform" class="needs-validation">
-	<div class="text-center"><h3>\{{WeiXinName}}-\{{UserName}}</h3></div>
+	<div class="text-center"><h3>\{{WeiXinName}}-\{{UserName}}-{{userID}}</h3></div>
 	<ul class="list-group">
 	  <li class="list-group-item" v-for="(item,index) in AddressList">
 	  姓名：\{{item.Name}}  电话：\{{item.Phone}}  住址：\{{item.Address}}  邮编：\{{item.ZipCode}}
