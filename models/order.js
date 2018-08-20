@@ -220,7 +220,7 @@ router.post('/setPack',function (req,res) {
             });
         },function (callback) {
             //新建打包记录
-            connection.query(sql.insertPack,[new Date(),UserID,TotalNumber,totalPrice,TotalOrderNumber],function (err,result) {
+            connection.query(sql.insertPack,[new Date(),UserID,TotalNumber,TotalPrice,TotalOrderNumber],function (err,result) {
                 insertId=result.insertId;
                 callback(err);
             });
