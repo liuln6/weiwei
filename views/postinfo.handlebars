@@ -182,6 +182,8 @@
 	        vm.TotalNumber=0;
 	        vm.TotalPrice=0;
 	        vm.TotalOrderNumber=0;
+	        vm.IsPost=model.IsPost;
+	        vm.IsBalance=model.IsBalance;
 	        $.each(model.OrderList,function (index,item) {
 	        	item.editFlag=false;
 	        	item.newNumber=item.Number;
