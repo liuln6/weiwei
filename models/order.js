@@ -199,7 +199,8 @@ router.post('/setPost',function (req,res) {
     handleDisconnect();
     connection.query(sql.editPost,[isPost,new Date(),ID],function (err,result) {
         console.log("标记已发快递"+isPost+"/"+ID);
-        callback(err);
+        res.json({"result":"true"});
+
     });
 });
 
@@ -209,8 +210,9 @@ router.post('/setBalance',function (req,res) {
     var ID=req.body.ID;
     handleDisconnect();
     connection.query(sql.editBalance,[isBalance,number,new Date(),ID],function (err,result) {
-        console.log("标记已发快递"+isPost+"/"+ID);
-        callback(err);
+        console.log("标记已结算"+isBalance+"/"+ID);
+        res.json({"result":"true"});
+        
     });
 });
 /**
