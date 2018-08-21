@@ -119,7 +119,8 @@
 					  allowOutsideClick: false
 					}).then(function(number) {
 						var ID=parseInt({{id}});
-		    			 axios.post('/order/setBalance',{isBalance:isBalance,totalPriceActive:number,ID:ID})
+						var totalPriceActive=parseFloat(number.value);
+		    			 axios.post('/order/setBalance',{isBalance:isBalance,totalPriceActive:totalPriceActive,ID:ID})
 					    .then(function (response) {
 		                    swal.close();
 		                    vm.IsBalance=!vm.IsBalance;

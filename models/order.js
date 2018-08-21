@@ -210,7 +210,7 @@ router.post('/setBalance',function (req,res) {
     var ID=req.body.ID;
     handleDisconnect();
     connection.query(sql.editBalance,[isBalance,number,new Date(),ID],function (err,result) {
-        console.log("标记已结算"+isBalance+"/"+ID);
+        console.log("标记已结算"+isBalance+"/"+ID+"/"+number);
         res.json({"result":"true"});
         
     });
