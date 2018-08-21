@@ -7,7 +7,7 @@ var orderSQL={
 	editOrder:'update WeiOrder set Number=?,TotalPrice=?,Remark=? where ID=?',
 	queryOrderUserList:'select od.*,wu.`UserName`,wu.`WeiXinName` from ( select `UserID`,count(1) Total,sum(`Number`) TotalNumber ,sum(`TotalPrice`) TotalPrice from `WeiOrder` where `IsPack`=0 group by `UserID`) od left join `WeiUsers` wu on od.`UserID`=wu.`ID`',
 	updatePack:'update `WeiOrder` set `IsPack`=?,`PackTime`=? where ID in(?)',
-	insertPack:'insert into `WeiPack`(`DateTime`,`IsBalance`,UserID,`BalanceTime`,`IsPost`,`PostTime`,TotalNumber,TotalPrice,TotalOrderNumber,TotalPriceActive) values(?,0,?,null,0,null,?,?,?,null)',
+	insertPack:'insert into `WeiPack`(`DateTime`,`IsBalance`,UserID,`BalanceTime`,`IsPost`,`PostTime`,TotalNumber,TotalPrice,TotalOrderNumber,TotalPriceActive) values(?,0,?,null,0,null,?,?,?,0)',
 	insertOrderPack:'insert into WeiOrderPack (PackID,OrderID,InputTime)values ?',
 	updateAllot:'update `WeiOrder` set `IsAllot`=?,`AllotTime`=? where `UserID`=? and ID in(?)',
 	updateBalence:'update `WeiOrder` set `IsBalance`=?,`BalanceTime`=? where `UserID`=? and ID in(?)',
