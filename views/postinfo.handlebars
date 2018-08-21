@@ -30,7 +30,7 @@
 	      <th scope="row">\{{index+1}}</th>
 	      <td>
  			\{{item.ProductName}}-\{{item.TypeName}}
- 			<span v-if="item.Remark.length>1">\{{item.Remark}}</span>
+ 			<span class="text-warning" v-if="item.Remark.length>1"><small>备注\{{item.Remark}}</small></span>
 	      </td>
 	      <td>×\{{item.newNumber}}</td>
 	      <td class="text-right">
