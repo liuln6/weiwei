@@ -209,7 +209,7 @@ router.post('/setBalance',function (req,res) {
     var number=req.body.totalPriceActive;
     var ID=req.body.ID;
     handleDisconnect();
-    connection.query(sql.editBalance,[isBalance,number,new Date(),ID],function (err,result) {
+    connection.query(sql.editBalance,[isBalance,new Date(),number,ID],function (err,result) {
         console.log("标记已结算"+isBalance+"/"+ID+"/"+number);
         res.json({"result":"true"});
         
