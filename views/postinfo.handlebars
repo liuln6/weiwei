@@ -114,7 +114,7 @@
 					  showLoaderOnConfirm: true,
 					  allowOutsideClick: false
 					}).then(function(number) {
-						var ID=parseInt(vm.ID);
+						var ID=parseInt({{id}});
 		    			 axios.post('/order/setBalance',{isBalance:isBalance,totalPriceActive:number,ID:ID})
 					    .then(function (response) {
 		                    swal.close();
@@ -135,7 +135,7 @@
     			if(!vm.IsPost){
     				isPost=1;
     			}
-    			var ID=parseInt(vm.ID);
+    			var ID=parseInt({{id}});
     			 axios.post('/order/setPost',{isPost:isPost,ID:ID})
 			    .then(function (response) {
                     swal.close();
