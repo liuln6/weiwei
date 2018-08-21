@@ -2,6 +2,11 @@
 	<title>{{title}}</title>
 {{/section}}
 <div class="container-fluid" id="orderList">
+<div class="h8"></div>
+<div class="text-right">
+  	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" style="display:none" @click="IsPostFun()">已发送</button>
+  	<button type="button" class="btn btn-sm btn-primary" onclick="toPrintView()">打印</button>
+</div>
 <form id="eidtform" class="needs-validation">
 	<div class="text-center"><h3>\{{WeiXinName}}-\{{UserName}}-{{userID}}</h3></div>
 	<ul class="list-group">
@@ -9,11 +14,7 @@
 	  姓名：\{{item.Name}}  电话：\{{item.Phone}}  住址：\{{item.Address}}  邮编：\{{item.ZipCode}}
 	  </li>
 	</ul>
-	<div class="h8"></div>
-	<div class="text-right">
-      	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" style="display:none" @click="IsPostFun()">已发送</button>
-      	<button type="button" class="btn btn-sm btn-primary" onclick="toPrintView()">打印</button>
-	</div>
+	
 	<div class="h8"></div>
 	<table class="table table-hover table-sm table-striped" id="priantTable">
 	  <thead>
