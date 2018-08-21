@@ -103,10 +103,10 @@
     	methods:{
     		IsBalanceFun:function () {
     			var isBalance=0;
-    			if(obj.IsBalance){
+    			if(vm.IsBalance){
     				isBalance=1;
     			}
-    			if(!obj.IsBalance){
+    			if(!vm.IsBalance){
 					  swal({
 					  title: '已核算',
 					  input: 'number',
@@ -115,11 +115,11 @@
 					  showLoaderOnConfirm: true,
 					  allowOutsideClick: false
 					}).then(function(number) {
-						var ID=parseInt(obj.ID);
+						var ID=parseInt(vm.ID);
 		    			 axios.post('/order/setBalance',{isBalance:isBalance,totalPriceActive:number,ID:ID})
 					    .then(function (response) {
 		                    swal.close();
-		                    obj.IsBalance=!obj.IsBalance;
+		                    vm.IsBalance=!vm.IsBalance;
 					    	toastr.success('设置成功了，恭喜亲~', '')
 					    })
 					    .catch(function (error) {
@@ -130,17 +130,17 @@
 
 				}
     		},
-    		IsPostFun:function(obj) {
+    		IsPostFun:function() {
     			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
     			var isPost=0;
-    			if(obj.IsPost){
+    			if(vm.IsPost){
     				isPost=1;
     			}
-    			var ID=parseInt(obj.ID);
+    			var ID=parseInt(vm.ID);
     			 axios.post('/order/setPost',{isPost:isPost,ID:ID})
 			    .then(function (response) {
                     swal.close();
-                    obj.IsPost=!obj.IsPost;
+                    vm.IsPost=!vm.IsPost;
 			    	toastr.success('设置成功了，恭喜亲~', '')
 			    })
 			    .catch(function (error) {
