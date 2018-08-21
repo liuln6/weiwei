@@ -206,7 +206,7 @@ router.post('/setPost',function (req,res) {
 
 router.post('/setBalance',function (req,res) {
     var isBalance=req.body.isBalance;
-    var number=parseFloat(req.body.totalPriceActive);
+    var number=req.body.totalPriceActive;
     var ID=req.body.ID;
     handleDisconnect();
     connection.query(sql.editBalance,[isBalance,number,new Date(),ID],function (err,result) {
