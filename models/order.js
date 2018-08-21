@@ -170,7 +170,7 @@ router.post('/queryPostInfo',function (req,res) {
     handleDisconnect();
     var orderList=[];
     var userInfo={};
-    connection.query(sql.queryPostInfo,[userID,userID,ID],function (err,result) {
+    connection.query(sql.queryPostInfo,[ID,userID,userID,ID],function (err,result) {
         closeMysql(connection);
         if(err){
             res.send('获取打包信息失败'+ err);
