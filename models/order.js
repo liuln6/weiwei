@@ -192,6 +192,27 @@ router.post('/queryPostInfo',function (req,res) {
         }
     });
 });
+/**标记已发快递**/
+router.post('/setPost',function (req,res) {
+    var isPost=req.body.isPost;
+    var ID=req.body.ID;
+    handleDisconnect();
+    connection.query(sql.editPost,[isPost,new Date(),ID],function (err,result) {
+        console.log("标记已发快递"+isPost+"/"+ID);
+        callback(err);
+    });
+});
+
+router.post('/setBalance',function (req,res) {
+    var isBalance=req.body.isBalance;
+    var number=parseFloat(req.body.totalPriceActive);
+    var ID=req.body.ID;
+    handleDisconnect();
+    connection.query(sql.editBalance,[isBalance,new Date(),ID],function (err,result) {
+        console.log("标记已发快递"+isPost+"/"+ID);
+        callback(err);
+    });
+});
 /**
 标记打包
 **/

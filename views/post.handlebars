@@ -48,6 +48,17 @@
 	            {
 	                data:'DateTime',
 	                title:'打包日期'
+	            },{
+	            	data:null,
+	            	render:function (data,type,row) {
+	            		var html="";
+	            		if(row.IsPost){
+	            			html+="<span class='text-info'>已发出</span>";
+	            		}
+	            		if(row.IsBalance){
+	            			html+=(" <span class='text-warning'>已结算</span> <span class='text-warning'>实收："+row.TotalPriceActive+"</span>");
+	            		}
+	            	}
 	            } 
 		    ]
 		});

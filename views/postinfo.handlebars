@@ -4,7 +4,6 @@
 <div class="container-fluid" id="orderList">
 <div class="h8"></div>
 <div class="text-right">
-  	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary" style="display:none" @click="IsPostFun()">已发送</button>
   	<button type="button" class="btn btn-sm btn-primary" onclick="toPrintView()">打印</button>
 </div>
 <form id="eidtform" class="needs-validation">
@@ -14,7 +13,11 @@
 	  姓名：\{{item.Name}}  电话：\{{item.Phone}}  住址：\{{item.Address}}  邮编：\{{item.ZipCode}}
 	  </li>
 	</ul>
-	
+	<div class="h8"></div>
+	<div class="text-right">
+	  	<button type="button" v-if="!IsPost" class="btn btn-sm btn-primary"  @click="IsPostFun()">已快递</button>
+	  	<button type="button" v-if="!IsBalance" class="btn btn-sm btn-primary"  @click="IsBalanceFun()">已结算</button>
+	</div>
 	<div class="h8"></div>
 	<table class="table table-hover table-sm table-striped" id="priantTable">
 	  <thead>
@@ -63,6 +66,7 @@
     		TotalNumber:0,
     		TotalOrderNumber:0,
     		IsPost:false,
+    		IsBalance:false,
     		AddressList:[{
     			ID:0,
     			Address:'',
@@ -97,8 +101,51 @@
     		}]
     	},
     	methods:{
-    		IsPostFun:function() {
-    			 
+    		IsBalanceFun:function () {
+    			var isBalance=0;
+    			if(obj.IsBalance){
+    				isBalance=1;
+    			}
+    			if(!obj.IsBalance){
+					  swal({
+					  title: '已核算',
+					  input: 'number',
+					  showCancelButton: true,
+					  confirmButtonText: 'Submit',
+					  showLoaderOnConfirm: true
+					  allowOutsideClick: false
+					}).then(function(number) {
+						var ID=parseInt(obj.ID);
+		    			 axios.post('/order/setBalance',{isBalance:isBalance,totalPriceActive:number,ID:ID})
+					    .then(function (response) {
+		                    swal.close();
+		                    obj.IsBalance=!obj.IsBalance;
+					    	toastr.success('设置成功了，恭喜亲~', '')
+					    })
+					    .catch(function (error) {
+					        console.log(error);
+					    });
+					  
+					})
+
+				}
+    		},
+    		IsPostFun:function(obj) {
+    			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+    			var isPost=0;
+    			if(obj.IsPost){
+    				isPost=1;
+    			}
+    			var ID=parseInt(obj.ID);
+    			 axios.post('/order/setPost',{isPost:isPost,ID:ID})
+			    .then(function (response) {
+                    swal.close();
+                    obj.IsPost=!obj.IsPost;
+			    	toastr.success('设置成功了，恭喜亲~', '')
+			    })
+			    .catch(function (error) {
+			        console.log(error);
+			    }); 
 
     		},
             calcuteMsg:function () {
