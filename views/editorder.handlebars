@@ -229,7 +229,7 @@
                 vm.userWeiXinName=row.WeiXinName;
             });
 
-            $('#orderList').DataTable({
+            var table=$('#orderList').DataTable({
 		        language: {
 		            url: '/script/Chinese.json'
 		        },
@@ -249,7 +249,8 @@
 		            },
 		            {
 		                data:'UserID',
-		                title:'用户ID'
+		                title:'用户ID',
+		                visible:false
 		            },
 		            {
 		                data:'ProductName',
@@ -284,10 +285,49 @@
 		            {
 		                data:'Remark',
 		                title:'备注'
+		            },
+		            {
+		            	data:null,
+			    		title:'操作',
+			    		render:function (data,type,row) {
+			    			var html="";
+			    			if(row.OrderStatu==30){
+			    				html='<button type="button" class="btn btn-info btn-sm" onclick="DelOrder(\''+row.ID+'\',\''+row.TypeID+'\')">删除</button>';
+			    			}
+			    			return html;
+			    		}
 		            }             
 		        ]
 		    });
+		    table
+		    .order( [ 0, 'desc' ] )
+		    .draw();
         });
-        
+        function DelOrder(ID,TypeID) {
+
+        	swal({ 
+				  title: '确定删除吗？', 
+				  text: '你将无法恢复它！', 
+				  type: 'warning',
+				  showCancelButton: true, 
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '确定删除！', 
+				}).then(function(){
+					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+	    			axios.post('/order/delOrder',{ID:parseInt(ID),TypeID:parseInt(TypeID)})
+	                .then(function (response) {
+	                    swal.close();
+	                    
+	                    toastr.success('订单删除成功了，恭喜亲~', '')
+	                })
+	                .catch(function (error) {
+	                    swal.close();
+	                    console.log(error);
+	                    toastr.error('删除失败了，亲稍等，截图联系管理员~', '')
+
+	                });
+				})
+        }
 	</script>
 {{/section}}
