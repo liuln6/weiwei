@@ -1,6 +1,6 @@
 var orderSQL={
 	add:'insert into WeiOrder(ProductID,TypeID, OrderNO,Price,UserID,InputTime,TotalPrice,Number,IsPack,UserWeiXinID,Remark,WeiXinName,OrderStatu)values(?,?,?,?,?,?,?,?,0,?,?,?,30)',
-	queryAllNoPack:'SELECT wo.ID,wo.ProductID,wp.ProductName,OrderNO,wo.Price,UserID,IsBalance,wo.InputTime,TotalPrice,Number,IsPack,PackTime,UserWeiXinID,TypeID,wo.Remark,wo.WeiXinName,wpt.Remark as TypeName from WeiOrder wo LEFT JOIN WeiProduct wp ON wo.ProductID=wp.ID LEFT JOIN WeiProductImageType wpt on wo.TypeID=wpt.ID WHERE IsPack=0 and OrderStatu=30',
+	queryAllNoPack:'SELECT wo.ID,wo.ProductID,wp.ProductName,OrderNO,wo.Price,UserID,IsBalance,wo.InputTime,TotalPrice,Number,IsPack,PackTime,UserWeiXinID,TypeID,wo.Remark,wo.WeiXinName,wpt.Remark as TypeName,wo.OrderStatu from WeiOrder wo LEFT JOIN WeiProduct wp ON wo.ProductID=wp.ID LEFT JOIN WeiProductImageType wpt on wo.TypeID=wpt.ID WHERE IsPack=0 and OrderStatu=30',
 	delOrder:'update `WeiOrder` set OrderStatu=18 where ID=?',
 	updateOrderStatu:'update `WeiOrder` set OrderStatu=19 where ID=?',
 	//删除状态 18
