@@ -291,7 +291,7 @@
 			    		title:'操作',
 			    		render:function (data,type,row) {
 			    			var html="";
-			    			if(row.OrderStatu==30){
+			    			if(row.OrderStatu===30){
 			    				html='<button type="button" class="btn btn-info btn-sm" onclick="DelOrder(\''+row.ID+'\',\''+row.TypeID+'\')">删除</button>';
 			    			}
 			    			return html;
