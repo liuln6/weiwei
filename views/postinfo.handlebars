@@ -20,7 +20,7 @@
 	  	<button type="button" v-if="!IsBalance" class="btn btn-sm btn-primary"  @click="IsBalanceFun()">已结算</button>
 	  	<span class="text-warning" v-if="IsBalance">已结算</span>
 	  	<span class="text-warning" v-if="IsBalance">实收：\{{TotalPriceActive}}</span>
-	  	<button type="button" v-if="PackStatu===30" class="btn btn-sm btn-danger"  @click="IsBalanceFun()">退单</button>
+	  	<button type="button" v-if="PackStatu===30" class="btn btn-sm btn-danger"  @click="IsRebackFun()">退单</button>
 
 	</div>
 	<div class="h8"></div>
