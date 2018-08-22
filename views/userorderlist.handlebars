@@ -65,6 +65,8 @@
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">取消</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
 	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
+	      	<button type="button" class="btn btn-sm btn-warning" @click="RebackOrder(item)">退单</button>
+	      	
 	      </td>
 	    </tr>
 	  </tbody>
@@ -239,6 +241,32 @@
 	                });
 				})
     			
+    		},RebackOrder:function (obj) {
+    			swal({ 
+				  title: '确定退单吗？', 
+				  text: '你将无法恢复它！', 
+				  type: 'warning',
+				  showCancelButton: true, 
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '确定删除！', 
+				}).then(function(){
+					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+	    			axios.post('/order/RebackOrder',{ID:parseInt(obj.ID)})
+	                .then(function (response) {
+	                	var index=vm.OrderList.indexOf(obj);
+						vm.OrderList.splice(index,1);
+	                    swal.close();
+	                    
+	                    toastr.success('退单成功了，亲可以在退单页面继续操作，恭喜亲~', '')
+	                })
+	                .catch(function (error) {
+	                    swal.close();
+	                    console.log(error);
+	                    toastr.error('退单失败了，亲稍等，截图联系管理员~', '')
+
+	                });
+				})
     		}
     	}
     });
