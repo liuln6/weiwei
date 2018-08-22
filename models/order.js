@@ -230,7 +230,7 @@ router.post('/setRebackPack',function (req,res) {
         function (callback) {
             //还库存
             connection.query(sql.setRebackPack,[number,ID],function (err,result) {
-                console.log("标记已结算"+isBalance+"/"+ID+"/"+number);
+                console.log("标记已结算"+ID+"/"+number);
                 callback(err);
                 
             });
