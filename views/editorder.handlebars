@@ -293,7 +293,7 @@
 			    		render:function (data,type,row) {
 			    			var html="";
 			    			if(row.OrderStatu===30){
-			    				html='<button type="button" class="btn btn-info btn-sm" onclick="DelOrder(\''+row.ID+'\',\''+row.TypeID+'\')">删除</button>';
+			    				html='<button type="button" class="btn btn-info btn-sm" onclick="DelOrder(\''+row.ID+'\',\''+row.TypeID+'\',this)">删除</button>';
 			    			}
 			    			return html;
 			    		}
@@ -304,7 +304,7 @@
 		    .order( [ 0, 'desc' ] )
 		    .draw();
         });
-        function DelOrder(ID,TypeID) {
+        function DelOrder(ID,TypeID,obj) {
 
         	swal({ 
 				  title: '确定删除吗？', 
@@ -318,6 +318,10 @@
 					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
 	    			axios.post('/order/delOrder',{ID:parseInt(ID),TypeID:parseInt(TypeID)})
 	                .then(function (response) {
+	                	table
+				        .row( $(obj).parents('tr') )
+				        .remove()
+				        .draw();
 	                    swal.close();
 	                    
 	                    toastr.success('订单删除成功了，恭喜亲~', '')
