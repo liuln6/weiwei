@@ -73,6 +73,7 @@
     		IsPost:false,
     		IsBalance:false,
     		TotalPriceActive:0,
+    		PackStatu:30,
     		AddressList:[{
     			ID:0,
     			Address:'',
@@ -216,6 +217,7 @@
 	        vm.IsPost=model.IsPost;
 	        vm.IsBalance=model.IsBalance;
 	        vm.TotalPriceActive=model.TotalPriceActive;
+	        vm.PackStatu=model.PackStatu;
 	        $.each(model.OrderList,function (index,item) {
 	        	item.editFlag=false;
 	        	item.newNumber=item.Number;
