@@ -143,7 +143,7 @@
 					  title: '已退单',
 					  input: 'number',
 					  showCancelButton: true,
-					  confirmButtonText: 'Submit',
+					  confirmButtonText: '确认',
 					  showLoaderOnConfirm: true,
 					  allowOutsideClick: false
 					}).then(function(number) {
@@ -152,7 +152,7 @@
 		    			 axios.post('/order/setRebackPack',{totalPriceActive:totalPriceActive,ID:ID})
 					    .then(function (response) {
 		                    swal.close();
-		                    vm.IsBalance=!vm.IsBalance;
+		                    vm.PackStatu=19;
 		                    vm.TotalPriceActive=totalPriceActive;
 					    	toastr.success('设置成功了~', '')
 					    })
