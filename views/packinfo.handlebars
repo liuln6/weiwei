@@ -181,12 +181,12 @@
 						vm.OrderList.splice(index,1);
 	                    swal.close();
 	                    
-	                    toastr.success('订单删除成功了，恭喜亲~', '')
+	                    toastr.success('退单成功了，亲可以在退单页面继续操作，恭喜亲~', '')
 	                })
 	                .catch(function (error) {
 	                    swal.close();
 	                    console.log(error);
-	                    toastr.error('删除失败了，亲稍等，截图联系管理员~', '')
+	                    toastr.error('退单失败了，亲稍等，截图联系管理员~', '')
 
 	                });
 				})
