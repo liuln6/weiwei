@@ -215,6 +215,54 @@ router.post('/setBalance',function (req,res) {
         
     });
 });
+router.post('/setRebackPack',function (req,res) {
+    var number=req.body.totalPriceActive;
+    var ID=req.body.ID;
+    handleDisconnect();
+    
+
+
+    var tasks=[
+        function (callback) {
+            //开启事务
+            connection.beginTransaction(function(err) {
+                callback(err);
+            });
+        },
+        function (callback) {
+            //还库存
+            connection.query(sql.setRebackPack,[number,ID],function (err,result) {
+                console.log("标记已结算"+isBalance+"/"+ID+"/"+number);
+                callback(err);
+                
+            });
+        },
+        function (callback) {
+            //批量修改订单状态为退单 19
+            connection.query(sql.batchUpdateOrderStatu,[ID],function (err,result) {
+                console.log("修改成功"+ID);
+                callback(err);
+            });
+        },function (callback) {
+            //提交事务
+            connection.commit(function (err) {
+                callback(err);
+            });
+        }
+    ];
+    async.series(tasks,function (err,results) {
+        if(err){
+            console.log(err);
+            connection.rollback();//发生错误时回滚
+            closeMysql(connection);
+            res.json({"result": err});
+        }else{
+            closeMysql(connection);
+            res.json({"result":"修改成功","PackID":ID});
+        }
+
+    });
+});
 /**
 标记打包
 **/

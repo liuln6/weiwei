@@ -175,7 +175,7 @@
 				  confirmButtonText: '确定！', 
 				}).then(function(){
 					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
-	    			axios.post('/order/RebackOrder',{ID:parseInt(obj.ID)})
+	    			axios.post('/order/setRebackPack',{ID:parseInt(obj.ID)})
 	                .then(function (response) {
 	                	var index=vm.OrderList.indexOf(obj);
 						vm.OrderList.splice(index,1);

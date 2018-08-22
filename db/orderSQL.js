@@ -18,6 +18,8 @@ var orderSQL={
 	queryPostInfo:'select wu.ID,wu.WeiXinID,wu.WeiXinName,wu.UserName,wp.`IsPost`,wp.`IsBalance`,DATE_FORMAT(wp.PostTime,"%Y-%m-%d") PostTime,DATE_FORMAT(wp.BalanceTime,"%Y-%m-%d"),wp.PackStatu BalanceTime,TotalPriceActive from `WeiUsers` wu left join `WeiPack` wp on wu.ID=wp.`UserID` and wp.`ID`=? where wu.ID=?; select ID,Address,Name,Phone,ZipCode from `WeiUsersAddress` where `UserID`=?; select wo.*,wp.`ProductName`,wpt.`Remark` TypeName from `WeiOrder` wo left join `WeiProduct` wp on wo.`ProductID`=wp.ID left join `WeiProductImageType` wpt on wo.`TypeID`=wpt.ID where wo.ID in( select `OrderID` from `WeiOrderPack` where `PackID`=?)',
 	editPost:'update WeiPack set IsPost=?,PostTime=? where ID=? ',
 	editBalance:'update WeiPack set IsBalance=?,BalanceTime=?,TotalPriceActive=? where ID=? ',
+	setRebackPack:'update WeiPack set PackStatu=19 ,TotalPriceActive=? where ID=? ',
+	batchUpdateOrderStatu:'update `WeiOrder` set OrderStatu=19 where ID in(select OrderID from WeiOrderPack where PackID =?)',
 	addPostInfo:'insert into WeiPostInfo (CID,CName,Code,InputTime,Price)values(?,?,?,?,?)'
 };
 module.exports = orderSQL;
