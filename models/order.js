@@ -411,6 +411,21 @@ router.post('/delOrder',function (req,res) {
 
     });
 });
+/**
+退单
+**/
+router.post('/RebackOrder',function(req,res) {
+    var ID=parseInt(req.body.ID);
+    handleDisconnect();
+    connection.query(sql.updateOrderStatu,[19,ID],function (err,rows) {
+        closeMysql(connection);
+        if(err){
+            res.send('退单失败'+ err);
+        }else{
+            res.json({"result":"退单失败","orderID":ID});
+        }
+    });
+});
 var chars = ['0','1','2','3','4','5','6','7','8','9'];
 function generateMixed(n) {
      global.res = "";

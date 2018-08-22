@@ -52,6 +52,7 @@
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="editor(item)">取消</button>
 	      	<button type="button" v-if="item.editFlag" class="btn btn-sm btn-info" @click="edit(item)">保存</button>
 	      	<button type="button" class="btn btn-sm btn-danger" @click="delOrder(item)">删除</button>
+	      	<button type="button" class="btn btn-sm btn-danger" @click="RebackOrder(item)">退单</button>
 	      </td>
 	    </tr>
 	  </tbody>
@@ -137,21 +138,58 @@
 				
             }
     		,delOrder:function (obj) {
-    			swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
-    			axios.post('/order/delOrder',{ID:parseInt(obj.ID),TypeID:parseInt(vm.TypeID)})
-                    .then(function (response) {
-                    	var index=vm.OrderList.indexOf(obj);
+    			swal({ 
+				  title: '确定删除吗？', 
+				  text: '你将无法恢复它！', 
+				  type: 'warning',
+				  showCancelButton: true, 
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '确定删除！', 
+				}).then(function(){
+					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+	    			axios.post('/order/delOrder',{ID:parseInt(obj.ID),TypeID:parseInt(vm.TypeID)})
+	                .then(function (response) {
+	                	var index=vm.OrderList.indexOf(obj);
 						vm.OrderList.splice(index,1);
-                        swal.close();
-                        
-                        toastr.success('订单删除成功了，恭喜亲~', '')
-                    })
-                    .catch(function (error) {
-                        swal.close();
-                        console.log(error);
-                        toastr.error('删除失败了，亲稍等，截图联系管理员~', '')
+	                    swal.close();
+	                    
+	                    toastr.success('订单删除成功了，恭喜亲~', '')
+	                })
+	                .catch(function (error) {
+	                    swal.close();
+	                    console.log(error);
+	                    toastr.error('删除失败了，亲稍等，截图联系管理员~', '')
 
-                    }); 
+	                });
+				})
+    		}
+    		,RebackOrder:function (obj) {
+    			swal({ 
+				  title: '确定退单吗？', 
+				  text: '你将无法恢复它！', 
+				  type: 'warning',
+				  showCancelButton: true, 
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '确定删除！', 
+				}).then(function(){
+					swal({title:"<i class=\"fa fa-circle-o-notch fa-spin fa-3x fa-fw\"></i><span class=\"sr-only\">Loading...</span>数据处理中，请稍后"});
+	    			axios.post('/order/RebackOrder',{ID:parseInt(obj.ID)})
+	                .then(function (response) {
+	                	var index=vm.OrderList.indexOf(obj);
+						vm.OrderList.splice(index,1);
+	                    swal.close();
+	                    
+	                    toastr.success('订单删除成功了，恭喜亲~', '')
+	                })
+	                .catch(function (error) {
+	                    swal.close();
+	                    console.log(error);
+	                    toastr.error('删除失败了，亲稍等，截图联系管理员~', '')
+
+	                });
+				})
     		}
     	}
     });
