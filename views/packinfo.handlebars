@@ -8,14 +8,14 @@
 		<div v-if="!editFlag">
 			价格：\{{Price}} 库存：\{{TotalNumber}}
 		</div>
-		<div v-if="editFlag" class="form-inline">
+		<div v-if="editFlag" class="form-inline text-center">
            
-			<div class="edit form-group float-left" style="width:100px;">
+			<div class="edit form-group float-left">
 			 	<label :for="Price" class="text-muted">价格</label>
 	      		<input type="text" v-model="Price" class="form-control" style="width:80px;" :name="Price">
 	      	</div>
 	      	
-	      	<div class="edit form-group float-left" style="width:80px;">
+	      	<div class="edit form-group float-left">
 	      	<label :for="AddTotalNumber" class="text-muted">库存：\{{TotalNumber}}+</label>
 	      		<input type="text" v-model="AddTotalNumber" class="form-control" style="width:80px;" :name="AddTotalNumber" >
 	      	</div>
