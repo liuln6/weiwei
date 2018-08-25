@@ -148,7 +148,7 @@
                             var row=$('#productList').DataTable().rows(index).data()[0];
                             row.TotalNumber+=TotalNumber;
                             row.StockNumber+=TotalNumber;
-                            $("stocknumber_"+index).text(row.StockNumber);
+                            $("#stocknumber_"+index).text(row.StockNumber);
 
                             swal.close();
                             toastr.success('设置成功了~', '')
