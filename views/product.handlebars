@@ -132,7 +132,7 @@
                     }
                   });
             },
-            appendStock:function (Price,TypeID) {
+            appendStock:function (Price,TypeID,index) {
                 swal({
                       title: '追加库存',
                       input: 'number',
@@ -141,11 +141,11 @@
                       showLoaderOnConfirm: true,
                       allowOutsideClick: false
                     }).then(function(number) {
-                        var TypeID=parseInt(obj.TypeID);
+                        var TypeID=parseInt(TypeID);
                         var TotalNumber=parseFloat(number.value);
-                         axios.post('/product/eidttype',{TypeID:TypeID,TotalNumber:TotalNumber,Price:obj.Price})
+                         axios.post('/product/eidttype',{TypeID:TypeID,TotalNumber:TotalNumber,Price:Price})
                         .then(function (response) {
-                            obj.TotalNumber=obj.TotalNumber+TotalNumber;
+                            $('#productList').DataTable().rows(index)[0].TotalNumber+=TotalNumber;
                             swal.close();
                             toastr.success('设置成功了~', '')
                         })
@@ -271,7 +271,7 @@ $(function () {
                 data:'StockNumber',
                 title:'库存',
                 render:function (data,type,row,meta) {
-                        return row.StockNumber +'<button type="button" class="btn btn-info btn-sm float-right" onclick="appendStock('+row.Price+','+row.TypeID+')">追加库存</button>';
+                        return row.StockNumber +'<button type="button" class="btn btn-info btn-sm float-right" onclick="appendStock('+row.Price+','+row.TypeID+','+meta.row+')">追加库存</button>';
                     }
             },
             {
