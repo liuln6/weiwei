@@ -132,6 +132,29 @@
                     }
                   });
             },
+            appendStock:function (Price,TypeID) {
+                swal({
+                      title: '追加库存',
+                      input: 'number',
+                      showCancelButton: true,
+                      confirmButtonText: '确认',
+                      showLoaderOnConfirm: true,
+                      allowOutsideClick: false
+                    }).then(function(number) {
+                        var TypeID=parseInt(obj.TypeID);
+                        var TotalNumber=parseFloat(number.value);
+                         axios.post('/product/eidttype',{TypeID:TypeID,TotalNumber:TotalNumber,Price:obj.Price})
+                        .then(function (response) {
+                            obj.TotalNumber=obj.TotalNumber+TotalNumber;
+                            swal.close();
+                            toastr.success('设置成功了~', '')
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                      
+                    })
+            },
             saveRows:function () {
                 //保存表格数据
                 var product={
@@ -246,7 +269,10 @@ $(function () {
             },
             {
                 data:'StockNumber',
-                title:'库存'
+                title:'库存',
+                render:function (data,type,row) {
+                        return row.StockNumber +'<button type="button" class="btn btn-info btn-sm" onclick="appendStock('+row.Price+','+row.TypeID+')">追加库存</button>';
+                    }
             },
             {
                 data:'Price',
