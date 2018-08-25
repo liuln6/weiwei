@@ -9,13 +9,13 @@
 			价格：\{{Price}} 库存：\{{TotalNumber}}
 		</div>
 		<div v-if="editFlag">
-            价格：
+            价格：\{{TotalNumber}}+
 			<div class="edit" style="width:80px;">
 	      		<input type="text" v-model="Price" class="form-control" :name="Price">
 	      	</div>
 	      	库存：
 	      	<div class="edit" style="width:80px;">
-	      		<input type="text" v-model="TotalNumber" class="form-control" :name="TotalNumber" >
+	      		<input type="text" v-model="AddTotalNumber" class="form-control" :name="AddTotalNumber" >
 	      	</div>
 		</div>
 	</div>
@@ -91,6 +91,7 @@
     		TypeID:{{id}},
     		TypeName:'',
     		TotalNumber:0,
+    		AddTotalNumber:0,
     		Price:0,
     		editFlag:false,
     		OrderList:[{
@@ -132,12 +133,13 @@
 				}).then((result)=>{
 					if(result){
 						axios.post('/product/eidttype',{
-							Price:vm.Price,
-							TotalNumber:vm.TotalNumber,
+							Price:parseFloat(vm.Price),
+							TotalNumber:parseFloat( vm.AddTotalNumber),
 							TypeID:vm.TypeID
 						})
 	                    .then(function (response) {
 	                    	vm.editFlag=!vm.editFlag;
+	                    	vm.TotalNumber=parseFloat(vm.TotalNumber)+parseFloat(vm.AddTotalNumber);
 	                        swal.close();
 	                        toastr.success('订单产品成功了，恭喜亲~', '')
 	                    })
