@@ -232,6 +232,26 @@ router.post('/userproductinfo',function (req,res) {
 		}
 	});
 })
+router.get('/editproduct',function (req,res) {
+	var ID=req.query.ID;
+	res.render('editproduct'{title:'产品编辑【'+ID+'】',id:ID});
+});
+router.post('/eidttype',function (req,res) {
+	var TypeID=req.body.TypeID;
+	var TotalNumber=req.body.TotalNumber;
+	var Price=req.body.Price;
+	handleDisconnect();
+	connection.query(sql.eidttype,[Price,TotalNumber,TypeID],function (err,rows) {
+		closeMysql(connection);
+		if(err){
+			res.send('修改产品库存，价格失败'+err);
+		}
+		else{
+
+			res.json({"result":true});
+		}
+	});
+});
 /**
 入库
 **/

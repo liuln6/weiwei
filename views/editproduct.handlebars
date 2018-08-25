@@ -1,0 +1,96 @@
+{{#section 'title'}}
+    <title>{{title}}</title>
+{{/section}}
+<div class="container-fluid" id="productInfo">
+<form id="productform" class="needs-validation p18" @submit.prevent="validateBeforeSubmit">
+    <div class="card bg-dark text-white" v-for="(item,index) in ImageTypeList" v-model="ImageTypeList">
+      <img class="card-img jqthumb" :src="item.url" :alt="item.mark">
+      <div class="card-img-overlay">
+        <h5 class="card-title text-white bg-secondary">\{{ProductName}}-\{{item.mark}}</h5>
+        <p class="card-text text-white bg-secondary">价格：￥\{{item.price}} 库存：\{{item.stockNum}} 产品编号：\{{ID}}-\{{item.id}} 描述信息：\{{Remark}}</p>
+      </div>
+    </div>
+   
+    <div>
+    <p>\{{ProductName}}</p>
+    <p>\{{Width}}</p>
+    \{{Remark}}
+    </div>
+</form>
+</div>
+{{#section 'jquery'}}
+<script type="text/javascript">
+    var imageArr=[{
+        id:{{id}},
+        url:'',
+        price:null,
+        stockNum:null,
+        mark:''
+    }]; 
+    var vm=new Vue({
+        el: "#productInfo",
+        data: {
+            ID:0,
+            WID:0,
+            ProductNo:'',
+            Remark:'',
+            ProductName:'',
+            Width:0,
+            ImageList:imageArr,
+            ImageTypeList:imageArr
+        },
+        methods:{
+            validateBeforeSubmit:function () {
+                this.$validator.validateAll().then((result) => {
+                    if (result) {
+                      this.editProduct();
+                      return;
+                    }
+                  });
+            },
+            editProduct:function () {
+                
+            }
+        }
+    });
+$(function () {
+    getProductInfo();
+})
+function getProductInfo() {
+    var productID={{id}};
+    axios.post('/product/info',{ID:productID})
+    .then(function (response) {
+        var model=response.data.model;
+        vm.ImageList=[];
+        $.each(model.ImageList,function (index,item) {
+            vm.ImageList.push({
+                id:item.ID,
+                url:'/'+item.ImgThumbUrl,
+                price:0,
+                stockNum:0,
+                mark:''
+            });
+        });
+        vm.ImageTypeList=[];
+        $.each(model.TypeList,function (index,item) {
+            vm.ImageTypeList.push({
+                id:item.ID,
+                url:'/'+item.ImgThumbUrl,
+                price:item.Price,
+                stockNum:item.TotalNumber-item.UsedNumber,
+                mark:item.Remark
+            });
+        });
+        vm.WID=model.WID;
+        vm.ProductNo=model.ProductNo;
+        vm.Remark=model.Remark;
+        vm.ProductName=model.ProductName;
+        vm.Width=model.Width;
+        vm.ID=model.ID;
+    })
+    .catch(function (error) {
+        console.log(error);
+    }); 
+}
+</script>
+{{/section}}
