@@ -10,8 +10,8 @@
 		</div>
 		<div v-if="editFlag">
            
-			<div class="edit float-left" style="width:80px;">
-			 价格：
+			<div class="edit float-left" style="width:100px;">
+			 	<label :for="Price" class="text-muted">价格</label>
 	      		<input type="text" v-model="Price" class="form-control" :name="Price">
 	      	</div>
 	      	
