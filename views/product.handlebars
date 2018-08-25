@@ -271,7 +271,7 @@ $(function () {
                 data:'StockNumber',
                 title:'库存',
                 render:function (data,type,row,meta) {
-                        return row.StockNumber +'<button type="button" class="btn btn-info btn-sm float-right" onclick="appendStock('+row.Price+','+row.TypeID+','+meta.row+')">追加库存</button>';
+                        return row.StockNumber +'<button type="button" class="btn btn-info btn-sm float-right" @click="appendStock('+row.Price+','+row.TypeID+','+meta.row+')">追加库存</button>';
                     }
             },
             {
