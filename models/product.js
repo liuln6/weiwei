@@ -231,7 +231,7 @@ router.post('/userproductinfo',function (req,res) {
 			res.json({"result":"true","model":userInfo});
 		}
 	});
-})
+});
 router.get('/editproduct',function (req,res) {
 	var ID=req.query.ID;
 	res.render('editproduct'{title:'产品编辑【'+ID+'】',id:ID});
