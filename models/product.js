@@ -240,10 +240,10 @@ router.post('/eidttype',function (req,res) {
 	connection.query(sql.eidttype,[Price,TotalNumber,TypeID],function (err,rows) {
 		closeMysql(connection);
 		if(err){
+			console.log(err);
 			res.send('修改产品库存，价格失败'+err);
 		}
 		else{
-
 			res.json({"result":true});
 		}
 	});

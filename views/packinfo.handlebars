@@ -7,6 +7,7 @@
 		<h3>\{{ProductName}}-\{{TypeName}}</h3>
 		<div v-if="!editFlag">
 			价格：\{{Price}} 库存：\{{TotalNumber}}
+	    <button type="button" v-if="!editFlag" class="btn btn-sm btn-info" @click="editorType()">修改</button>
 		</div>
 		<div v-if="editFlag" class="form-inline text-center">
            
@@ -19,12 +20,12 @@
 	      	<label :for="AddTotalNumber" class="text-muted">库存：\{{TotalNumber}}+</label>
 	      		<input type="text" v-model="AddTotalNumber" class="form-control" style="width:80px;" :name="AddTotalNumber" >
 	      	</div>
+	    	<button type="button" v-if="editFlag" class="btn btn-sm btn-info" @click="saveType()">保存</button>
+
 		</div>
 	</div>
 	<div class="h8"></div>
 	<div class="edit">
-	    <button type="button" v-if="!editFlag" class="btn btn-sm btn-info" @click="editorType()">修改</button>
-	    <button type="button" v-if="editFlag" class="btn btn-sm btn-info" @click="saveType()">保存</button>
 	</div>
 	<table class="table table-hover table-sm table-striped">
 	  <thead>
@@ -143,7 +144,7 @@
 	                    	vm.editFlag=!vm.editFlag;
 	                    	vm.TotalNumber=parseFloat(vm.TotalNumber)+parseFloat(vm.AddTotalNumber);
 	                        swal.close();
-	                        toastr.success('订单产品成功了，恭喜亲~', '')
+	                        toastr.success('修改价格库存成功了，恭喜亲~', '')
 	                    })
 	                    .catch(function (error) {
 	                        swal.close();
