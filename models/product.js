@@ -237,7 +237,7 @@ router.post('/eidttype',function (req,res) {
 	var TotalNumber=req.body.TotalNumber;
 	var Price=req.body.Price;
 	handleDisconnect();
-	connection.query(sql.eidttype,[Price,TotalNumber,TypeID],function (err,rows) {
+	connection.query(sql.edittype,[Price,TotalNumber,TypeID],function (err,rows) {
 		closeMysql(connection);
 		if(err){
 			console.log(err);
