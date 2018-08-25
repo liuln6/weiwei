@@ -21,6 +21,14 @@
                 <span v-show="errors.has('number')" class="help text-danger">\{{ errors.first('number') }}</span>
             </div>
         </div>
+         <div class="form-group row">
+            <label for="price" class="col-3 col-form-label text-right">价格</label>
+            <div class="col-9">
+                <input type="text" :class="{'is-invalid': errors.has('price')}" data-vv-delay="500" v-model="price" v-validate="'required|decimal'" class="form-control" name="price">
+                <i v-show="errors.has('price')" class="fa text-danger fa-warning"></i>
+                <span v-show="errors.has('price')" class="help text-danger">\{{ errors.first('price') }}</span>
+            </div>
+        </div>
         <div class="form-row" v-if="productID>0&&number>0">
         	 <label class="col-3 col-form-label text-right"></label>
         	<div class="form-group col-9">
