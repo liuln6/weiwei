@@ -342,7 +342,7 @@ router.use('/upload',function (req,res) {
     //存放目录
     form.uploadDir = 'public/tmp/' + year +'/' + month + '/';
     //缩略图目录
-    var thumbDir='public/thumb/' + year +'/' + month + '/';
+    var thumbDir='public/tmptmb/' + year +'/' + month + '/';
     let myPath=form.uploadDir;
     fs.existsSync(myPath)==false&&mkdir(myPath);
 	fs.existsSync(thumbDir)==false&&mkdir(thumbDir);
@@ -359,7 +359,7 @@ router.use('/upload',function (req,res) {
         var ms = Date.parse(date);
         var msfive=generateMixed(5);
         var newPath='public/tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[types.length-1];
-        var newThumbPath='public/thumb/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
+        var newThumbPath='public/tmptmb/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
         fs.renameSync(file.path, newPath);
         gm(newPath)
 		.resizeExact(500, 800)
