@@ -141,7 +141,7 @@
                       showLoaderOnConfirm: true,
                       allowOutsideClick: false
                     }).then(function(number) {
-                        var TypeID=parseInt(TypeID);
+                        TypeID=parseInt(TypeID);
                         var TotalNumber=parseFloat(number.value);
                          axios.post('/product/eidttype',{TypeID:TypeID,TotalNumber:TotalNumber,Price:Price})
                         .then(function (response) {
