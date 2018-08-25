@@ -9,20 +9,21 @@
 			价格：\{{Price}} 库存：\{{TotalNumber}}
 		</div>
 		<div v-if="editFlag">
-            价格：\{{TotalNumber}}+
-			<div class="edit" style="width:80px;">
+           
+			<div class="edit float-left" style="width:80px;">
+			 价格：
 	      		<input type="text" v-model="Price" class="form-control" :name="Price">
 	      	</div>
-	      	库存：
-	      	<div class="edit" style="width:80px;">
-	      		<input type="text" v-model="AddTotalNumber" class="form-control" :name="AddTotalNumber" >
+	      	
+	      	<div class="edit float-left" style="width:80px;">
+	      		库存：\{{TotalNumber}}+<input type="text" v-model="AddTotalNumber" class="form-control" :name="AddTotalNumber" >
 	      	</div>
 		</div>
 	</div>
 	<div class="h8"></div>
 	<div class="edit">
 	    <button type="button" v-if="!editFlag" class="btn btn-sm btn-info" @click="editorType()">修改</button>
-	    <button type="button" v-if="editFlag" class="btn btn-sm btn-info" @click="saveType()">修改</button>
+	    <button type="button" v-if="editFlag" class="btn btn-sm btn-info" @click="saveType()">保存</button>
 	</div>
 	<table class="table table-hover table-sm table-striped">
 	  <thead>
