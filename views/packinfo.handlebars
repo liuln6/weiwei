@@ -96,6 +96,7 @@
     		TotalNumber:0,
     		AddTotalNumber:0,
     		Price:0,
+    		UsedNumber:0,
     		editFlag:false,
     		OrderList:[{
     			ID: 73,
@@ -265,6 +266,7 @@
 	        vm.ProductName=model.ProductName;
 	        vm.TypeName=model.Remark;
 	        vm.TotalNumber=model.TotalNumber;
+	        vm.UsedNumber=model.UsedNumber;
 	        vm.OrderList=[];
 	        $.each(model.OrderList,function (index,item) {
 	        	item.editFlag=false;
