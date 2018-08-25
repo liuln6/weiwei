@@ -372,7 +372,7 @@ router.use('/upload',function (req,res) {
 		});
         file.path='tmp/' + year +'/' + month + '/' + ms + msfive+'.'+types[types.length-1];
         // use the .resizeExact with only width and/or height arguments
-        file.thumbPath='thumb/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
+        file.thumbPath='tmptmb/' + year +'/' + month + '/' + ms+msfive+'.'+types[types.length-1];
 		
         docs.push(file);
     }).on('end', function() {
