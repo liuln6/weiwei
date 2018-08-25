@@ -232,10 +232,6 @@ router.post('/userproductinfo',function (req,res) {
 		}
 	});
 });
-router.get('/editproduct',function (req,res) {
-	var ID=req.query.ID;
-	res.render('editproduct'{title:'产品编辑【'+ID+'】',id:ID});
-});
 router.post('/eidttype',function (req,res) {
 	var TypeID=req.body.TypeID;
 	var TotalNumber=req.body.TotalNumber;
