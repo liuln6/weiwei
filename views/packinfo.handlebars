@@ -131,7 +131,7 @@
             saveType:function () {
             	var vr= this.$validator.validateAll({
 				    decimal: vm.Price,
-				    decimal: obj.TotalNumber
+				    decimal: vm.AddTotalNumber
 				}).then((result)=>{
 					if(result){
 						axios.post('/product/eidttype',{
