@@ -6,7 +6,7 @@
 	<div class="text-center">
 		<h3>\{{ProductName}}-\{{TypeName}}</h3>
 		<div v-if="!editFlag">
-			价格：\{{Price}} 库存：\{{TotalNumber}}
+			价格：￥\{{Price}} 库存：\{{TotalNumber}}米（件） 已用库存：\{{UsedNumber}}米（件）
 	    <button type="button" v-if="!editFlag" class="btn btn-sm btn-info" @click="editorType()">修改</button>
 		</div>
 		<div v-if="editFlag" class="form-inline text-center">
