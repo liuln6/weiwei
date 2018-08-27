@@ -292,6 +292,18 @@
 		                title:'总价'
 		            },
 		            {
+		                data:'IsPack',
+		                title:'打包',
+		                render:function(data,type,row,meta) {
+		                	if(data==0){
+		                		return "未打包";
+		                	}else{
+		                		return "已打包"
+		                	}
+		                }
+		            },
+
+		            {
 		                data:'Remark',
 		                title:'备注'
 		            },
