@@ -29,6 +29,7 @@
 	    <tr>
 	      <th scope="col" style="width:30px">#</th>
 	      <th scope="col" style="width:220px">产品</th>
+	      <th scope="col" style="width:50px">单价</th>
 	      <th scope="col" style="width:50px">数量</th>
 	      <th scope="col" style="width:70px" class="text-right">总价</th>
 	    </tr>
@@ -41,6 +42,9 @@
  			<span class="text-warning" v-if="item.Remark.length>1"><small>备注\{{item.Remark}}</small></span>
 	      </td>
 	      <td>×\{{item.newNumber}}</td>
+	      <td class="text-right">
+		     ￥\{{item.Price}}
+	      </td>
 	      <td class="text-right">
 		     ￥\{{item.TotalPrice}}
 	      </td>
